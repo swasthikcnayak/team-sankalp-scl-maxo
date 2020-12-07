@@ -25,13 +25,13 @@ class Assignment(models.Model):
 
 
 class Submission(models.Model):
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, verbose_name='assignment')
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, verbose_name='assignments')
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name='student')
     answer = models.URLField()
     time_submitted = models.DateTimeField()
 
     '''def __str__(self):
-        return self.assignment + "+" + self.student'''
+        return self.assignments + "+" + self.student'''
 
     class Meta:
-        unique_together = ('assignment', 'student')
+        unique_together = ('assignments', 'student')

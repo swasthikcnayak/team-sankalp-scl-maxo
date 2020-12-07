@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-# from academics.models import Department, Class
+from academics.models import Department, Class
 from .models import User, TeacherProfile, StudentProfile, SEM_CHOICES
 
 
@@ -36,9 +36,9 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class StudentProfileUpdateForm(forms.ModelForm):
-    # department = forms.ModelChoiceField(queryset=Department.objects.all())
+    department = forms.ModelChoiceField(queryset=Department.objects.all())
     semester = forms.ChoiceField(choices=SEM_CHOICES)
-    # section = forms.ModelChoiceField(queryset=Class.objects.all())
+    section = forms.ModelChoiceField(queryset=Class.objects.all())
     cgpa = forms.DecimalField(decimal_places=3)
 
     def clean_section(self):
@@ -54,7 +54,7 @@ class StudentProfileUpdateForm(forms.ModelForm):
 
 
 class TeacherProfileUpdateForm(forms.ModelForm):
-    # department = forms.ModelChoiceField(queryset=Department.objects.all())
+    department = forms.ModelChoiceField(queryset=Department.objects.all())
     join_date = forms.DateField()
 
     class Meta:

@@ -11,8 +11,8 @@ class AssignmentAdmin(admin.ModelAdmin):
 
 
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ('assignment', 'student', 'time_submitted')
-    search_fields = ('assignment', 'student')
+    list_display = ('assignments', 'student', 'time_submitted')
+    search_fields = ('assignments', 'student')
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()

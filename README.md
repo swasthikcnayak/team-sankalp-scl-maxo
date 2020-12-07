@@ -12,7 +12,6 @@
     Clone the repository in your local machine.
 2. Checkout to your branch
      ```git
-    git status
     git checkout -b 'new branch name'
     git pull origin development
     ```

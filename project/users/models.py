@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from PIL import Image
 
-from academics.models import Department
 
-from academics.models import Subject, Class
+# from academics.models import Department
+
+# from academics.models import Subject, Class
 
 
 class MyAccountManager(BaseUserManager):
@@ -93,22 +94,22 @@ SEM_CHOICES = (
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="user")
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True,
-                                   default=None)
+    # department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True,
+    # default=None)
     semester = models.CharField(max_length=3, choices=SEM_CHOICES, default='1')
-    section = models.ForeignKey(Class, on_delete=models.SET_NULL, verbose_name="section", null=True, default=None)
+    # section = models.ForeignKey(Class, on_delete=models.SET_NULL, verbose_name="section", null=True, default=None)
     cgpa = models.DecimalField(max_digits=4, decimal_places=2)
 
     def clean(self):
         self.cgpa = abs(self.cgpa)
 
-    def __str__(self):
-        return self.user.username
+    '''def __str__(self):
+        return self.user.username'''
 
 
 class TeacherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="user")
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True)
+    # department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True)
     join_date = models.DateField(null=True)
 
     def __str__(self):
@@ -116,8 +117,8 @@ class TeacherProfile(models.Model):
 
 
 class Teaches(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name="section")
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    # class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name="section")
+    # subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, null=True)
 
     class Meta:
@@ -128,7 +129,7 @@ class Mark(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name="student")
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, verbose_name="teacher", null=True)
     exam_name = models.CharField(max_length=20)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
+    # subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
     marks_maximum = models.CharField(max_length=3)
     marks_obtained = models.CharField(max_length=3)
 
@@ -139,7 +140,7 @@ class Mark(models.Model):
 class Attendance(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name="student")
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, verbose_name="teacher", null=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
+    # subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
     classes_conducted = models.CharField(max_length=3)
     classes_attended = models.CharField(max_length=3)
     percentage = models.CharField(max_length=4)

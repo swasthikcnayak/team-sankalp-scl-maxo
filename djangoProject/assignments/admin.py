@@ -20,5 +20,3 @@ class SubmissionAdmin(admin.ModelAdmin):
 
 admin.site.register(Assignment, AssignmentAdmin)
 admin.site.register(Submission, SubmissionAdmin)
-
-# Register your models here.

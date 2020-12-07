@@ -30,4 +30,3 @@ admin.site.register(StudentProfile, StudentProfileAdminClass)
 admin.site.register(TeacherProfile, TeacherProfileAdminClass)
 admin.site.register(Attendance)
 admin.site.register(Mark)
-# Register your models here.

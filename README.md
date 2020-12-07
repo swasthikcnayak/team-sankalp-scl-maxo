@@ -12,9 +12,8 @@
     Clone the repository in your local machine.
 2. Checkout to your branch
      ```git
-    git status
-    git pull origin development
     git checkout -b 'new branch name'
+    git pull origin development
     ```
    Start applying your changes in this new  branch
 3. update `setting.py` in `project/project/`
@@ -42,7 +41,7 @@
     ```bash
     python manage.py runserver
     ```
-7. Do the Development
+7. Do the Development and add, commit your changes.
 8. Push your changes
      ```git
     git push origin 'new branch name'

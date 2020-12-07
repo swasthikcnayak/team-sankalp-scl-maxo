@@ -13,8 +13,8 @@
 2. Checkout to your branch
      ```git
     git status
-    git pull origin development
     git checkout -b 'new branch name'
+    git pull origin development
     ```
    Start applying your changes in this new  branch
 3. update `setting.py` in `project/project/`

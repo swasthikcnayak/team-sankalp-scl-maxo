@@ -70,4 +70,4 @@ class Note(models.Model):
         unique_together = ('department', 'subject', 'chapter_number')
 
     def __str__(self):
-        return self.department.department_short_form+"+"+self.subject.subject_short_form + "+" + self.chapter_number
+        return self.department.department_short_form + "+" + self.subject.subject_short_form + "+" + self.chapter_number

@@ -13,7 +13,7 @@
 2. Checkout to your branch
      ```git
     git status
-    git pull
+    git pull origin development
     git checkout -b 'new branch name'
     ```
    Start applying your changes in this new  branch

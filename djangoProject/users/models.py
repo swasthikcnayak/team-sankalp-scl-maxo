@@ -4,7 +4,7 @@ from PIL import Image
 
 from academics.models import Department
 
-from academics.models import Subject, Class
+from academics.models import Subject, Class, SEM_CHOICES
 
 
 class MyAccountManager(BaseUserManager):
@@ -45,7 +45,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=30)
     date_of_birth = models.DateField(null=True)
     description = models.TextField(null=True)
-    image = models.ImageField(default='default.PNG', upload_to='profile_pics')
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
@@ -77,18 +77,6 @@ class User(AbstractUser):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
-
-SEM_CHOICES = (
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-    ('4', '4'),
-    ('5', '5'),
-    ('6', '6'),
-    ('7', '7'),
-    ('8', '8'),
-)
 
 
 class StudentProfile(models.Model):

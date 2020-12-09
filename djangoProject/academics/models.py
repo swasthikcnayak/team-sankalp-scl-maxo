@@ -41,10 +41,17 @@ SEM_CHOICES = (
     ('8', '8'),
 )
 
+SECTION_CHOICES = (
+    ('A', 'A'),
+    ('B', 'B'),
+    ('C', 'C'),
+    ('D', 'D'),
+)
+
 
 class Class(models.Model):
     semester = models.CharField(max_length=3, choices=SEM_CHOICES, default='1')
-    section_name = models.CharField(max_length=1, null=True)
+    section_name = models.CharField(max_length=1, choices=SECTION_CHOICES, default='A')
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     link = models.URLField(null=True)
     timetable = models.URLField()
@@ -70,4 +77,4 @@ class Note(models.Model):
         unique_together = ('department', 'subject', 'chapter_number')
 
     def __str__(self):
-        return self.department.department_short_form+"+"+self.subject.subject_short_form + "+" + self.chapter_number
+        return self.department.department_short_form + "+" + self.subject.subject_short_form + "+" + self.chapter_number

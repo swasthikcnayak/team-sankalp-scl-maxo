@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from academics.models import Department, Class
-from .models import User, TeacherProfile,StudentProfile, SEM_CHOICES
+from academics.models import Department, Class, SECTION_CHOICES,SEM_CHOICES
+from .models import User, TeacherProfile, StudentProfile
 
 
 class UserRegisterForm(UserCreationForm):
@@ -38,15 +38,16 @@ class UserUpdateForm(forms.ModelForm):
 class StudentProfileUpdateForm(forms.ModelForm):
     department = forms.ModelChoiceField(queryset=Department.objects.all())
     semester = forms.ChoiceField(choices=SEM_CHOICES)
-    section = forms.ModelChoiceField(queryset=Class.objects.all())
+    section = forms.ChoiceField(choices=SECTION_CHOICES)
     cgpa = forms.DecimalField(decimal_places=3)
 
     def clean_section(self):
         sec = self.cleaned_data.get('section')
-        split = str(sec).split('+')
-        if str(self.cleaned_data['department']) != split[0] or str(self.cleaned_data['semester']) != split[1]:
+        dept = self.cleaned_data.get('department')
+        sem = self.cleaned_data.get('semester')
+        if Class.objects.filter(semester=sem, section_name=sec, department=dept).count() == 0:
             raise ValidationError("You have entered wrong section either of wrong department or semester")
-        return sec
+        return Class.objects.filter(semester=sem,section_name=sec,department=dept).first()
 
     class Meta:
         model = StudentProfile

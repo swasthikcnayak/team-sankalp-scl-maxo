@@ -18,10 +18,10 @@ class Assignment(models.Model):
         self.assignment_name = self.assignment_name.upper()
 
     def __str__(self):
-        return self.assignment_name + "+" + self.Class + "+" + self.subject
+        return str(self.Class.semester)+"+"+str(self.Class.section_name) + "+" + str(self.subject) + "+" + self.assignment_name
 
     class Meta:
-        unique_together = ('subject', 'assignment_name')
+        unique_together = ('subject', 'assignment_name','Class')
 
 
 class Submission(models.Model):
@@ -31,7 +31,7 @@ class Submission(models.Model):
     time_submitted = models.DateTimeField()
 
     def __str__(self):
-        return self.assignment + "+" + self.student
+        return str(self.assignment.subject.subject_short_form)+"+"+str(self.assignment.assignment_name) + "+" + str(self.student)
 
     class Meta:
         unique_together = ('assignment', 'student')

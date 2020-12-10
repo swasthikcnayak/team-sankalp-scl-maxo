@@ -5,13 +5,13 @@
     <title>Register</title>
 </head>
 <body>
- <div>
+    <div>
         <form method="POST">
             {% csrf_token %}
             {{ form }}
             <input type="password" name="password1" value="Password@123" hidden>
-    <input type="password" name="password2" value="Password@123" hidden>
-    <input type="submit" value="Submit">
+            <input type="password" name="password2" value="Password@123" hidden>
+            <input type="submit" value="Submit">
         </form>
     </div>
 </body>

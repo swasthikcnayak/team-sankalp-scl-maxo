@@ -33,9 +33,6 @@ class ClassAdminModel(admin.ModelAdmin):
         'section_name', 'department__department_short_form',
         'department__department_name'
     )
-    filter_horizontal = ()
-    list_filter = ()
-    fieldsets = ()
 
 
 class NotesAdminModel(admin.ModelAdmin):

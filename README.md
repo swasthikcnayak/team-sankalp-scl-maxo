@@ -41,7 +41,7 @@
     ```bash
     python manage.py runserver
     ```
-7. Do the Development
+7. Do the Development and add, commit your changes.
 8. Push your changes
      ```git
     git push origin 'new branch name'

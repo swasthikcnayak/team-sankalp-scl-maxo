@@ -103,13 +103,13 @@ class TeacherProfile(models.Model):
         return self.user.username
 
 
-class Teaches(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name="section")
+class Teach(models.Model):
+    Class = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name="section")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        unique_together = ('class_id', 'subject', 'teacher')
+        unique_together = ('Class', 'subject', 'teacher')
 
 
 class Mark(models.Model):

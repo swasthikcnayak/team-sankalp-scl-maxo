@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'marks.apps.MarksConfig',
+    'attendance.apps.AttendanceConfig',
     'academics.apps.AcademicsConfig',
     'assignments.apps.AssignmentsConfig',
     'users.apps.UsersConfig',

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, StudentProfile, TeacherProfile, Attendance, Mark
+from .models import User, StudentProfile, TeacherProfile
 
 
 class UserAdminClass(UserAdmin):
@@ -25,22 +25,6 @@ class TeacherProfileAdminClass(admin.ModelAdmin):
                      'department__department_short_form', 'department__department_name')
 
 
-class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('student', 'teacher', 'subject', 'classes_attended', 'classes_conducted', 'percentage')
-    search_fields = ('student__user__username', 'student__user__email', 'student__user__first_name',
-                     'student__user__last_name', 'subject__department__department_short_form',
-                     'subject__department__department_name','teacher__user__username','teacher__user__first_name')
-
-
-class MarksAdmin(admin.ModelAdmin):
-    list_display = ('student', 'subject', 'teacher', 'marks_obtained', 'marks_maximum')
-    search_fields = ('student__user__username', 'student__user__email', 'student__user__first_name',
-                     'student__user__last_name', 'subject__subject_name','subject__subject_short_form',
-                     'subject__department__department_short_form', 'subject__department__department_name')
-
-
 admin.site.register(User, UserAdminClass)
 admin.site.register(StudentProfile, StudentProfileAdminClass)
 admin.site.register(TeacherProfile, TeacherProfileAdminClass)
-admin.site.register(Attendance, AttendanceAdmin)
-admin.site.register(Mark, MarksAdmin)

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <input type="password" name="password1" value="Password@123" hidden>
+            <input type="password" name="password2" value="Password@123" hidden>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

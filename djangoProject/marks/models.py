@@ -12,6 +12,8 @@ class Mark(models.Model):
     marks_maximum = models.CharField(max_length=3)
     marks_obtained = models.CharField(max_length=3)
 
+    def clean(self):
+        self.exam_name = self.exam_name.upper()
+
     class Meta:
         unique_together = ('student', 'subject', 'exam_name')
-

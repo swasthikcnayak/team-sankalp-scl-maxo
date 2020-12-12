@@ -51,6 +51,7 @@ def register(request):
             return redirect('register')
     else:
         form = UserRegisterForm()
+        # for boundfield in form:print(boundfield)
     return render(request, 'users/register.html', {'form': form})
 
 

@@ -19,14 +19,17 @@
 	          <div class="square"></div>
 	          <h1>Registration</h1>
 	        </header>
-            <div class="col-md-8">
-                    {% if messages %}
-                        {%  for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+            <div class="row">
+    <div class="col-md-8">
+        {% if messages %}
+            {%  for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
             </div>
 	        <form method="POST" class="templatemo-login-form">
                 {% csrf_token %}

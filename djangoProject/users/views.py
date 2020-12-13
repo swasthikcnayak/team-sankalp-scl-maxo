@@ -47,7 +47,7 @@ def register(request):
             elif role == 'STD':
                 student_profile = StudentProfile.objects.create(user=user, cgpa=0.00)
                 student_profile.save()
-            messages.success(request, message="Email has been sent to " + email + ".")
+            messages.success(request, message="User is registered successfully and an Email has been sent to " + email + ".")
             return redirect('register')
     else:
         form = UserRegisterForm()

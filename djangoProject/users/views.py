@@ -22,7 +22,6 @@ def register(request):
             password = User.objects.make_random_password(
                 length=10,
                 allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
-
             if role == 'ADM':
                 roleFull = 'ADMIN'
                 user.is_staff = True
@@ -47,8 +46,12 @@ def register(request):
             elif role == 'STD':
                 student_profile = StudentProfile.objects.create(user=user, cgpa=0.00)
                 student_profile.save()
-            messages.success(request, message="User is registered successfully and an Email has been sent to " + email + ".")
+            messages.success(request,
+                             message="User is registered successfully and an Email has been sent to " + email + ".")
             return redirect('register')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 message="User is could not be registered check for duplicate username or emails")
     else:
         form = UserRegisterForm()
         # for boundfield in form:print(boundfield)
@@ -77,7 +80,7 @@ def profile(request):
         else:
             if u_form.is_valid():
                 u_form.save()
-                messages.success(request,f'Your account has been updated')
+                messages.success(request, f'Your account has been updated')
                 redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)

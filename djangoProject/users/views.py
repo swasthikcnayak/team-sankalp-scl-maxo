@@ -54,7 +54,7 @@ def register(request):
                                  message="User is could not be registered check for duplicate username or emails")
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/password_reset.html', {'form': form})
 
 
 @login_required

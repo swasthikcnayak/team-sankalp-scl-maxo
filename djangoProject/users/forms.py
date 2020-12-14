@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from academics.models import Department, Class, SECTION_CHOICES,SEM_CHOICES
+from academics.models import Department, Class, SECTION_CHOICES, SEM_CHOICES
 from .models import User, TeacherProfile, StudentProfile
 
 
@@ -26,13 +26,16 @@ class UserUpdateForm(forms.ModelForm):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
 
         self.fields['date_of_birth'].required = False
-        self.fields['description'].required = False
         self.fields['last_name'].required = False
         self.fields['image'].required = False
+        self.fields['blood_group'].required = False
+        self.fields['address_line_1'].required = False
+        self.fields['address_line_2'].required = False
+        self.fields['address_line_3'].required = False
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'date_of_birth', 'description', 'image']
+        fields = ['email', 'first_name', 'last_name', 'date_of_birth', 'blood_group',  'address_line_1','address_line_2','address_line_3','image']
 
 
 class StudentProfileUpdateForm(forms.ModelForm):
@@ -47,7 +50,7 @@ class StudentProfileUpdateForm(forms.ModelForm):
         sem = self.cleaned_data.get('semester')
         if Class.objects.filter(semester=sem, section_name=sec, department=dept).count() == 0:
             raise ValidationError("You have entered wrong section either of wrong department or semester")
-        return Class.objects.filter(semester=sem,section_name=sec,department=dept).first()
+        return Class.objects.filter(semester=sem, section_name=sec, department=dept).first()
 
     class Meta:
         model = StudentProfile

@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, StudentProfileUpdateForm, TeacherProfileUpdateForm
 from django.http import HttpResponse
 from .models import User, StudentProfile, TeacherProfile
-
+from academics.models import Department
 
 @login_required
 def register(request):
@@ -54,12 +54,12 @@ def register(request):
                                  message="User is could not be registered check for duplicate username or emails")
     else:
         form = UserRegisterForm()
-        # for boundfield in form:print(boundfield)
     return render(request, 'users/register.html', {'form': form})
 
 
 @login_required
 def profile(request):
+    department = Department.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         if request.user.role == 'STD':
@@ -82,6 +82,7 @@ def profile(request):
                 u_form.save()
                 messages.success(request, f'Your account has been updated')
                 redirect('profile')
+            messages.add_message(request,messages.ERROR,'Please enter all the required fields correctly')
     else:
         u_form = UserUpdateForm(instance=request.user)
         if request.user.role == 'STD':
@@ -92,4 +93,5 @@ def profile(request):
             p_form = TeacherProfileUpdateForm(instance=teacher_profile)
         else:
             p_form = None
-    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form})
+        # for boundfield in u_form: print(boundfield)
+    return render(request, 'users/profile1.html', {'u_form': u_form, 'p_form': p_form})

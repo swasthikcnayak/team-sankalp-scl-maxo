@@ -1,25 +1,95 @@
-{% block content %}
-      <div class="content-section">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.image.url }}">
-          <div class="media-body">
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Profile</title>
+      <meta name="description" content="">
+      <meta name="author" content="templatemo">
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+  </head>
+
+<body class="">
+     <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Name/ Logo</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Academics <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="#"><i class="fa fa-book fa-fw"></i>Attendance</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#"><i class="fa fa-bar-chart fa-fw"></i>Marks</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#"><i class="fa fa-check fa-fw"></i>Assignments</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#"><i class="fa fa-users fa-fw"></i>Notes</a></li>
+              </ul>
+            <li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Class</a></li>
+          <li><a href="#"><i class="fa fa-users fa-fw"></i>Project</a></li>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Profile</a></li>
+              <li>{% if user.role == 'ADM' %}
+                <a href="/users/admin"><i class="fa fa-database fa-fw"></i>ADMIN</a>
+                  {% endif %}
+              </li>
+
+             <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+     <div class="content-section">
+      <div class="media text-center">
+        <img class="rounded-img account-img " src="{{ user.image.url }}">
+        <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
       <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
+          {% if user.role == 'ADM' %}
+          <div class="col-sm-12">
+              {% else %}
+              <div class="col-sm-6">
+                  {% endif %}
           <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Profile Info</legend>
-              {{ u_form }}
+              <legend class="border-bottom mb-4">Personal Information</legend>
+              {{ u_form|crispy }}
           </fieldset>
+              </div>
+
+          <div class="col-md-12">
           <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Academics Info</legend>
-              {{ p_form }}
+              <legend class="border-bottom mb-4">Academic Information</legend>
+              {{ p_form|crispy }}
           </fieldset>
+          </div>
           <div class="form-group">
-              <button class="btn btn-outline-info" type="submit">Update</button>
+              <button class="button" type="submit" ><span>Update changes</span></button>
+                <a href="#"><button class="button" ><span>Change password </span></button></a>
           </div>
       </form>
     </div>
-{% endblock content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{% static 'users/templatemo-script.js' %}"></script>      <!-- Templatemo Script -->
+</body>
+</html>

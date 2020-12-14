@@ -9,6 +9,7 @@
 {% block title %}
     <title>PROFILE</title>
 {% endblock title %}
+
 {% block content %}
  <div class="student-profile py-4">
           <div class="container">
@@ -43,7 +44,7 @@
                    <div class="row text-center">
                       <div class="form-group">
                           <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span></button>
-                            <a href="#"><button class="button btn  btn-info" ><span>Change password </span></button></a>
+                          <a href="{% url 'password_reset' %}"><button class="button btn  btn-info" type="button" ><span>Change password </span></button></a>
                       </div>
                    </div>
               </form>

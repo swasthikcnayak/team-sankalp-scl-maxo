@@ -1,4 +1,5 @@
 {% include 'users/head.html' %}
+{% load crispy_forms_tags %}
 <title>LOGIN</title>
 	</head>
 	<body class="light-gray-bg text-center">
@@ -15,25 +16,14 @@
 	        </header>
 	        <form method="POST" class="templatemo-login-form">
                 {% csrf_token %}
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" id="username" name="username" placeholder="Reg No/ Employee Id">
-		          	</div>	
-	        	</div>
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" class="form-control" name="password" id="password" placeholder="******">           
-		          	</div>	
-	        	</div>
+	        			{{ form | crispy }}
 				<div class="form-group">
 					<button type="submit" class="templatemo-blue-button width-100">Login</button>
 				</div>
 	        </form>
 		</div>
 		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-			<p>Forgort password? <strong><a href="#" class="blue-text">Click here!</a></strong></p>
+			<p>Forgort password? <strong><a href="{% url 'password_reset' %}" class="blue-text">Click here!</a></strong></p>
 		</div>
 	</body>
 </html>

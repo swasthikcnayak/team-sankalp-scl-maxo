@@ -94,4 +94,4 @@ def profile(request):
         else:
             p_form = None
         # for boundfield in u_form: print(boundfield)
-    return render(request, 'users/profile1.html', {'u_form': u_form, 'p_form': p_form})
+    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form})

@@ -1,24 +1,32 @@
-
-{% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            This is a login page
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{ form }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-            </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">Need an account?
-            <a href="{%  url 'register' %}" class="ml-2">Sign Up now</a></small>
-        </div>
-    <div class="border-top pt-3">
-            <small class="text-muted">Forgot your password?
-            <a href="{%  url 'profile' %}" class="ml-2">Reset my password</a></small>
-        </div>
-    </div>
-{% endblock content %}
+{% include 'users/head.html' %}
+<title>LOGIN</title>
+	</head>
+	<body class="light-gray-bg text-center">
+        <div class="templatemo-content-widget templatemo-login-widget white-bg">
+			<header class="text-center">
+	          <h1>Login</h1>
+	        </header>
+	        <form method="POST" class="templatemo-login-form">
+                {% csrf_token %}
+	        	<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" id="username" name="username" placeholder="Reg No/ Employee Id">
+		          	</div>	
+	        	</div>
+	        	<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="password" class="form-control" name="password" id="password" placeholder="******">           
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+					<button type="submit" class="templatemo-blue-button width-100">Login</button>
+				</div>
+	        </form>
+		</div>
+		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+			<p>Forgort password? <strong><a href="#" class="blue-text">Click here!</a></strong></p>
+		</div>
+	</body>
+</html>

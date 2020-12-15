@@ -1,0 +1,39 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>PROFILE</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+         {%  for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                   {{ message }}
+              </div>
+         {% endfor %}
+    {% endif %}
+<!-- PUT YOUR CONTENT HERE-->
+    <table class="table">
+    <tr>
+        <th>SUBJECT</th>
+        <th>CLASSES ATTENDED</th>
+        <th>CLASSES CONDUCTED</th>
+    </tr>
+    {% for a in attendances %}
+        <tr>
+        <td>{{a.subject.subject_short_form}}</td>
+        <td>{{a.classes_attended}}</td>
+        <td>{{a.classes_conducted}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock content%}
+

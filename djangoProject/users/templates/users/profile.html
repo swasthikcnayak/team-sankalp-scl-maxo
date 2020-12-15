@@ -10,8 +10,9 @@
     <title>PROFILE</title>
 {% endblock title %}
 
+
 {% block content %}
- <div class="student-profile py-4">
+<div class="student-profile py-4">
           <div class="container">
               <div class="row">
               <div class="col-lg-3 col-lg-offset-4">
@@ -36,8 +37,10 @@
                         </div>
                         <div class="col-lg-6">
                             <fieldset class="form-group">
+                                {% if user.role != 'ADM' %}
                                 <legend class="border-bottom mb-4">Academic Information</legend>
                                     {{ p_form|crispy }}
+                                {% endif %}
                             </fieldset>
                         </div>
                     </div>

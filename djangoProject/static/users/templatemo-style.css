@@ -81,13 +81,7 @@ footer { padding: 15px; }
 /* 2. Left Column
 -----------------------------*/
 .templatemo-sidebar { width: 300px; }
-.square {
-	width: 25px;
-	height: 25px;
-	border: 3px solid #13895F;
-	display: inline-block;
-	vertical-align: middle;
-}
+
 .circle {
 	width: 15px;
 	height: 15px;
@@ -209,16 +203,17 @@ footer { padding: 15px; }
 /* Main Content Area */
 .templatemo-content {
   margin-top: 0px;
-  min-height: 600px;
+  min-height: 1000px;
   padding: 0;  
   overflow-x: hidden;
 }
 .templatemo-content-container {	padding: 40px 50px; }
-.templatemo-flex-row {
+/*.templatemo-flex-row {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-}
+	flex-direction: column;
+} */
 .col-1 {
 	-webkit-flex: 1;
 	    -ms-flex: 1;
@@ -568,11 +563,7 @@ input[type="radio"]:checked + label span {
 }
 
 @media screen and (max-width: 992px) and (min-width: 768px) {
-	.templatemo-site-header,
-	.templatemo-search-form { 
-		margin: 15px; 
-	}
-	.templatemo-sidebar { width: 200px; } 
+	.templatemo-sidebar { width: 100px; }
 	.templatemo-site-header h1 { font-size: 1.6em; }
 	.square { 
 		width: 20px; 

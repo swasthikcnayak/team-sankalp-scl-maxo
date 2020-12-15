@@ -1,10 +1,18 @@
+{% extends 'users/main.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% include 'users/head.html' %}
-<title>RESET PASSWORD</title>
-	</head>
-	<body class="light-gray-bg">
-		<div class="templatemo-content-widget templatemo-login-widget white-bg">
+
+{% block css-imports %}
+      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>REGISTER</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="templatemo-content-widget templatemo-login-widget white-bg">
 			<header class="text-center" style="margin-bottom: 20px;">
                     {% if messages %}
                     {%  for message in messages %}
@@ -56,7 +64,5 @@
 				</div>
 	        </form>
 		</div>
+{% endblock content%}
 
-{% include 'users/scipts.html' %}
-	</body>
-</html>

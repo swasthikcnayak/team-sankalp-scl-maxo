@@ -3,12 +3,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 import users.urls as user_url
-
-'''
 import attendance.urls as attendance_url
-import marks.urls as marks_url
-import assignments.urls as assignment_url
-import academics.urls as academics_url '''
+
+
+"""import marks.urls as marks_url
+import assignments.urls as assignment_url"""
+
 
 handler404 = 'djangoProject.views.handler404'
 handler500 = 'djangoProject.views.handler500'
@@ -28,7 +28,7 @@ urlpatterns = [
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
-    # path('attendance/', include(attendance_url)),
+    path('attendance/', include(attendance_url)),
     # path('marks/', include(marks_url)),
     # path('assignments/', include(assignment_url)),
     # path('academics/',include(academics_url)),

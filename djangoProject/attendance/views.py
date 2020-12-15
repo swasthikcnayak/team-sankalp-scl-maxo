@@ -1,4 +1,4 @@
-"""from django.shortcuts import render
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from attendance.models import Attendance
 from users.models import StudentProfile, TeacherProfile, Teach
@@ -9,14 +9,13 @@ from academics.models import Subject
 def view_attendance(request):
     if request.user.role == 'STD':
         studentProfile = StudentProfile.objects.get(user=request.user)
-        subjects = Attendance.objects.filter(studentProfile=studentProfile).values('subject').distinct()
-        print(subjects)
-        render('attendance.html', {'subjects': subjects})
+        attendances = Attendance.objects.filter(student=studentProfile)
+        return render(request,'attendance/attendance.html', {'attendances': attendances})
     elif request.user.role == 'THR':
         teacherProfile = TeacherProfile.objects.get(user=request.user)
         teaches = Teach.objects.filter(teacher=teacherProfile)
         print(teaches)
-        render('attendance.html', {'classes': teaches})
+        render(request,'attendance/attendance.html', {'classes': teaches})
 
 
 @login_required
@@ -30,7 +29,7 @@ def view_subject_attendance(request, subjectId):
     elif request.user.role == 'THR':
         teacherProfile = TeacherProfile.objects.get(user=request.user)
         subject = Subject.objects.get(id=subjectId)
-        render('attendance.html',{'subject':subject}) """
+        render('attendance.html',{'subject':subject})
 
 # we can get the class of the user logged in from his profile. using the teaches model
 # we can then find all the subjects taught to that class, which can form a drop down list.

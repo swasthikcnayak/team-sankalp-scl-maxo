@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, StudentProfileUpdateForm, TeacherProfileUpdateForm
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+
+from .forms import UserRegisterForm, UserUpdateForm, StudentProfileUpdateForm, TeacherProfileUpdateForm
 from .models import User, StudentProfile, TeacherProfile
-from academics.models import Department
+
 
 @login_required
 def register(request):
@@ -93,4 +94,4 @@ def profile(request):
             p_form = TeacherProfileUpdateForm(instance=teacher_profile)
         else:
             p_form = None
-    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form,'title':'PROFILE'})
+    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form, 'title': 'PROFILE'})

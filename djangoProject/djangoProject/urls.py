@@ -4,10 +4,11 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 import users.urls as user_url
 
+'''
 import attendance.urls as attendance_url
 import marks.urls as marks_url
 import assignments.urls as assignment_url
-import academics.urls as academics_url
+import academics.urls as academics_url '''
 
 handler404 = 'djangoProject.views.handler404'
 handler500 = 'djangoProject.views.handler500'

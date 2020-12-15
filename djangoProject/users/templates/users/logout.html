@@ -1,8 +1,18 @@
+{% extends 'users/main.html' %}
 {% load static %}
-{% include 'users/head.html' %}
-<title>LOG OUT</title>
-	</head>
-	<body class="light-gray-bg">
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>LOG-OUT</title>
+{% endblock title %}
+
+
+{% block content %}
+
 		<div class="templatemo-content-widget templatemo-login-widget white-bg">
 			<header class="text-center" style="margin-bottom: 20px;">
                     {% if messages %}
@@ -17,7 +27,5 @@
 	        </header>
         <a href="{% url 'login' %}"><button type="button" class="templatemo-blue-button width-100">Login In Here</button></a>
 		</div>
+{% endblock content%}
 
-{% include 'users/scipts.html' %}
-	</body>
-</html>

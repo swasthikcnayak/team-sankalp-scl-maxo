@@ -1,5 +1,6 @@
+"""
 from django.urls import path
-import attendance.views as attendance_view
+import attendance.views as attendance_view"""
 '''
 urlpatterns = [
     path('',attendance_view.view_attendance,name="view-attendance"),

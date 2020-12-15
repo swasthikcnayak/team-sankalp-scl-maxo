@@ -45,9 +45,9 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=30)
     date_of_birth = models.DateField(null=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    blood_group = models.CharField(max_length=4,null=True)
-    address_line_1 = models.CharField(max_length=50,null=True)
-    address_line_2 = models.CharField(max_length=50,null=True)
+    blood_group = models.CharField(max_length=4, null=True)
+    address_line_1 = models.CharField(max_length=50, null=True)
+    address_line_2 = models.CharField(max_length=50, null=True)
     address_line_3 = models.CharField(max_length=50, null=True)
 
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
@@ -113,6 +113,3 @@ class Teach(models.Model):
 
     class Meta:
         unique_together = ('Class', 'subject', 'teacher')
-
-
-

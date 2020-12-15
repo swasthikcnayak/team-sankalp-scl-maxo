@@ -1,1 +1,2 @@
-django
+django~=2.2.5
+pillow~=7.2.0

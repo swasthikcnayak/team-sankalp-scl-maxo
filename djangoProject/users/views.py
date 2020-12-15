@@ -82,7 +82,7 @@ def profile(request):
                 u_form.save()
                 messages.success(request, f'Your account has been updated')
                 redirect('profile')
-            messages.add_message(request,messages.ERROR,'Please enter all the required fields correctly')
+
     else:
         u_form = UserUpdateForm(instance=request.user)
         if request.user.role == 'STD':

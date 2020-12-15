@@ -51,7 +51,7 @@ def register(request):
             return redirect('register')
         else:
             messages.add_message(request, messages.ERROR,
-                                 message="User is could not be registered check for duplicate username or emails")
+                                 message="User is could not be registered check for duplicate username or email")
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -59,7 +59,6 @@ def register(request):
 
 @login_required
 def profile(request):
-    department = Department.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         if request.user.role == 'STD':
@@ -71,10 +70,11 @@ def profile(request):
         else:
             p_form = None
         if request.user.role == 'STD' or request.user.role == 'THR':
+            print(u_form.is_valid())
+            print(p_form.is_valid())
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
                 p_form.save()
-                print("saved")
                 messages.success(request, f'Your account has been updated!')
                 redirect('profile')
         else:

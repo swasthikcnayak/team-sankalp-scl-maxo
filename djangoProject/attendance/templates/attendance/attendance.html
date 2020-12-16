@@ -5,6 +5,7 @@
 
 {% block css-imports %}
       <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+      <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
@@ -21,7 +22,7 @@
          {% endfor %}
     {% endif %}
 <!-- PUT YOUR CONTENT HERE-->
-    <table class="table">
+    <!-- <table class="table">
     <tr>
         <th>SUBJECT</th>
         <th>CLASSES ATTENDED</th>
@@ -34,6 +35,31 @@
         <td>{{a.classes_conducted}}</td>
         </tr>
     {% endfor %}
+    </table> -->
+    <div class="content">
+    
+        <input id="text-search" placeholder="Type to find..." type="search">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th title="Field #1" style="width: 200;">Subject</th>
+              <th title="Field #2" style="width: 300;">Classes conducted</th>
+              <th title="Field #3">Classes attended</th>
+              <th title="Field #4">Percentage</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cs</td>
+              <td>40</td>
+              <td>30</td>
+              <td>80</td>
+              
+            </tr>
+    
+        </tbody>
     </table>
+    </div>
 {% endblock content%}
 

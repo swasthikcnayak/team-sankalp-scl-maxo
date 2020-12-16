@@ -32,13 +32,14 @@ def register(request):
                 roleFull = 'TEACHER'
             else:
                 roleFull = 'STUDENT'
-            send_mail(
+            """send_mail(
                 'Login details',
                 'Here is your login details \n username : ' + username + '\n role : ' + roleFull + '\n password : ' + password,
                 from_email=None,
                 recipient_list=[email],
                 fail_silently=False,
-            )
+            )"""
+            print(password)
             user.set_password(password)
             user.save()
             if role == 'THR':

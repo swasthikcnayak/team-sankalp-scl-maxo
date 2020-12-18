@@ -13,6 +13,8 @@
 {% endblock title %}
 
 
+
+
 {% block content %}
     {% if messages %}
         {% for message in messages %}
@@ -22,26 +24,9 @@
         {% endfor %}
     {% endif %}
     <div class="content">
-    <h1>NOTES</h1>
-        {% if request.user.role == 'STD' %}
-            <table id="data-table" class="table " style="border:1px">
-                <thead class="thead-dark">
-                <tr>
-                    <th style="border-bottom: 2px solid black">Subject Id</th>
-                    <th style="border-bottom: 2px solid black">Subject Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for subject in subjects %}
-                    <tr>
-                        <td> <a href=" {% url 'view-notes' subjectId=subject.id%}"> {{ subject.id }}</a></td>
-                        <td> <a href=" {% url 'view-notes' subjectId=subject.id%}">{{ subject.subject.subject_name }}</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
+    <h1>CLASS LIST</h1>
         {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -54,13 +39,13 @@
                 {% for teach in teaches %}
                     <tr>
                         <td ><a
-                               href=" {% url 'view-notes' subjectId=teach.subject.id%}">{{ teach.subject.subject_name }}</a>
+                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.subject.subject_name }}</a>
                         </td>
                         <td ><a
-                               href=" {% url 'view-notes' subjectId=teach.subject.id%}">{{ teach.Class.semester }}</a>
+                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.semester }}</a>
                         </td>
                         <td><a
-                               href=" {% url 'view-notes' subjectId=teach.subject.id%}">{{ teach.Class.section_name }}</a>
+                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.section_name }}</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -71,4 +56,3 @@
 
 
 {% endblock content %}
-

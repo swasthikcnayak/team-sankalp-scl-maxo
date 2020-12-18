@@ -24,14 +24,15 @@ class TeacherProfileAdminClass(admin.ModelAdmin):
     search_fields = ('user__username', 'user__email', 'user__first_name', 'user__lastname',
                      'department__department_short_form', 'department__department_name')
 
+
 class TeachesAdminClass(admin.ModelAdmin):
     list_display = ('Class', 'subject', 'teacher')
-    search_fields = ('Class__semester','Class__section_name','Class__department__department_name',
-                        'Class__department__department_short_form','teacher__user__username', 
-                        'teacher__user__email', 'teacher__user__first_name', 'teacher__user__lastname')
+    search_fields = ('Class__semester', 'Class__section_name', 'Class__department__department_name',
+                     'Class__department__department_short_form', 'teacher__user__username',
+                     'teacher__user__email', 'teacher__user__first_name', 'teacher__user__lastname')
 
 
 admin.site.register(User, UserAdminClass)
 admin.site.register(StudentProfile, StudentProfileAdminClass)
 admin.site.register(TeacherProfile, TeacherProfileAdminClass)
-admin.site.register(Teach,TeachesAdminClass)
+admin.site.register(Teach, TeachesAdminClass)

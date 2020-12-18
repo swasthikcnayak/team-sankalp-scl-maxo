@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from academics.models import Class, Note,Subject
+from academics.models import Class, Note, Subject
 from users.models import StudentProfile, Teach, TeacherProfile
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from academics.forms import AddNotesForm
 from django.contrib import messages
 
@@ -43,3 +43,21 @@ def view_notes(request, subjectId):
     elif request.user.role == 'STD':
         notes = Note.objects.filter(subject=subjectId)
         return render(request, 'academics/notes-detail.html', {'notes': notes})
+
+
+@login_required
+def class_list(request):
+    if request.user.role == 'STD':
+        std = StudentProfile.objects.filter(user=request.user).first()
+        class_id = std.section.id
+        return redirect('view-class', classId=class_id)
+    else:
+        teacherProfile = TeacherProfile.objects.get(user=request.user)
+        teaches = Teach.objects.filter(teacher=teacherProfile)
+        return render(request, 'academics/class-list.html', {'teaches': teaches})
+
+
+@login_required
+def view_class(request, classId):
+    class_obj = Class.objects.get(id=classId)
+    return render(request, 'academics/class-detail.html', {'class': class_obj})

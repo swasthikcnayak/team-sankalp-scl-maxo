@@ -135,8 +135,8 @@ LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'EMAIL ID HERE'
-EMAIL_HOST_PASSWORD = 'EMAIL PASSWORD HERE'
+EMAIL_HOST_USER = 'webapp@sankalp.live'
+EMAIL_HOST_PASSWORD = '13f9612e7045d6415f6d693099648bc6-b6190e87-bf1359a0'

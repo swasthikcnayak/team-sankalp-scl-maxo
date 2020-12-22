@@ -35,6 +35,7 @@ def view_subject_attendance(request, classId, subjectId):
                 Attendance.objects.create(student=students, subject=subject, Class=class_obj)
         attendances = Attendance.objects.filter(subject=subject, Class=class_obj)
         if request.method == 'GET':
+
             return render(request, 'attendance/attendance-edit.html', {'attendances': attendances, 'form': form})
         elif request.method == 'POST':
             teacherProfile = TeacherProfile.objects.get(user=request.user)

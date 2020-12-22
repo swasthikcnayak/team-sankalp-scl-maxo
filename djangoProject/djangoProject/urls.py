@@ -31,7 +31,7 @@ urlpatterns = [
     path('attendance/', include(attendance_url)),
     path('marks/', include(marks_url)),
     # path('assignments/', include(assignment_url)),
-    path('academics/', include(academics_url)),
+    path('academics/', include(academics_url)), #has class and notes
 ]
 
 if settings.DEBUG:

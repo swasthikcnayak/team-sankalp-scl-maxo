@@ -38,13 +38,31 @@
                 {% for teach in teaches %}
                     <tr>
                         <td ><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.subject.subject_name }}</a>
+                               href="{% url 'view_marks_list_student' subjectId=teach.subject.id classId=teach.Class.id%}">{{ teach.subject.subject_name }}</a>
                         </td>
                         <td ><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.semester }}</a>
+                               href="{% url 'view_marks_list_student' subjectId=teach.subject.id classId=teach.Class.id%}">{{ teach.Class.semester }}</a>
                         </td>
                         <td><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.section_name }}</a>
+                               href="{% url 'view_marks_list_student' subjectId=teach.subject.id classId=teach.Class.id%}">{{ teach.Class.section_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% elif request.user.role == 'STD'  %}
+            <table id="data-table" class="table " style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in subjects %}
+                    <tr>
+                        <td ><a
+                               href="{% url 'view_marks_detail' subjectId=subject.subject.id%}">{{ subject.subject.subject_name }}</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -52,6 +70,5 @@
             </table>
         {% endif %}
     </div>
-
 
 {% endblock content %}

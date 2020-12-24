@@ -7,8 +7,8 @@ import attendance.urls as attendance_url
 import academics.urls as academics_url
 
 import marks.urls as marks_url
-"""
-import assignments.urls as assignment_url"""
+
+import assignments.urls as assignment_url
 
 handler404 = 'djangoProject.views.handler404'
 handler500 = 'djangoProject.views.handler500'
@@ -30,8 +30,8 @@ urlpatterns = [
          name='password_reset_complete'),
     path('attendance/', include(attendance_url)),
     path('marks/', include(marks_url)),
-    # path('assignments/', include(assignment_url)),
-    path('academics/', include(academics_url)), #has class and notes
+    path('assignments/', include(assignment_url)),
+    path('academics/', include(academics_url)),
 ]
 
 if settings.DEBUG:

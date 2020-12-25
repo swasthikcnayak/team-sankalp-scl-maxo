@@ -12,8 +12,6 @@ def view_list(request):
         student_profile = StudentProfile.objects.filter(user=request.user).first()
         class_obj = student_profile.section
         subjects = Teach.objects.filter(Class=class_obj)
-        for subject in subjects:
-            print(subject.subject.subject_name)
         return render(request, 'marks/subject-list.html', {'subjects': subjects})
     elif request.user.role == 'THR' or request.user.role == 'ADM':
         teacherProfile = TeacherProfile.objects.get(user=request.user)

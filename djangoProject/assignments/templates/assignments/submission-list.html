@@ -22,26 +22,32 @@
         {% endfor %}
     {% endif %}
     <div class="content">
-    <h1>ATTENDANCE</h1>
+    <h1>SUBMISSIONS</h1>
         {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
-             <table id="data-table" class="table" style="border:1px">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+            <button type="submit">SUBMIT LOG</button>
+            </form>
+
+            <table id="data-table" class="table" style="border:1px">
                 <thead class="thead-dark">
                 <tr>
-                    <th style="border-bottom: 2px solid black">Assignment Name</th>
-                    <th style="border-bottom: 2px solid black">Start Time</th>
-                    <th style="border-bottom: 2px solid black">End time</th>
+                    <th style="border-bottom: 2px solid black">Reg. Number</th>
                     <th style="border-bottom: 2px solid black">maximum marks</th>
-                    <th style="border-bottom: 2px solid black">question</th>
+                    <th style="border-bottom: 2px solid black">marks Given</th>
+                    <th style="border-bottom: 2px solid black">Submitted at</th>
+                    <th style="border-bottom: 2px solid black">answer</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for submission in submissions %}
                     <tr>
                         <td>{{ submission.student.user.username }}</td>
-                        <td>{{ submission.time_submitted }}</td>
-                        <td>{{ submission.answer }}</td>
                         <td>{{ submission.assignment.maximum_marks }}</td>
                         <td>{{ submission.marks_obtained }}</td>
+                        <td>{{ submission.time_submitted }}</td>
+                        <td>{{ submission.answer }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

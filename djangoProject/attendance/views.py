@@ -39,7 +39,6 @@ def view_subject_attendance(request, classId, subjectId):
         elif request.method == 'POST':
             teacherProfile = TeacherProfile.objects.get(user=request.user)
             form = AttendanceUpdateForm(request.POST)
-            print(form.is_valid())
             if form.is_valid():
                 log = form.save(commit=False)
                 log.teacher = teacherProfile

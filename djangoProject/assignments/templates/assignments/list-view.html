@@ -51,6 +51,24 @@
                 </tbody>
             </table>
         {% endif %}
+    {% if request.user.role == 'STD' %}
+            <table id="data-table" class="table " style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in subjects %}
+                    <tr>
+                        <td ><a
+                               href="{% url 'view-subject-assignment' classId=classId subjectId=subject.subject.id %}">{{ subject.subject.subject_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 </div>
 

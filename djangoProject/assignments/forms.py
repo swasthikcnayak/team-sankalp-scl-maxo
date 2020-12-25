@@ -14,6 +14,7 @@ class MarksUpdateForm(forms.ModelForm):
         fields = ['student', 'marks_obtained']
 
     def __init__(self, *args, **kwargs):
-        self.assignment_obj = kwargs.pop('assignment_obj', None)
+        self.assignment_id = kwargs.pop('assignment_id', None)
         super(MarksUpdateForm, self).__init__(*args, **kwargs)
-        self.student = forms.ModelChoiceField(queryset=Submission.objects.filter(assignment=self.assignment_obj))
+        self.fields['student'].queryset = Submission.objects.filter(assignment__id=self.assignment_id).values_list(
+            'student__user__username', flat=True)

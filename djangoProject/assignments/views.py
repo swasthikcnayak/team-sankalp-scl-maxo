@@ -62,10 +62,9 @@ def view_assignments(request, classId, subjectId):
 @login_required
 def submissions(request, assignmentId):
     if request.user.role == 'THR' or request.user.role == 'ADM':
-        submission = Submission.objects.filter(id=assignmentId)
+        submission = Submission.objects.filter(assignment__id=assignmentId)
         if request.method == 'GET':
-            assignment = Assignment.objects.get(id=assignmentId)
-            form = MarksUpdateForm(assignment_obj=assignment)
+            form = MarksUpdateForm(assignment_id=assignmentId)
             return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form})
         elif request.method == 'POST':
             form = MarksUpdateForm(request.POST)

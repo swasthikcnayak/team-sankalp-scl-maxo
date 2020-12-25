@@ -1,12 +1,11 @@
 from math import ceil
 
 from django.contrib import messages
-from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from users.models import StudentProfile, TeacherProfile, Teach
 from assignments.models import Submission, Assignment
-from assignments.forms import AssignmentCreationForm, MarksUpdateForm
+from assignments.forms import AssignmentCreationForm, MarksUpdateForm, AssignmentSubmissionForm
 from academics.models import Subject, Class
 
 
@@ -80,3 +79,26 @@ def submissions(request, assignmentId):
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
             return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form})
+    elif request.user.role == 'STD':
+        assignment_details = Assignment.objects.get(id=assignmentId)
+        if request.method == 'GET':
+            form = AssignmentSubmissionForm()
+            return render(request, 'assignments/submission-list.html', {'assignment': assignment_details, 'form': form})
+        elif request.method == 'POST':
+            form = AssignmentSubmissionForm(request.POST)
+            if form.is_valid():
+                answer = form.save(commit=False)
+                answer.assignment = Assignment.objects.get(id=assignmentId)
+                student = StudentProfile.objects.get(user=request.user)
+                answer.student = student
+                answer.marks_obtained = -1
+                answer.save()
+                messages.success(request,
+                                 message="Marks Updated Successfully")
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     message="Could not submit assignment")
+            form = AssignmentSubmissionForm(request.POST)
+            return render(request, 'assignments/submission-list.html', {'assignment': assignment_details, 'form': form})
+
+

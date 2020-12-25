@@ -53,6 +53,17 @@
                 </tbody>
             </table>
         {% endif %}
+        {% if request.user.role == 'STD' %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+            <button type="submit">SUBMIT LOG</button>
+            </form>
+            <p>{{ assignment.assignment_name }}</p>
+            <p>{{ assignment.question }}</p>
+            <p>{{ assignment.start_time }}</p>
+            <p>{{ assignment.end_time }}</p>
+        {% endif %}
     </div>
 
 

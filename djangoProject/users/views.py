@@ -32,13 +32,13 @@ def register(request):
                 roleFull = 'TEACHER'
             else:
                 roleFull = 'STUDENT'
-            send_mail(
+            """send_mail(
                 'Login details',
                 'Here is your login details \n username : ' + username + '\n role : ' + roleFull + '\n password : ' + password,
                 from_email=None,
                 recipient_list=[email],
                 fail_silently=False,
-            )
+            )"""
             print(password)
             user.set_password(password)
             user.save()
@@ -79,6 +79,9 @@ def profile(request):
                 p_form.save()
                 messages.success(request, f'Your account has been updated!')
                 redirect('profile')
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     message="Please check the input details")
         else:
             if u_form.is_valid():
                 u_form.save()

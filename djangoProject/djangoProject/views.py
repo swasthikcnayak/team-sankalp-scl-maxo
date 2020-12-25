@@ -31,3 +31,7 @@ def handler403(request, exception):
         'error_detail': 'Permission Denied'
     }
     return render(request, 'users/404.html', context)
+
+
+def home_view(request):
+    return render(request, template_name='users/home.html')

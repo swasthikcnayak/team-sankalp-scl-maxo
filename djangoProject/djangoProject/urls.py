@@ -9,6 +9,7 @@ import academics.urls as academics_url
 import marks.urls as marks_url
 
 import assignments.urls as assignment_url
+from djangoProject.views import home_view
 
 handler404 = 'djangoProject.views.handler404'
 handler500 = 'djangoProject.views.handler500'
@@ -16,6 +17,7 @@ handler400 = 'djangoProject.views.handler400'
 handler403 = 'djangoProject.views.handler403'
 
 urlpatterns = [
+    path('',home_view,name="home"),
     path('users/', include(user_url)),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),
          name='password_reset'),

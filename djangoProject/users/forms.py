@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-
 from academics.models import Department, Class, SECTION_CHOICES, SEM_CHOICES
 from .models import User, TeacherProfile, StudentProfile
 
 
+# form for user registration
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -19,6 +19,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'role']
 
 
+# form for user profile update
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(required=True)
 
@@ -35,9 +36,11 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'date_of_birth', 'blood_group',  'address_line_1','address_line_2','address_line_3','image']
+        fields = ['email', 'first_name', 'last_name', 'date_of_birth', 'blood_group', 'address_line_1',
+                  'address_line_2', 'address_line_3', 'image']
 
 
+# form for student profile update
 class StudentProfileUpdateForm(forms.ModelForm):
     department = forms.ModelChoiceField(queryset=Department.objects.all())
     semester = forms.ChoiceField(choices=SEM_CHOICES)
@@ -57,6 +60,7 @@ class StudentProfileUpdateForm(forms.ModelForm):
         fields = ['department', 'semester', 'section', 'cgpa']
 
 
+# form for teacher profile update
 class TeacherProfileUpdateForm(forms.ModelForm):
     department = forms.ModelChoiceField(queryset=Department.objects.all())
     join_date = forms.DateField()

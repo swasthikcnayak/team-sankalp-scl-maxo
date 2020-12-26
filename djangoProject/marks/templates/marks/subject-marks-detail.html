@@ -25,6 +25,7 @@
     {% endif %}
     <div class="content">
     <h1>MARKS</h1>
+    {% if request.user.role != 'ADM' %}
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -43,6 +44,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+        {% endif %}
     </div>
 
 {% endblock content %}

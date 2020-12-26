@@ -32,14 +32,18 @@ def view_notes(request, subjectId):
             form = AddNotesForm(request.POST)
             if form.is_valid():
                 note = form.save(commit=False)
-                subject = Subject.objects.get(id=subjectId)
                 note.subject = subject
-                teacherProfile = TeacherProfile(user=request.user)
+                teacherProfile = get_object_or_404(TeacherProfile, user=request.user)
                 note.department = teacherProfile.department
-                form.save()
-                messages.success(request,
-                                 message="Notes added successfully")
-            return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form}, )
+                if Note.objects.filter(department=note.department, subject=note.subject,
+                                    chapter_number=note.chapter_number).count() == 0:
+                    form.save()
+                    messages.success(request,
+                                     message="Notes added successfully")
+                else:
+                    messages.add_message(request, messages.ERROR,
+                                         message="This chapter notes is already added")
+                return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form}, )
     elif is_student(request):
         notes = Note.objects.filter(subject=subject)
         return render(request, 'academics/notes-detail.html', {'notes': notes})

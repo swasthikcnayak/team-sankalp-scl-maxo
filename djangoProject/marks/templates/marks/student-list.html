@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>MARKS</title>
 {% endblock title %}
 
 
@@ -27,6 +27,7 @@
     <h1>MARKS</h1>
         {% if request.user.role == 'THR'%}
             {% if students.count != 0 %}
+                <h4>Select the student</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>

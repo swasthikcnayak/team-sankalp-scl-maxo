@@ -22,7 +22,8 @@ def view_list(request):
 # view notes for student, add and view notes for teacher
 @login_required
 def view_notes(request, subjectId):
-    notes = Note.objects.filter(subject=subjectId)
+    subject = get_object_or_404(Subject, id=subjectId)
+    notes = Note.objects.filter(subject=subject)
     if is_teacher(request):
         if request.method == 'GET':
             form = AddNotesForm()
@@ -40,7 +41,7 @@ def view_notes(request, subjectId):
                                  message="Notes added successfully")
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form}, )
     elif is_student(request):
-        notes = Note.objects.filter(subject=subjectId)
+        notes = Note.objects.filter(subject=subject)
         return render(request, 'academics/notes-detail.html', {'notes': notes})
 
 
@@ -59,5 +60,5 @@ def class_list(request):
 # view details of a class student and teacher
 @login_required
 def view_class(request, classId):
-    class_obj = Class.objects.get(id=classId)
+    class_obj = get_object_or_404(Class, id=classId)
     return render(request, 'academics/class-detail.html', {'class': class_obj})

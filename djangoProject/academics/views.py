@@ -36,7 +36,7 @@ def view_notes(request, subjectId):
                 teacherProfile = get_object_or_404(TeacherProfile, user=request.user)
                 note.department = teacherProfile.department
                 if Note.objects.filter(department=note.department, subject=note.subject,
-                                    chapter_number=note.chapter_number).count() == 0:
+                                       chapter_number=note.chapter_number).count() == 0:
                     form.save()
                     messages.success(request,
                                      message="Notes added successfully")

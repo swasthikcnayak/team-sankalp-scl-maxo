@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-
 from academics.models import Class
 from assignments.models import Submission
 from users.models import StudentProfile, TeacherProfile, Teach
@@ -22,14 +21,14 @@ def view_list(request):
 
 # display student list for teacher
 @login_required
-def students_list(request, classId, subjectId):
+def students_list(request, subjectId, classId):
     if is_teacher(request):
         class_obj = get_object_or_404(Class, id=classId)
         students_this_section = StudentProfile.objects.filter(section=class_obj)
         return render(request, 'marks/student-list.html', {'students': students_this_section, 'subjectId': subjectId})
 
 
-# get details of marks of that particular student
+# get details of marks of that particular student for teacher
 @login_required
 def student_marks_detail(request, classId, subjectId, studentId):
     if is_teacher(request):
@@ -38,7 +37,7 @@ def student_marks_detail(request, classId, subjectId, studentId):
         return render(request, 'marks/subject-marks-detail.html', {'submissions': submissions})
 
 
-# get details of the registered students marks of that subject
+# get details of the the current logged in students marks of that subject
 @login_required
 def marks_detail(request, subjectId):
     if is_student(request):

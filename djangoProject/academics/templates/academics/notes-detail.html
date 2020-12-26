@@ -24,6 +24,8 @@
     <div class="content">
     <h1>NOTES</h1>
         {% if request.user.role == 'STD' %}
+            {% if notes.count != 0 %}
+                <h4>Available notes</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -42,13 +44,18 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>No notes added</h4>
+                {% endif %}
         {% endif %}
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+        {% if request.user.role == 'THR' %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
             <button type="submit">SUBMIT NOTES</button>
             </form>
+            {% if notes.count != 0 %}
+                <h4>Available notes</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -67,6 +74,9 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>No notes added</h4>
+                {% endif %}
         {% endif %}
     </div>
 

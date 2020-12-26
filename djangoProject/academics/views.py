@@ -1,30 +1,29 @@
 from django.contrib.auth.decorators import login_required
 from academics.models import Class, Note, Subject
 from users.models import StudentProfile, Teach, TeacherProfile
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from academics.forms import AddNotesForm
 from django.contrib import messages
+from djangoProject.utils import is_student, is_teacher
 
 
+# get list of classes for teacher get list of subjects for student  -- notes section
 @login_required
 def view_list(request):
-    if request.user.role == 'STD':
-        student_profile = StudentProfile.objects.filter(user=request.user).first()
-        class_obj = student_profile.section
-        subjects = Teach.objects.filter(Class=class_obj)
-        for subject in subjects:
-            print(subject.subject.subject_name)
+    if is_student(request):
+        student_profile = get_object_or_404(StudentProfile, user=request.user)
+        subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'academics/notes-list.html', {'subjects': subjects})
-    elif request.user.role == 'THR' or request.user.role == 'ADM':
-        teacherProfile = TeacherProfile.objects.get(user=request.user)
-        teaches = Teach.objects.filter(teacher=teacherProfile)
+    elif is_teacher(request):
+        teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'academics/notes-list.html', {'teaches': teaches})
 
 
+# view notes for student, add and view notes for teacher
 @login_required
 def view_notes(request, subjectId):
     notes = Note.objects.filter(subject=subjectId)
-    if request.user.role == 'ADM' or request.user.role == 'THR':
+    if is_teacher(request):
         if request.method == 'GET':
             form = AddNotesForm()
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form})
@@ -40,23 +39,24 @@ def view_notes(request, subjectId):
                 messages.success(request,
                                  message="Notes added successfully")
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form}, )
-    elif request.user.role == 'STD':
+    elif is_student(request):
         notes = Note.objects.filter(subject=subjectId)
         return render(request, 'academics/notes-detail.html', {'notes': notes})
 
 
+# view list of class for teacher , get details of his class student -- class
 @login_required
 def class_list(request):
-    if request.user.role == 'STD':
-        std = StudentProfile.objects.filter(user=request.user).first()
-        class_id = std.section.id
+    if is_student(request):
+        student_profile = get_object_or_404(StudentProfile, user=request.user)
+        class_id = student_profile.section.id
         return redirect('view-class', classId=class_id)
     else:
-        teacherProfile = TeacherProfile.objects.get(user=request.user)
-        teaches = Teach.objects.filter(teacher=teacherProfile)
+        teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'academics/class-list.html', {'teaches': teaches})
 
 
+# view details of a class student and teacher
 @login_required
 def view_class(request, classId):
     class_obj = Class.objects.get(id=classId)

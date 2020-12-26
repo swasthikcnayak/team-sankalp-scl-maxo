@@ -14,8 +14,7 @@ def view_list(request):
         subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'marks/subject-list.html', {'subjects': subjects})
     elif is_teacher(request):
-        teacherProfile = get_object_or_404(TeacherProfile, user=request.user)
-        teaches = Teach.objects.filter(teacher=teacherProfile)
+        teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'marks/subject-list.html', {'teaches': teaches})
 
 

@@ -23,13 +23,14 @@
     {% endif %}
     <div class="content">
     <h1>ASSIGNMENTS</h1>
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+        {% if request.user.role == 'THR'%}
+            <h4>Create an assignment</h4>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
             <button type="submit">SUBMIT LOG</button>
             </form>
-
+            {% if assignments.count != 0 %}
              <table id="data-table" class="table" style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -52,7 +53,11 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>You have not scheduled any assignment till day</h4>
+                {% endif %}
         {% endif %}
+
     {% if request.user.role == 'STD' %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}

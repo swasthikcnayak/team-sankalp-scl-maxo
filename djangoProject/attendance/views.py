@@ -78,6 +78,4 @@ def view_subject_attendance(request, classId, subjectId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")
-            form = AttendanceUpdateForm(class_obj=class_obj)
-            return render(request, 'attendance/attendance-edit.html', {'attendances': attendances, 'form': form,
-                                                                       'date_last_updated': last_updated})
+            return redirect('view-subject-attendance', classId=classId, subjectId=subjectId)

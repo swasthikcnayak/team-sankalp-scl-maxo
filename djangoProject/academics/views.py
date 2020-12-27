@@ -43,7 +43,7 @@ def view_notes(request, subjectId):
                 else:
                     messages.add_message(request, messages.ERROR,
                                          message="This chapter notes is already added")
-                return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form}, )
+                return redirect('view-notes',subjectId=subjectId)
     elif is_student(request):
         notes = Note.objects.filter(subject=subject)
         return render(request, 'academics/notes-detail.html', {'notes': notes})

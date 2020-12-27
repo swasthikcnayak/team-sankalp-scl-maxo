@@ -13,7 +13,9 @@ from .models import User, StudentProfile, TeacherProfile
 def register(request):
     if not request.user.is_superuser:
         return HttpResponse('Unauthorized', status=401)
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'users/register.html')
+    elif request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -46,13 +48,10 @@ def register(request):
                 student_profile.save()
             messages.success(request,
                              message="User is registered successfully and an Email has been sent to " + email + ".")
-            return redirect('register')
         else:
             messages.add_message(request, messages.ERROR,
                                  message="User is could not be registered check for duplicate username or email")
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        return redirect('register')
 
 
 # profile view

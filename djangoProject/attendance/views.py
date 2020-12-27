@@ -21,14 +21,16 @@ def view_attendance(request):
             return render(request, 'attendance/attendance.html', {'attendances': attendances, 'form': form})
         elif request.method == 'POST':
             form = RequestAttendanceDetails(request.POST)
+            selected_sem = ""
             if form.is_valid():
-                messages.success(request,
-                                 message="Showing details of selected semester")
                 selected_sem = form.cleaned_data['semester']
-            else:
-                messages.add_message(request, messages.ERROR,
-                                     message="Invalid semester, showing details of your semester")
-                selected_sem = studentProfile.section.semester
+                attendances = Attendance.objects.filter(student=studentProfile, Class__semester=selected_sem)
+                if attendances.count() != 0:
+                    messages.success(request,
+                                     message="Showing details of selected semester attendance")
+                else:
+                    messages.add_message(request, messages.ERROR,
+                                         message="No record found in this semester")
             attendances = Attendance.objects.filter(student=studentProfile, Class__semester=selected_sem)
             return render(request, 'attendance/attendance.html', {'attendances': attendances, 'form': form})
     elif is_teacher(request):

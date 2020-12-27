@@ -56,7 +56,7 @@ def class_list(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
         class_id = student_profile.section.id
         return redirect('view-class', classId=class_id)
-    else:
+    elif is_teacher(request):
         teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'academics/class-list.html', {'teaches': teaches})
 

@@ -52,7 +52,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT NOTES</button>
+            <button type="submit">ADD NOTES</button>
             </form>
             {% if notes.count != 0 %}
                 <h4>Available notes</h4>

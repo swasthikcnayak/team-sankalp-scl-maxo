@@ -23,6 +23,3 @@ class AttendanceLog(models.Model):
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, verbose_name='teacher', null=True)
     conducted_date = models.DateField( null=True,verbose_name='conducted_date')
     logged_date = models.DateTimeField(auto_now_add=True, verbose_name='logged_date')
-
-    class Meta:
-        unique_together = ('conducted_date', 'subject','Class')

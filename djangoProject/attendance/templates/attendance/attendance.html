@@ -10,7 +10,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>PROFILE</title>
+    <title>ATTENDANCE</title>
 {% endblock title %}
 
 
@@ -23,74 +23,83 @@
         {% endfor %}
     {% endif %}
     <div class="container-fluid">
-    <div class="content">
-        {% if request.user.role == 'STD' %}
-        <div class="form-group">
-            <label style="margin-right: 10px;">SEMESTER </label>
-            <label style="margin-bottom: 40px;">
-                <select class="form-control" name="sem-select" style="width: 300px">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
+        <div class="content">
+            {% if request.user.role == 'STD' %}
+                <div class="form-group">
+                    <label style="margin-right: 10px;">SEMESTER </label>
+                    <label style="margin-bottom: 40px;">
+                        <select class="form-control" name="sem-select" style="width: 300px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </label>
+                </div>
+                {% if attendances.count != 0 %}
+                    <table id="data-table" class="table table-striped table-bordered" style="border:1px">
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="border-bottom: 2px solid black">Subject</th>
+                            <th style="border-bottom: 2px solid black">Classes attended</th>
+                            <th style="border-bottom: 2px solid black">Classes conducted</th>
+                            <th style="border-bottom: 2px solid black">Percentage</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for a in attendances %}
+                            <tr>
+                                <td>{{ a.subject.subject_name }}</td>
+                                <td>{{ a.classes_attended }}</td>
+                                <td>{{ a.classes_conducted }}</td>
+                                <td>{{ a.percentage }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h4>No attendance record found</h4>
+                {% endif %}
+            {% endif %}
 
-                </select>
-            </label>
-          </div>
-            <table id="data-table" class="table table-striped table-bordered" style="border:1px">
-                <thead class="thead-light">
-                <tr>
-                    <th style="border-bottom: 2px solid black">Subject</th>
-                    <th style="border-bottom: 2px solid black">Classes attended</th>
-                    <th style="border-bottom: 2px solid black">Classes conducted</th>
-                    <th style="border-bottom: 2px solid black">Percentage</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for a in attendances %}
-                    <tr>
-                        <td>{{ a.subject.subject_name }}</td>
-                        <td>{{ a.classes_attended }}</td>
-                        <td>{{ a.classes_conducted }}</td>
-                        <td>{{ a.percentage }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
-            <h1>ATTENDANCE </h1>
-            <table id="data-table" class="table " style="border:1px">
-                <thead class="thead-dark">
-                <tr>
-                    <th style="border-bottom: 2px solid black">Subject</th>
-                    <th style="border-bottom: 2px solid black">Semester</th>
-                    <th style="border-bottom: 2px solid black">Section</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for teach in teaches %}
-                    <tr>
-                        <td ><a
-                               href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
-                        </td>
-                        <td ><a
-                               href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
-                        </td>
-                        <td><a
-                               href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
+            {% if request.user.role == 'THR' %}
+                <h1>ATTENDANCE </h1>
+                {% if teaches.count != 0 %}
+                    <h4>Select a class</h4>
+                    <table id="data-table" class="table " style="border:1px">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th style="border-bottom: 2px solid black">Subject</th>
+                            <th style="border-bottom: 2px solid black">Semester</th>
+                            <th style="border-bottom: 2px solid black">Section</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for teach in teaches %}
+                            <tr>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
+                                </td>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
+                                </td>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h4>You do not teach any class, No record found</h4>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
-</div>
 
 
 {% endblock content %}

@@ -18,3 +18,9 @@ class MarksUpdateForm(forms.ModelForm):
         super(MarksUpdateForm, self).__init__(*args, **kwargs)
         self.fields['student'].queryset = Submission.objects.filter(assignment__id=self.assignment_id).values_list(
             'student__user__username', flat=True)
+
+
+class AssignmentSubmissionForm(forms.ModelForm):
+    class Meta:
+        model = Submission
+        fields = ['answer']

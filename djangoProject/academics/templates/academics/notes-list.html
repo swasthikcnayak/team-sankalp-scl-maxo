@@ -24,6 +24,8 @@
     <div class="content">
     <h1>NOTES</h1>
         {% if request.user.role == 'STD' %}
+            {% if subjects.count != 0 %}
+                <h4>Select the subject</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -40,8 +42,14 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>Not enrolled to any subjects, check you profile for section</h4>
+                {% endif %}
         {% endif %}
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+
+        {% if request.user.role == 'THR'%}
+            {% if teaches.count != 0 %}
+                <h4>Select a class</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -66,6 +74,9 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>You are not teaching any subject, No classes found</h4>
+                {% endif %}
         {% endif %}
     </div>
 

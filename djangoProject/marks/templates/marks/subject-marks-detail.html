@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>MARKS</title>
 {% endblock title %}
 
 
@@ -25,6 +25,8 @@
     {% endif %}
     <div class="content">
     <h1>MARKS</h1>
+    {% if request.user.role != 'ADM' %}
+        {% if submissions.count != 0 %}
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -43,6 +45,10 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+                    <h4>No records found</h4>
+                    {% endif %}
+        {% endif %}
     </div>
 
 {% endblock content %}

@@ -25,8 +25,9 @@
     {% endif %}
     <div class="content">
     <h1>CLASS LIST</h1>
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
-
+        {% if request.user.role == 'THR' %}
+            {% if teaches.count != 0 %}
+                <h4>Select the class</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -51,7 +52,10 @@
                 {% endfor %}
                 </tbody>
             </table>
-        {% endif %}
+                {% else %}
+                <h4>You do not teach any class! No record found</h4>
+                {% endif %}
+    {% endif %}
     </div>
 
 

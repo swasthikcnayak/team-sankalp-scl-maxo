@@ -2,11 +2,13 @@ from django.contrib import admin
 from .models import Department, Subject, Class, Note
 
 
+# department view for admin panel
 class DepartmentAdminModel(admin.ModelAdmin):
     list_display = ('department_name', 'department_short_form')
     search_fields = ('department_name', 'department_short_form')
 
 
+# subject view for admin panel
 class SubjectAdminModel(admin.ModelAdmin):
     list_display = (
         'department',
@@ -17,11 +19,9 @@ class SubjectAdminModel(admin.ModelAdmin):
         'department__department_name',
         'subject_name', 'subject_short_form',
         'credits')
-    filter_horizontal = ()
-    list_filter = ()
-    fieldsets = ()
 
 
+# classes view for admin panel
 class ClassAdminModel(admin.ModelAdmin):
     list_display = (
         'department',
@@ -35,6 +35,7 @@ class ClassAdminModel(admin.ModelAdmin):
     )
 
 
+# notes view for admin panel
 class NotesAdminModel(admin.ModelAdmin):
     list_display = (
         'department',
@@ -52,6 +53,7 @@ class NotesAdminModel(admin.ModelAdmin):
     )
 
 
+# registering all the classes and views for admin panel
 admin.site.register(Department, DepartmentAdminModel)
 admin.site.register(Subject, SubjectAdminModel)
 admin.site.register(Class, ClassAdminModel)

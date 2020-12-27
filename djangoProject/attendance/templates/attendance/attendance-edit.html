@@ -22,37 +22,42 @@
         {% endfor %}
     {% endif %}
     <div class="content">
-    <h1>ATTENDANCE</h1>
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+        <h1>ATTENDANCE</h1>
+        {% if request.user.role == 'THR' %}
+            <p>Last updated on : {{ date_last_updated }}</p>
+            <h4>Fill the absentees form : </h4>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
+                <button type="submit">SUBMIT ABSENTEES LIST</button>
             </form>
 
-
-            <table id="data-table" class="table" style="border:1px">
-                <thead class="thead-dark">
-                <tr>
-                    <th style="border-bottom: 2px solid black">Reg. Number</th>
-                    <th style="border-bottom: 2px solid black">Name</th>
-                    <th style="border-bottom: 2px solid black">attended</th>
-                    <th style="border-bottom: 2px solid black">conducted</th>
-                    <th style="border-bottom: 2px solid black">Percentage</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for a in attendances %}
+            {% if attendances.count != 0 %}
+                <table id="data-table" class="table" style="border:1px">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>{{ a.student.user.username }}</td>
-                        <td>{{ a.student.user.first_name }} {{ a.student.user.last_name }}</td>
-                        <td>{{ a.classes_attended }}</td>
-                        <td>{{ a.classes_conducted }}</td>
-                        <td>{{ a.percentage }}</td>
+                        <th style="border-bottom: 2px solid black">Reg. Number</th>
+                        <th style="border-bottom: 2px solid black">Name</th>
+                        <th style="border-bottom: 2px solid black">attended</th>
+                        <th style="border-bottom: 2px solid black">conducted</th>
+                        <th style="border-bottom: 2px solid black">Percentage</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for a in attendances %}
+                        <tr>
+                            <td>{{ a.student.user.username }}</td>
+                            <td>{{ a.student.user.first_name }} {{ a.student.user.last_name }}</td>
+                            <td>{{ a.classes_attended }}</td>
+                            <td>{{ a.classes_conducted }}</td>
+                            <td>{{ a.percentage }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4>No record found</h4>
+            {% endif %}
         {% endif %}
     </div>
 

@@ -28,7 +28,7 @@ class Submission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, verbose_name='assignment')
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name='student')
     answer = models.URLField()
-    time_submitted = models.DateTimeField()
+    time_submitted = models.DateTimeField(auto_now_add=True)
     marks_obtained = models.IntegerField(null=True)
 
     def __str__(self):

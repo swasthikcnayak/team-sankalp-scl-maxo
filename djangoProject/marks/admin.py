@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 
 from marks.models import Mark
 
@@ -10,4 +10,4 @@ class MarksAdmin(admin.ModelAdmin):
                      'subject__department__department_short_form', 'subject__department__department_name')
 
 
-admin.site.register(Mark, MarksAdmin)
+admin.site.register(Mark, MarksAdmin)"""

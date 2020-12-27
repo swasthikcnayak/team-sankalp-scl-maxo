@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>MARKS</title>
 {% endblock title %}
 
 
@@ -25,7 +25,9 @@
     {% endif %}
     <div class="content">
     <h1>MARKS</h1>
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+        {% if request.user.role == 'THR' %}
+            {% if teaches.count != 0 %}
+                <h4>Select the class</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -50,8 +52,13 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>You do not teach any class! No record found</h4>
+                {% endif %}
 
         {% elif request.user.role == 'STD'  %}
+            {% if subjects.count != 0 %}
+                <h4>Select the subject</h4>
             <table id="data-table" class="table " style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -68,6 +75,9 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% else %}
+                <h4>You are Not enrolled in to any class or subject, check your profile for the class.</h4>
+                {% endif %}
         {% endif %}
     </div>
 

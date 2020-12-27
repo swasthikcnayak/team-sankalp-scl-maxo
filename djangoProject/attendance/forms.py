@@ -1,6 +1,7 @@
 from django import forms
 from attendance.models import AttendanceLog
 from users.models import StudentProfile
+from academics.models import SEM_CHOICES
 
 
 class AttendanceUpdateForm(forms.ModelForm):
@@ -12,3 +13,12 @@ class AttendanceUpdateForm(forms.ModelForm):
         self.class_obj = kwargs.pop('class_obj', None)
         super(AttendanceUpdateForm, self).__init__(*args, **kwargs)
         self.absentees = forms.ModelMultipleChoiceField(queryset=StudentProfile.objects.filter(section=self.class_obj))
+
+
+class RequestAttendanceDetails(forms.Form):
+    semester = forms.ChoiceField(choices=SEM_CHOICES)
+
+    def __init__(self, *args, **kwargs):
+        self.sem = kwargs.pop('semester', None)
+        super(RequestAttendanceDetails, self).__init__(*args, **kwargs)
+        self.fields['semester'].initial = self.sem

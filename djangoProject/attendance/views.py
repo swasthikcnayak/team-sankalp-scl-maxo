@@ -5,7 +5,7 @@ from attendance.models import Attendance, AttendanceLog
 from djangoProject.utils import is_student, is_teacher
 from users.models import StudentProfile, TeacherProfile, Teach
 from academics.models import Subject, Class
-from attendance.forms import AttendanceUpdateForm
+from attendance.forms import AttendanceUpdateForm, RequestAttendanceDetails
 from django.contrib import messages
 
 
@@ -15,8 +15,22 @@ from django.contrib import messages
 def view_attendance(request):
     if is_student(request):
         studentProfile = get_object_or_404(StudentProfile, user=request.user)
-        attendances = Attendance.objects.filter(student=studentProfile, Class__id=studentProfile.section.id)
-        return render(request, 'attendance/attendance.html', {'attendances': attendances})
+        if request.method == 'GET':
+            form = RequestAttendanceDetails(semester=studentProfile.semester)
+            attendances = Attendance.objects.filter(student=studentProfile, Class__id=studentProfile.section.id)
+            return render(request, 'attendance/attendance.html', {'attendances': attendances, 'form': form})
+        elif request.method == 'POST':
+            form = RequestAttendanceDetails(request.POST)
+            if form.is_valid():
+                messages.success(request,
+                                 message="Showing details of selected semester")
+                selected_sem = form.cleaned_data['semester']
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     message="Invalid semester, showing details of your semester")
+                selected_sem = studentProfile.section.semester
+            attendances = Attendance.objects.filter(student=studentProfile, Class__semester=selected_sem)
+            return render(request, 'attendance/attendance.html', {'attendances': attendances, 'form': form})
     elif is_teacher(request):
         teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'attendance/attendance.html', {'teaches': teaches})

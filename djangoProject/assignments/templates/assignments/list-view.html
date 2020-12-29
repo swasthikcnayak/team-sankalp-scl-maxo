@@ -1,0 +1,87 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>ASSIGNMENTS</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container-fluid">
+    <div class="content">
+    <h1>ASSIGNMENTS</h1>
+        {% if request.user.role == 'THR'%}
+            {% if teaches.count != 0 %}
+                <h4>Select the class</h4>
+            <table id="data-table" class="table " style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                    <th style="border-bottom: 2px solid black">Semester</th>
+                    <th style="border-bottom: 2px solid black">Section</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for teach in teaches %}
+                    <tr>
+                        <td ><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
+                        </td>
+                        <td ><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
+                        </td>
+                        <td><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                {% else %}
+                <h4>You do not teach any class, no record found</h4>
+                {% endif %}
+        {% endif %}
+    {% if request.user.role == 'STD' %}
+        {% if subjects.count != 0 %}
+            <h4>Select the subject</h4>
+            <table id="data-table" class="table " style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in subjects %}
+                    <tr>
+                        <td ><a
+                               href="{% url 'view-subject-assignment' classId=classId subjectId=subject.subject.id %}">{{ subject.subject.subject_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>You are not enrolled into any subjects, check your profile for class</h4>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}
+

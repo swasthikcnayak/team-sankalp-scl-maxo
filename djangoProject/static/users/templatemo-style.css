@@ -533,35 +533,37 @@ footer { padding: 15px; }
 @media screen and (max-width: 992px) and (min-width: 768px) {
 	.templatemo-sidebar { width: 200px; }
 	.templatemo-site-header h1 { font-size: 1.6em; }
-	.square { 
-		width: 20px; 
+	.square {
+		width: 20px;
 		height: 20px;
 	}
 	.templatemo-left-nav a.active,
 	.templatemo-left-nav a:hover {
-		border-left: 6px solid #13895F;		
-	}	
+		border-left: 6px solid #13895F;
+	}
 	.templatemo-top-nav-container {	padding: 17px 30px;	}
 	.templatemo-top-nav a { padding: 0 15px; }
 }
 
 @media screen and (max-width: 992px) {
 	nav li { font-size: 1em; }
-	.templatemo-left-nav a { padding: 15px 10px; }	
+	.templatemo-left-nav a { padding: 15px 10px; }
 	.templatemo-content-container {	padding: 10px; }
 }
 @media only screen and (min-width: 768px) {
 	.templatemo-left-nav {	display: block !important; }
 }
+
+
 @media screen and (max-width: 767px) {
 	.templatemo-flex-row { display: block; }
 	.templatemo-site-header { margin: 20px 15px; }
 	.profile-photo-container {	display: none; /* Hide profile photo on mobile view */	}
 	.templatemo-search-form { margin: 10px; }
 	.templatemo-top-nav-container {	padding: 10px; }
-	.templatemo-top-nav a { 
+	.templatemo-top-nav a {
 		border-left: 1px solid #c5c5c5;
-		padding: 0 7px; 
+		padding: 0 7px;
 	}
 	.templatemo-top-nav li:last-child a { border-right: 1px solid #c5c5c5; }
 	.templatemo-content-widget { padding: 15px;	}
@@ -571,15 +573,15 @@ footer { padding: 15px; }
 		display: none;
 		position: fixed;
 		top: 10px;
-		right: 50px;		
+		right: 50px;
 		height: 30vh;
 		overflow: auto;
 		width: 40vw;
 		z-index: 999;
 	}
-	.templatemo-left-nav a.active, 
+	.templatemo-left-nav a.active,
 	.templatemo-left-nav a:hover {
-		border-left: 4px solid #13895F;	
+		border-left: 4px solid #13895F;
 	}
 	.mobile-menu-icon {
 		cursor: pointer;
@@ -600,6 +602,7 @@ footer { padding: 15px; }
 		padding-left: 11px;
 	}
 }
+
 
 .bolder{
 	font-size: larger;

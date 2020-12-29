@@ -23,11 +23,11 @@
     {% endif %}
     <div class="content">
     <h1>SUBMISSIONS</h1>
-        {% if request.user.role == 'THR' or request.user.role == 'ADM' %}
+        {% if request.user.role == 'THR'%}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
+            <button type="submit">UPDATE MARKS</button>
             </form>
 
             <table id="data-table" class="table" style="border:1px">

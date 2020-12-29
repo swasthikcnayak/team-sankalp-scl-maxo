@@ -63,7 +63,6 @@ def submissions(request, assignmentId):
             return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form})
         elif request.method == 'POST':
             form = MarksUpdateForm(request.POST)
-            print(form.is_valid())
             if form.is_valid():
                 row = Submission.objects.get(id=assignmentId,
                                              student__user__username=form.cleaned_data['student'])
@@ -72,6 +71,7 @@ def submissions(request, assignmentId):
                 messages.success(request,
                                  message="Marks Updated Successfully")
             else:
+                print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
             return redirect('view-submissions',assignmentId=assignmentId)

@@ -1,0 +1,68 @@
+{% extends 'users/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>REGISTER</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="templatemo-content-widget templatemo-login-widget white-bg" style="margin-top: 50px;">
+			<header class="text-center" style="margin-bottom: 20px;">
+                    {% if messages %}
+                    {%  for message in messages %}
+                         <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+            {% endif %}
+              <h1>REGISTER!!!</h1>
+	        </header>
+	        <form method="POST" class="templatemo-login-form">
+                {% csrf_token %}
+	        	<div class="form-group">
+					<h3 class="margin-bottom-10" style="font-size: 15px">Username</h3>
+	        		<div class="input-group width-100">
+                        <label for="id_username"></label><input type="text" class="form-control pt-8" name="username" placeholder="Registration Number/Employee Id" , maxlength="50" id="id_username" required>
+		          	</div>
+	        	</div>
+	        	<div class="form-group">
+					<h3 class="margin-bottom-10" style="font-size: 15px">Email</h3>
+	        		<div class="input-group width-100">
+                        <label for="id_email"></label><input type="email" class="form-control" placeholder="user@gmail.com" name="email" id="id_email" required>
+		          	</div>
+	        	</div>
+				<div class="form-group">
+					<h3 class="margin-bottom-10" style="font-size: 15px">Role</h3>
+					<div class="input-group width-100">
+                        <label for="id_role"></label><select class="form-control" name="role" id="id_role">
+						  <option value="STD" selected>STUDENT</option>
+						  <option value="THR">TEACHER</option>dd
+                            <option value="ADM">ADMIN</option>
+						</select>
+					  </div>
+				</div>
+				<div class="form-group">
+					<h3 class="margin-bottom-10" style="font-size: 15px">Password</h3>
+	        		<div class="input-group width-100">
+		              	<input type="password" class="form-control" name="password1" id="id_password2" placeholder="******" disabled>
+		          	</div>
+	        	</div>
+				<div class="form-group">
+					<h3 class="margin-bottom-10" style="font-size: 15px">Confirm Password</h3>
+	        		<div class="input-group width-100">
+                        <label for="id_password2"></label><input type="password" class="form-control" name="password2" id="id_password2" placeholder="******" disabled>
+		          	</div>
+	        	</div>
+				<div class="form-group">
+					<button type="submit" class="templatemo-blue-button width-100">Register</button>
+				</div>
+	        </form>
+		</div>
+{% endblock content%}
+

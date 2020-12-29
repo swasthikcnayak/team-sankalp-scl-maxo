@@ -1,0 +1,71 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>PROFILE</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="content">
+    <h1>SUBMISSIONS</h1>
+        {% if request.user.role == 'THR'%}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+            <button type="submit">UPDATE MARKS</button>
+            </form>
+
+            <table id="data-table" class="table" style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Reg. Number</th>
+                    <th style="border-bottom: 2px solid black">maximum marks</th>
+                    <th style="border-bottom: 2px solid black">marks Given</th>
+                    <th style="border-bottom: 2px solid black">Submitted at</th>
+                    <th style="border-bottom: 2px solid black">answer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for submission in submissions %}
+                    <tr>
+                        <td>{{ submission.student.user.username }}</td>
+                        <td>{{ submission.assignment.maximum_marks }}</td>
+                        <td>{{ submission.marks_obtained }}</td>
+                        <td>{{ submission.time_submitted }}</td>
+                        <td>{{ submission.answer }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        {% if request.user.role == 'STD' %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+            <button type="submit">SUBMIT LOG</button>
+            </form>
+            <p>{{ assignment.assignment_name }}</p>
+            <p>{{ assignment.question }}</p>
+            <p>{{ assignment.start_time }}</p>
+            <p>{{ assignment.end_time }}</p>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
+

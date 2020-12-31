@@ -9,6 +9,7 @@ from users.models import StudentProfile, TeacherProfile, Teach
 from assignments.models import Submission, Assignment
 from assignments.forms import AssignmentCreationForm, MarksUpdateForm, AssignmentSubmissionForm
 from academics.models import Subject, Class
+from django.utils import timezone
 
 
 @login_required
@@ -40,7 +41,7 @@ def view_assignments(request, classId, subjectId):
                            'form': form})
         elif request.method == 'POST':
             teacherProfile = TeacherProfile.objects.get(user=request.user)
-            form = AssignmentCreationForm(request.POST,request.FILES)
+            form = AssignmentCreationForm(request.POST, request.FILES)
             if form.is_valid():
                 assmt = form.save(commit=False)
                 assmt.teacher = teacherProfile
@@ -55,8 +56,17 @@ def view_assignments(request, classId, subjectId):
                                      message="Please check the input details")
             return redirect('view-subject-assignment', subjectId=subjectId, classId=classId)
     elif is_student(request):
-        assignments = Assignment.objects.filter(subject__id=subjectId, Class__id=classId)
-        return render(request, 'assignments/assignment-detail.html', {'assignments': assignments})
+        time_now = timezone.now()
+        assignment_parred_due_date = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                               start_time__lt=time_now,
+                                                               end_time__lt=time_now)
+        assignments_to_complete = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                            start_time__lt=time_now,
+                                                            end_time__gt=time_now)
+        assignments_scheduled = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                          start_time__gt=time_now,
+                                                          end_time__gt=time_now)
+        return render(request, 'assignments/assignment-detail.html', {'assignment_parred_due_date': assignment_parred_due_date,'assignments_to_complete':assignments_to_complete,'assignments_scheduled':assignments_scheduled})
 
 
 @login_required
@@ -66,9 +76,9 @@ def submissions(request, assignmentId):
         submission = Submission.objects.filter(assignment__id=assignmentId)
         if request.method == 'GET':
             form = MarksUpdateForm()
-            form.fields['student'].queryset = StudentProfile.objects.filter(submission__assignment__id = assignmentId)
+            form.fields['student'].queryset = StudentProfile.objects.filter(submission__assignment__id=assignmentId)
             return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,
-                                                                        'assignment':assignment_details})
+                                                                        'assignment': assignment_details})
         elif request.method == 'POST':
             form = MarksUpdateForm(request.POST)
             if form.is_valid():
@@ -83,13 +93,13 @@ def submissions(request, assignmentId):
                 print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
-            return redirect('view-submissions',assignmentId=assignmentId)
+            return redirect('view-submissions', assignmentId=assignmentId)
     elif is_student(request):
         if request.method == 'GET':
             form = AssignmentSubmissionForm()
             return render(request, 'assignments/submission-list.html', {'assignment': assignment_details, 'form': form})
         elif request.method == 'POST':
-            form = AssignmentSubmissionForm(request.POST,request.FILES)
+            form = AssignmentSubmissionForm(request.POST, request.FILES)
             if form.is_valid():
                 answer = form.save(commit=False)
                 answer.assignment = Assignment.objects.get(id=assignmentId)
@@ -102,4 +112,4 @@ def submissions(request, assignmentId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Could not submit assignment")
-            return redirect('view-submissions',assignmentId=assignmentId)
+            return redirect('view-submissions', assignmentId=assignmentId)

@@ -65,7 +65,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
+            <button type="submit">SUBMIT ASSIGNMENT</button>
             </form>
             <p>{{ assignment.assignment_name }}</p>
             <button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button>

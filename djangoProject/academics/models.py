@@ -54,7 +54,7 @@ class Class(models.Model):
     section_name = models.CharField(max_length=1, choices=SECTION_CHOICES, default='A')
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     link = models.URLField(null=True)
-    timetable = models.URLField()
+    timetable = models.FileField(upload_to='timetable')
 
     def clean(self):
         self.section_name = self.section_name.upper()

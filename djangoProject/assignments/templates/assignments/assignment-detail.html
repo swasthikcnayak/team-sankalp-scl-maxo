@@ -23,6 +23,7 @@
     {% endif %}
     <div class="content">
     <h1>ASSIGNMENTS</h1>
+
         {% if request.user.role == 'THR'%}
             <h4>Create an assignment</h4>
             <form method="POST" enctype="multipart/form-data">
@@ -59,12 +60,8 @@
         {% endif %}
 
     {% if request.user.role == 'STD' %}
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
-            </form>
-
+        <h5>Assignment to submit  : </h5>
+        {% if assignments_to_complete.count != 0 %}
              <table id="data-table" class="table" style="border:1px">
                 <thead class="thead-dark">
                 <tr>
@@ -76,7 +73,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for assignment in assignments %}
+                {% for assignment in assignments_to_complete %}
                     <tr>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a></td>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a></td>
@@ -87,6 +84,66 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <h4>No Assignment to submit right now</h4>
+            {% endif %}
+
+
+        <h5>Upcomming assignments : </h5>
+        {% if assignments_scheduled.count != 0 %}
+             <table id="data-table" class="table" style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Assignment Name</th>
+                    <th style="border-bottom: 2px solid black">Start Time</th>
+                    <th style="border-bottom: 2px solid black">End time</th>
+                    <th style="border-bottom: 2px solid black">maximum marks</th>
+                    <th style="border-bottom: 2px solid black">question</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assignment in assignments_scheduled %}
+                    <tr>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a></td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No upcomming assignments scheduled</h4>
+            {% endif %}
+
+        <h5>Assignment due date parred  : </h5>
+        {% if assignment_parred_due_date.count != 0 %}
+             <table id="data-table" class="table" style="border:1px">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Assignment Name</th>
+                    <th style="border-bottom: 2px solid black">Start Time</th>
+                    <th style="border-bottom: 2px solid black">End time</th>
+                    <th style="border-bottom: 2px solid black">maximum marks</th>
+                    <th style="border-bottom: 2px solid black">question</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assignment in assignment_parred_due_date %}
+                    <tr>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a></td>
+                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a></td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No previous assignments</h4>
+            {% endif %}
         {% endif %}
     </div>
 

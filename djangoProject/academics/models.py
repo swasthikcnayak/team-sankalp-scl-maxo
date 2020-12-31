@@ -54,7 +54,7 @@ class Class(models.Model):
     section_name = models.CharField(max_length=1, choices=SECTION_CHOICES, default='A')
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     link = models.URLField(null=True)
-    timetable = models.URLField()
+    timetable = models.FileField(upload_to='timetable')
 
     def clean(self):
         self.section_name = self.section_name.upper()
@@ -71,7 +71,7 @@ class Note(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
     chapter_number = models.CharField(max_length=2, null=True)
     chapter_name = models.CharField(max_length=50, null=True)
-    link = models.URLField()
+    link = models.FileField(upload_to='notes')
 
     class Meta:
         unique_together = ('department', 'subject', 'chapter_number')

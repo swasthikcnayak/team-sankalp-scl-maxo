@@ -4,12 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block css-imports %}
-    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
     <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>NOTES</title>
 {% endblock title %}
 
 
@@ -37,9 +36,9 @@
                 <tbody>
                 {% for note in notes %}
                     <tr>
-                        <td> <a href="{{ note.link }}"  target="_blank"> {{ note.chapter_number }}</a></td>
-                        <td> <a href=" {{ note.link }}" target="_blank"> {{ note.chapter_name }}</a></td>
-                        <td> <a href=" {{ note.link }}" target="_blank">{{ note.link}}</a></td>
+                        <td>  {{ note.chapter_number }}</td>
+                        <td> {{ note.chapter_name }}</td>
+                       <td> <button><a href = "/media/{{note.link}}" target="__blank">Open notes</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -67,9 +66,9 @@
                 <tbody>
                 {% for note in notes %}
                     <tr>
-                        <td> <a href="{{ note.link }}" target="_blank"> {{ note.chapter_number }}</a></td>
-                        <td> <a href=" {{ note.link }}" target="_blank" >{{ note.chapter_name }}</a></td>
-                        <td> <a href=" {{ note.link }}" target="_blank">{{ note.link}}</a></td>
+                        <td>  {{ note.chapter_number }}</td>
+                        <td> {{ note.chapter_name }}</td>
+                        <td> <button><a href = "/media/{{note.link}}" target="__blank">Open notes</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>

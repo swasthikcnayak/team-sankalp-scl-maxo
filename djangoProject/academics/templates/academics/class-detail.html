@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>CLASS-DETAILS</title>
 {% endblock title %}
 
 
@@ -26,8 +26,8 @@
         <p>semester : {{ class.semester }}</p>
         <p>section : {{ class.section_name }}</p>
         <p>department : {{ class.department.department_name }}</p>
-        <p>class joining link : {{ class.link }}</p>
-        <p>timetable : {{ class.timetable }}</p>
+        <p>class joining link : <a href="{{ class.link }}" target="__blank">Join Class</a></p>
+        <p>timetable : <button><a href = "/media/{{class.timetable}}" target="__blank">TimeTable</a></button></p>
     </div>
 {% endblock content %}
 

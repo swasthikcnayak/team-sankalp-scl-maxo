@@ -9,11 +9,6 @@ class AttendanceUpdateForm(forms.ModelForm):
         model = AttendanceLog
         fields = ['absentees', 'conducted_date']
 
-    def __init__(self, *args, **kwargs):
-        self.class_obj = kwargs.pop('class_obj', None)
-        super(AttendanceUpdateForm, self).__init__(*args, **kwargs)
-        self.absentees = forms.ModelMultipleChoiceField(queryset=StudentProfile.objects.filter(section=self.class_obj))
-
 
 class RequestAttendanceDetails(forms.Form):
     semester = forms.ChoiceField(choices=SEM_CHOICES)

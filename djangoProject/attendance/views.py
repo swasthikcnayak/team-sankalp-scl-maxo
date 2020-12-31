@@ -17,7 +17,12 @@ def view_attendance(request):
         studentProfile = get_object_or_404(StudentProfile, user=request.user)
         if request.method == 'GET':
             form = RequestAttendanceDetails(semester=studentProfile.semester)
-            attendances = Attendance.objects.filter(student=studentProfile, Class__id=studentProfile.section.id)
+            if studentProfile.section is None:
+                messages.add_message(request, messages.ERROR,
+                                     message="Update your profile before looking at other details")
+                return redirect('profile')
+            else:
+                attendances = Attendance.objects.filter(student=studentProfile, Class__id=studentProfile.section.id)
             return render(request, 'attendance/attendance.html', {'attendances': attendances, 'form': form})
         elif request.method == 'POST':
             form = RequestAttendanceDetails(request.POST)
@@ -43,17 +48,21 @@ def view_subject_attendance(request, classId, subjectId):
     if is_teacher(request):
         subject = get_object_or_404(Subject, id=subjectId)
         class_obj = get_object_or_404(Class, id=classId)
-        form = AttendanceUpdateForm(class_obj=class_obj)
+        form = AttendanceUpdateForm()
+        form.fields['absentees'].queryset = StudentProfile.objects.filter(section=class_obj)
         students_this_section = StudentProfile.objects.filter(section=class_obj)
         for students in students_this_section:
             if not Attendance.objects.filter(student=students, subject=subject, Class=class_obj).exists():
                 Attendance.objects.create(student=students, subject=subject, Class=class_obj)
         attendances = Attendance.objects.filter(subject=subject, Class=class_obj)
+        last_updated = None
         try:
-            last_updated = AttendanceLog.objects.filter(subject=subject, Class=class_obj).order_by('-logged_date'). \
-                first().logged_date
+            if AttendanceLog.objects.filter(subject=subject, Class=class_obj).order_by('-logged_date'). \
+                    first() is not None:
+                last_updated = AttendanceLog.objects.filter(subject=subject, Class=class_obj).order_by('-logged_date'). \
+                    first().logged_date
         except AttendanceLog.DoesNotExist:
-            last_updated = None
+            last_updated = ""
         if request.method == 'GET':
             return render(request, 'attendance/attendance-edit.html', {'attendances': attendances, 'form': form,
                                                                        'date_last_updated': last_updated})
@@ -73,7 +82,7 @@ def view_subject_attendance(request, classId, subjectId):
                         attendance.classes_attended = attendance.classes_attended + 1
                     attendance.percentage = ceil(attendance.classes_attended / attendance.classes_conducted * 100)
                     attendance.save()
-                    messages.success(request,
+                messages.success(request,
                                      message="Absentees registered successfully")
             else:
                 messages.add_message(request, messages.ERROR,

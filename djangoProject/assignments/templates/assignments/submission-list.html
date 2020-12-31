@@ -4,12 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block css-imports %}
-    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
     <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
-    <title>PROFILE</title>
+    <title>SUBMISSIONS</title>
 {% endblock title %}
 
 
@@ -24,11 +23,21 @@
     <div class="content">
     <h1>SUBMISSIONS</h1>
         {% if request.user.role == 'THR'%}
+
+            <h4>Assignment details</h4>
+            <p>Assignment Name : {{ assignment.assignment_name }}</p>
+            <p>Start time : {{ assignment.start_time }}</p>
+            <p>End time : {{ assignment.end_time }}</p>
+            <p>Details : {{ assignment.description }}</p>
+            <button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button>
+
+            <h4>update marks</h4>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
             <button type="submit">UPDATE MARKS</button>
             </form>
+
 
             <table id="data-table" class="table" style="border:1px">
                 <thead class="thead-dark">
@@ -47,22 +56,38 @@
                         <td>{{ submission.assignment.maximum_marks }}</td>
                         <td>{{ submission.marks_obtained }}</td>
                         <td>{{ submission.time_submitted }}</td>
-                        <td>{{ submission.answer }}</td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Answer</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         {% endif %}
         {% if request.user.role == 'STD' %}
+            <h4>Assignment details</h4>
+            <p>Assignment Name : {{ assignment.assignment_name }}</p>
+            <p>Start time : {{ assignment.start_time }}</p>
+            <p>End time : {{ assignment.end_time }}</p>
+            <p>Details : {{ assignment.description }}</p>
+            <p>Question Paper :<button> <a href = "/media/{{assignment.question}}" target="__blank">Question</a></button></p>
+            {% if submission == 0 %}
+                <h4>Upload your answer script here : </h4>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
+            <button type="submit">SUBMIT ASSIGNMENT</button>
             </form>
-            <p>{{ assignment.assignment_name }}</p>
-            <p>{{ assignment.question }}</p>
-            <p>{{ assignment.start_time }}</p>
-            <p>{{ assignment.end_time }}</p>
+                {% else %}
+                <h4>You have already submitted the assignment</h4>
+                <h5>Details as below : </h5>
+                        <p>Maximum marks : {{ submission.assignment.maximum_marks }}</p>
+                {% if submission.marks_obtained != -1 %}
+                    <p>Marks obtained{{ submission.marks_obtained }}</p>
+                    {% else %}
+                    <p>marks obtained : Not corrected</p>
+                    {% endif %}
+                        <p>Time submitted : {{ submission.time_submitted }}</p>
+                        <p>Answer script : <button><a href = "/media/{{assignment.question}}" target="__blank">Answer</a></button></p>
+                {% endif %}
         {% endif %}
     </div>
 

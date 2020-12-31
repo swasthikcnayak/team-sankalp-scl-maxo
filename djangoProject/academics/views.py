@@ -12,6 +12,10 @@ from djangoProject.utils import is_student, is_teacher
 def view_list(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        if student_profile.section is None:
+            messages.add_message(request, messages.ERROR,
+                                 message="Update your profile before looking at other details")
+            return redirect('profile')
         subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'academics/notes-list.html', {'subjects': subjects})
     elif is_teacher(request):
@@ -23,13 +27,14 @@ def view_list(request):
 @login_required
 def view_notes(request, subjectId):
     subject = get_object_or_404(Subject, id=subjectId)
+    print(subject)
     notes = Note.objects.filter(subject=subject)
     if is_teacher(request):
         if request.method == 'GET':
             form = AddNotesForm()
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form})
         elif request.method == 'POST':
-            form = AddNotesForm(request.POST)
+            form = AddNotesForm(request.POST,request.FILES)
             if form.is_valid():
                 note = form.save(commit=False)
                 note.subject = subject
@@ -45,7 +50,7 @@ def view_notes(request, subjectId):
                                          message="This chapter notes is already added")
                 return redirect('view-notes',subjectId=subjectId)
     elif is_student(request):
-        notes = Note.objects.filter(subject=subject)
+        notes = Note.objects.filter(subject__id=subjectId)
         return render(request, 'academics/notes-detail.html', {'notes': notes})
 
 
@@ -54,6 +59,10 @@ def view_notes(request, subjectId):
 def class_list(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        if student_profile.section is None:
+            messages.add_message(request, messages.ERROR,
+                                 message="Update your profile before looking at other details")
+            return redirect('profile')
         class_id = student_profile.section.id
         return redirect('view-class', classId=class_id)
     elif is_teacher(request):

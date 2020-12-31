@@ -40,7 +40,11 @@
                     <tr>
                         <td >{{ submission.assignment.assignment_name }}</td>
                         <td >{{ submission.assignment.maximum_marks }}</td>
-                        <td >{{ submission.marks_obtained }}</td>
+                        {% if submission.marks_obtained != -1 %}
+                            <td >{{ submission.marks_obtained }}</td>
+                        {% else %}
+                            <td >Not checked</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>

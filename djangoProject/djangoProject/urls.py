@@ -17,7 +17,7 @@ handler400 = 'djangoProject.views.handler400'
 handler403 = 'djangoProject.views.handler403'
 
 urlpatterns = [
-    path('',home_view,name="home"),
+    path('', home_view, name="home"),
     path('users/', include(user_url)),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),
          name='password_reset'),
@@ -38,3 +38,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

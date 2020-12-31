@@ -71,7 +71,7 @@ class Note(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="subject")
     chapter_number = models.CharField(max_length=2, null=True)
     chapter_name = models.CharField(max_length=50, null=True)
-    link = models.URLField()
+    link = models.FileField(upload_to='notes')
 
     class Meta:
         unique_together = ('department', 'subject', 'chapter_number')

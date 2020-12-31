@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
 from academics.models import Class
 from assignments.models import Submission
-from users.models import StudentProfile, TeacherProfile, Teach
-from djangoProject.utils import is_student, is_teacher, is_admin
+from djangoProject.utils import is_student, is_teacher
+from users.models import StudentProfile, Teach
 
 
 # view list of subjects taken by student and list of teaching subject by teacher
@@ -11,6 +13,10 @@ from djangoProject.utils import is_student, is_teacher, is_admin
 def view_list(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        if student_profile.section is None:
+            messages.add_message(request, messages.ERROR,
+                                 message="Update your profile before looking at other details")
+            return redirect('profile')
         subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'marks/subject-list.html', {'subjects': subjects})
     elif is_teacher(request):

@@ -26,7 +26,7 @@
                     <li><a href="{% url 'profile' %}" id="#PROFILE"><i class="fa fa-user fa-fw"></i>Profile</a></li>
                     {% if user.role == 'ADM' %}
                         <li><a href="{% url 'register' %}" id="#REGISTER"><i class="fa fa-registered fa-fw" ></i>Register Users</a></li>
-                        <li><a href="{% url 'admin' %}"><i class="fa fa-database fa-fw"></i>Admin Panel</a></li>
+                        <li><a href="/users/admin"><i class="fa fa-database fa-fw"></i>Admin Panel</a></li>
                     {% else %}
                         <li><a href="{% url 'view-attendance' %}" id="#ATTENDANCE"><i class="fa fa-bar-chart fa-fw" ></i>Attendance</a></li>
                         <li><a href="{% url 'view-list' %}" id=""><i class="fa fa-check fa-fw" ></i>Marks</a></li>

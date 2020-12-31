@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>ATTENDANCE</title>
+    <title>NOTES</title>
 {% endblock title %}
 
 
@@ -36,14 +36,14 @@
                 <tbody>
                 {% for subject in subjects %}
                     <tr>
-                        <td> <a href=" {% url 'view-notes' subjectId=subject.id%}"> {{ subject.id }}</a></td>
-                        <td> <a href=" {% url 'view-notes' subjectId=subject.id%}">{{ subject.subject.subject_name }}</a></td>
+                        <td> <a href=" {% url 'view-notes' subjectId=subject.subject.id%}"> {{ subject.id }}</a></td>
+                        <td> <a href=" {% url 'view-notes' subjectId=subject.subject.id%}">{{ subject.subject.subject_name }}</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
                 {% else %}
-                <h4>Not enrolled to any subjects, check you profile for section</h4>
+                <h4>Not enrolled to any subject . </h4>
                 {% endif %}
         {% endif %}
 

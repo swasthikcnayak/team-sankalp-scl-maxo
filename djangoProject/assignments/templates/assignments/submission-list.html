@@ -4,12 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block css-imports %}
-    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
     <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
-    <title>PROFILE</title>
+    <title>SUBMISSIONS</title>
 {% endblock title %}
 
 
@@ -24,11 +23,20 @@
     <div class="content">
     <h1>SUBMISSIONS</h1>
         {% if request.user.role == 'THR'%}
+
+            <h4>Assignment details</h4>
+            <p>{{ assignment.assignment_name }}</p>
+            <button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button>
+            <p>{{ assignment.start_time }}</p>
+            <p>{{ assignment.end_time }}</p>
+
+            <h4>update marks</h4>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
             <button type="submit">UPDATE MARKS</button>
             </form>
+
 
             <table id="data-table" class="table" style="border:1px">
                 <thead class="thead-dark">
@@ -47,7 +55,7 @@
                         <td>{{ submission.assignment.maximum_marks }}</td>
                         <td>{{ submission.marks_obtained }}</td>
                         <td>{{ submission.time_submitted }}</td>
-                        <td>{{ submission.answer }}</td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Answer</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -60,7 +68,7 @@
             <button type="submit">SUBMIT LOG</button>
             </form>
             <p>{{ assignment.assignment_name }}</p>
-            <p>{{ assignment.question }}</p>
+            <button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button>
             <p>{{ assignment.start_time }}</p>
             <p>{{ assignment.end_time }}</p>
         {% endif %}

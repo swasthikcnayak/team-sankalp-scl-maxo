@@ -9,7 +9,7 @@
 {% endblock css-imports %}
 
 {% block title %}
-    <title>PROFILE</title>
+    <title>ASSIGNMENT</title>
 {% endblock title %}
 
 
@@ -28,7 +28,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
-            <button type="submit">SUBMIT LOG</button>
+            <button type="submit">CREATE ASSIGNMENT</button>
             </form>
             {% if assignments.count != 0 %}
              <table id="data-table" class="table" style="border:1px">
@@ -48,7 +48,7 @@
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a></td>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a></td>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a></td>
-                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.question }}</a></td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -82,7 +82,7 @@
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a></td>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a></td>
                         <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a></td>
-                        <td><a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.question }}</a></td>
+                        <td><button><a href = "/media/{{assignment.question}}" target="__blank">Question</a></button></td>
                     </tr>
                 {% endfor %}
                 </tbody>

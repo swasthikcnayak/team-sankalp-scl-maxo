@@ -574,9 +574,9 @@ footer { padding: 15px; }
 		position: fixed;
 		top: 10px;
 		right: 50px;
-		height: 30vh;
+		height:fit-content;
 		overflow: auto;
-		width: 40vw;
+		width: 50vw;
 		z-index: 999;
 	}
 	.templatemo-left-nav a.active,

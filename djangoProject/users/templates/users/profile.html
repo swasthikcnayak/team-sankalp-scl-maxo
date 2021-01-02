@@ -26,7 +26,8 @@
         <div class="content">
         <div class="student-profile py-4">
             <div class="row">
-                <div class="col-lg-3 col-lg-offset-4">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-6">
                     <div class="card shadow-sm">
                         <div class="card-header bg-transparent text-center">
                             <img class="profile_img" src="{{ user.image.url }}" alt="Profile photo">
@@ -35,9 +36,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
         </div>
             <br/>
+            {% if user.role != 'ADM' %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
@@ -49,13 +52,12 @@
                     </div>
                     <div class="col-lg-6">
                         <fieldset class="form-group">
-                            {% if user.role != 'ADM' %}
                                 <legend class="border-bottom mb-4">Academic Information</legend>
                                 {{ p_form|crispy }}
-                            {% endif %}
                         </fieldset>
                     </div>
                 </div>
+
                 <div class="row text-center">
                     <div class="form-group">
                         <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
@@ -66,6 +68,34 @@
                     </div>
                 </div>
             </form>
+        {% else %}
+                {% csrf_token %}
+                <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <fieldset class="form-group ">
+                            <legend class="border-bottom mb-4">Personal Information</legend>
+                            {{ u_form|crispy }}
+                        </fieldset>
+                    </div>
+                <div class="col-lg-2"></div>
+                </div>
+                    <div class="row">
+                <div class="text-center">
+                    <div class="form-group">
+                        <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
+                        </button>
+                        <a href="{% url 'password_reset' %}">
+                            <button class="button btn  btn-info" type="button"><span>Change password </span></button>
+                        </a>
+                    </div>
+                </div>
+                    </div>
+                </form>
+            {% endif %}
+
         </div>
     </div>
 

@@ -476,7 +476,7 @@ footer { padding: 15px; }
 	text-align: center;
 }
 .templatemo-view-img-btn {
-	background-color: #f4f3f3;	
+	background-color: #f4f3f3;
 	border: none;
 	border-radius: 5px;
 	color: #a6a6a6;
@@ -491,20 +491,20 @@ footer { padding: 15px; }
 
 /* 7. Preferences
 -------------------------------*/
-.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .help-block, 
-.has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, 
+.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .help-block,
+.has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label,
 .has-success.radio label, .has-success.radio-inline label {
 	color: #13895F;
 }
 .has-success .form-control { border-color: #13895F; }
-.has-warning .checkbox, .has-warning .checkbox-inline, .has-warning .control-label, .has-warning .help-block, 
-.has-warning .radio, .has-warning .radio-inline, .has-warning.checkbox label, .has-warning.checkbox-inline label, 
+.has-warning .checkbox, .has-warning .checkbox-inline, .has-warning .control-label, .has-warning .help-block,
+.has-warning .radio, .has-warning .radio-inline, .has-warning.checkbox label, .has-warning.checkbox-inline label,
 .has-warning.radio label, .has-warning.radio-inline label {
 	color: #CF922C;
 }
 .has-warning .form-control { border-color: #CF922C; }
-.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, 
-.has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, 
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block,
+.has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label,
 .has-error.radio label, .has-error.radio-inline label {
 	color: #D7425C;
 }

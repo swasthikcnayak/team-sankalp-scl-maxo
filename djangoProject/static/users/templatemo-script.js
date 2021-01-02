@@ -5,6 +5,7 @@ $(document).ready(function(){
 		$('.templatemo-left-nav').slideToggle();				
 	});
 
+
 	/* Close the widget when clicked on close button */
 	$('.templatemo-content-widget .fa-times').click(function(){
 		$(this).parent().slideUp(function(){

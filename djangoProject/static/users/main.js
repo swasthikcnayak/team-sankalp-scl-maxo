@@ -1,12 +1,7 @@
-/**
-* Template Name: Tempo - v2.2.0
-* Template URL: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+
 !(function($) {
   "use strict";
-
+  const head
   // Smooth scroll for the navigation menu and links with .scrollto classes
   var scrolltoOffset = $('#header').outerHeight() - 17;
   $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {

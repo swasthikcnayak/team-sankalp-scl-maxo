@@ -167,7 +167,7 @@ footer { padding: 15px; }
 .templatemo-left-nav a.active,
 .templatemo-left-nav a:hover {
 	background: #18191b;
-	border-left: 8px solid #13895F;
+	border-left: 10px solid #13895F;
 }
 .templatemo-left-nav a {
 	color: #e9e9ea;

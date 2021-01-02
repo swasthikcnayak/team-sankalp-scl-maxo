@@ -83,7 +83,7 @@ def view_subject_attendance(request, classId, subjectId):
                     attendance.percentage = ceil(attendance.classes_attended / attendance.classes_conducted * 100)
                     attendance.save()
                 messages.success(request,
-                                     message="Absentees registered successfully")
+                                 message="Absentees registered successfully")
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")

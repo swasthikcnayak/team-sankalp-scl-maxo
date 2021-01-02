@@ -6,3 +6,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.js"></script>
     <script type="text/javascript" src="{% static 'users/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'users/templatemo-script.js' %}"></script>
+
+<script>
+var m = document.getElementsByClassName("alert");  // Return an array
+
+setTimeout(function(){
+   if (m && m.length) {
+       m[0].classList.add('hide');
+   }
+}, 3000);
+</script>

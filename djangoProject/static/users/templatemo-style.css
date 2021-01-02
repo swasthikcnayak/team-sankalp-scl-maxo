@@ -488,7 +488,7 @@ footer { padding: 15px; }
 /* 8. Media Queries
 ------------------------------*/
 @media screen and (max-width: 1199px) and (min-width: 991px) {
-	.templatemo-site-header { margin: 25px; }
+	.templatemo-site-header { margin: 15px; }
 	.templatemo-sidebar { width: 250px;	}
 	.templatemo-search-form { margin: 20px; }
 	nav li { font-size: 1em; }

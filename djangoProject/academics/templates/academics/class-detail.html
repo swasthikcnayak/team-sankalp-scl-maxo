@@ -6,12 +6,31 @@
 {% block css-imports %}
     <link rel="stylesheet" href="{% static 'users/profile.css' %}">
     <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+    <link rel="stylesheet" href="{% static 'academics/class-detail.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
     <title>ATTENDANCE</title>
 {% endblock title %}
+<header>
+        <h2><a href="#">DEPARTMENT</a></h2>
 
+        <h2><a href="#">SEMESTER</a></h2>
+
+        <h2><a href="#">SECTION</a></h2>
+        <h2><a href="#"></a></h2>
+
+      </header>
+
+      <section class="hero">
+        <div class="background-image"></div>
+        <div class="hero-content-area">
+          <h1>CLASS DETAILS!</h1>
+
+          <a href="#" class="btn">Class joining link</a>
+          <a href="#" class="btn">Timetable</a>
+        </div>
+      </section>
 
 {% block content %}
     {% if messages %}

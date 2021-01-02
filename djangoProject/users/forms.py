@@ -25,19 +25,27 @@ class UserUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-
         self.fields['date_of_birth'].required = False
         self.fields['last_name'].required = False
         self.fields['image'].required = False
         self.fields['blood_group'].required = False
         self.fields['address_line_1'].required = False
         self.fields['address_line_2'].required = False
-        self.fields['address_line_3'].required = False
+
+        self.fields['last_name'].label = "Last Name"
+        self.fields['image'].label = "Upload new profile photo"
 
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name', 'date_of_birth', 'blood_group', 'address_line_1',
-                  'address_line_2', 'address_line_3', 'image']
+                  'address_line_2', 'image']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'blood_group': forms.TextInput(attrs={'placeholder': 'Blood Group'}),
+            'address_line_1': forms.TextInput(attrs={'placeholder': 'Address line 1'}),
+            'address_line_2': forms.TextInput(attrs={'placeholder': 'Address line 2'}),
+        }
 
 
 # form for student profile update

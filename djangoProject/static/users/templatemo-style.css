@@ -500,7 +500,7 @@ footer { padding: 15px; }
 
 @media screen and (max-width: 992px) and (min-width: 768px) {
 	.templatemo-sidebar { width: 30vw; }
-	.templatemo-site-header h1 { font-size: 3em; }
+	.templatemo-site-header h1 { font-size: 2em; }
 	.templatemo-left-nav a.active,
 	.templatemo-left-nav a:hover {
 		border-left: 10px solid #13895F;
@@ -573,16 +573,16 @@ footer { padding: 15px; }
 }
 
 .alert {
-    position: relative;
+    positition: relative;
     opacity: 1;
     visibility: visible;
     transform: translateX(0px);
-    transition: visibility 2s, opacity 1000ms, transform 1000ms;
+    transition: visibility 0s, opacity 250ms, transform 250ms;
 }
 .alert.hide {
-    position: relative;
+    positition: relative;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: visibility 2s 1000ms, opacity 1000ms, transform 1000ms;
+    transform: translateX(-10px); // translateX, translateY, translateZ works well
+    transition: visibility 0s 250ms, opacity 250ms, transform 250ms;
 }

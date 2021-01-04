@@ -9,6 +9,7 @@
 
 
 {% block content %}
+    <div class="content container-fluid">
 <div class="templatemo-content-widget templatemo-login-widget white-bg center" style="margin-top: 150px;">
 			<header class="text-center">
                 {% if messages %}
@@ -31,5 +32,6 @@
 		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
 			<p>Forgort password? <strong><a href="{% url 'password_reset' %}" class="blue-text">Click here!</a></strong></p>
 		</div>
+    </div>
 {% endblock content%}
 

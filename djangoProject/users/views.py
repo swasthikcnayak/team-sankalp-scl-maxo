@@ -11,48 +11,47 @@ from .models import User, StudentProfile, TeacherProfile
 # registering users
 @login_required
 def register(request):
-    if not request.user.is_superuser:
-        return HttpResponse('Unauthorized', status=401)
-    if request.method == 'GET':
-        return render(request, 'users/register.html')
-    elif request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            roleFull = ""
-            email = form.cleaned_data.get('email')
-            role = form.cleaned_data.get('role')
-            user = form.save(commit=False)
-            password = User.objects.make_random_password(
-                length=10,
-                allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
-            if role == 'ADM':
-                roleFull = 'ADMIN'
-                user.is_staff = True
-                user.is_admin = True
-            elif role == 'THR':
-                user.is_staff = True
-                roleFull = 'TEACHER'
+    if request.user.is_superuser:
+        if request.method == 'GET':
+            return render(request, 'users/register.html')
+        elif request.method == 'POST':
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                roleFull = ""
+                email = form.cleaned_data.get('email')
+                role = form.cleaned_data.get('role')
+                user = form.save(commit=False)
+                password = User.objects.make_random_password(
+                    length=10,
+                    allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+                if role == 'ADM':
+                    roleFull = 'ADMIN'
+                    user.is_staff = True
+                    user.is_admin = True
+                elif role == 'THR':
+                    user.is_staff = True
+                    roleFull = 'TEACHER'
+                else:
+                    roleFull = 'STUDENT'
+                """send_mail( 'Login details', 'Here is your login details \n username : ' + username + '\n role : ' + 
+                roleFull + '\n password : ' + password, from_email=None, recipient_list=[email], fail_silently=False, ) """
+                print(username, roleFull)
+                print(password)
+                user.set_password(password)
+                user.save()
+                if role == 'THR':
+                    teacher_profile = TeacherProfile.objects.create(user=user)
+                    teacher_profile.save()
+                elif role == 'STD':
+                    student_profile = StudentProfile.objects.create(user=user, cgpa=0.00)
+                    student_profile.save()
+                messages.success(request,
+                                 message="User is registered successfully and an Email has been sent to " + email + ".")
             else:
-                roleFull = 'STUDENT'
-            """send_mail( 'Login details', 'Here is your login details \n username : ' + username + '\n role : ' + 
-            roleFull + '\n password : ' + password, from_email=None, recipient_list=[email], fail_silently=False, ) """
-            print(username, roleFull)
-            print(password)
-            user.set_password(password)
-            user.save()
-            if role == 'THR':
-                teacher_profile = TeacherProfile.objects.create(user=user)
-                teacher_profile.save()
-            elif role == 'STD':
-                student_profile = StudentProfile.objects.create(user=user, cgpa=0.00)
-                student_profile.save()
-            messages.success(request,
-                             message="User is registered successfully and an Email has been sent to " + email + ".")
-        else:
-            messages.add_message(request, messages.ERROR,
-                                 message="User is could not be registered check for duplicate username or email")
-        return redirect('register')
+                messages.add_message(request, messages.ERROR,
+                                     message="User is could not be registered check for duplicate username or email")
+            return redirect('register')
 
 
 # profile view

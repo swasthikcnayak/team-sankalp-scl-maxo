@@ -22,7 +22,7 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div class="content">
+    <div class="content container-fluid">
     <h1>MARKS</h1>
     {% if request.user.role != 'ADM' %}
         {% if submissions.count != 0 %}

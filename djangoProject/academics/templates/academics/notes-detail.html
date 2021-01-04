@@ -20,7 +20,7 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div class="content">
+    <div class="content container-fluid">
     <h1>NOTES</h1>
         {% if request.user.role == 'STD' %}
             {% if notes.count != 0 %}

@@ -18,8 +18,8 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div class="container-fluid">
-    <div class="content">
+
+    <div class="content container-fluid">
     <h1>Assignments</h1>
         {% if request.user.role == 'THR'%}
             {% if teaches.count != 0 %}
@@ -82,8 +82,6 @@
             {% endif %}
         {% endif %}
     </div>
-</div>
-
 
 {% endblock content %}
 

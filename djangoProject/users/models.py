@@ -48,7 +48,6 @@ class User(AbstractUser):
     blood_group = models.CharField(max_length=4, null=True)
     address_line_1 = models.CharField(max_length=50, null=True)
     address_line_2 = models.CharField(max_length=50, null=True)
-   #address_line_3 = models.CharField(max_length=50, null=True)
 
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
@@ -80,6 +79,23 @@ class User(AbstractUser):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+    #
+    #     def save(self, *args, **kwargs):
+    #         super().save(*args, **kwargs)
+    #
+    #         img_read = storage.open(self.image.name, 'r')
+    #         img = Image.open(img_read)
+    #
+    #         if img.height > 300 or img.width > 300:
+    #             output_size = (300, 300)
+    #             img.thumbnail(output_size)
+    #             in_mem_file = io.BytesIO()
+    #             img.save(in_mem_file, format='JPEG')
+    #             img_write = storage.open(self.image.name, 'w+')
+    #             img_write.write(in_mem_file.getvalue())
+    #             img_write.close()
+    #
+    #         img_read.close()
 
 
 class StudentProfile(models.Model):

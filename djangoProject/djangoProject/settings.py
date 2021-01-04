@@ -24,9 +24,9 @@ SECRET_KEY = 'gsdn^zxt*b--rz+g-4(a#v2bot+x%$r)x!3p9)z1uzzf43yy0w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
+#DEBUG = False
 
-# ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
 
 # Application definition
 

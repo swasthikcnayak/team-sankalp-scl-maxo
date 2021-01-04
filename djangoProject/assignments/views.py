@@ -53,7 +53,6 @@ def view_assignments(request, classId, subjectId):
                 messages.success(request,
                                  message="Assignment added successfully")
             else:
-                print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")
         return render(request, 'assignments/assignment-detail.html',
@@ -87,7 +86,6 @@ def submissions(request, assignmentId):
                 messages.success(request,
                                  message="Marks Updated Successfully")
             else:
-                print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
         return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,

@@ -232,3 +232,11 @@
 
 {% endblock content %}
 
+{% block js-imports %}
+<script>
+  $( function() {
+      $( "#id_start_time" ).datetimepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true, controlType: 'select'}).attr("autocomplete", "off") ;
+       $( "#id_end_time" ).datetimepicker({ dateFormat: 'yy-mm-dd', changeMonth:true,changeYear:true, controlType: 'select'}).attr("autocomplete", "off") ;
+      });
+  </script>
+{% endblock %}

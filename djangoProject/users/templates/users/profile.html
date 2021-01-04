@@ -99,3 +99,14 @@
 
 {% endblock content %}
 
+{% block js-imports %}
+<script>
+  $( function() {
+       //$( "#id_date_of_birth" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+      //$( "#id_date_of_birth" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+      $( "#id_date_of_birth" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true}).attr("autocomplete", "off") ;
+      $( "#id_join_date" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true}).attr("autocomplete", "off") ;
+
+  });
+  </script>
+{% endblock %}

@@ -14,7 +14,12 @@
 
 
 {% block content %}
-
+<nav aria-label="breadcrumb" >
+  <ol class="breadcrumb" style="background-color:#67B5B9 ">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">

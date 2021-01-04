@@ -46,7 +46,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 100px 80px;
+	padding: 50px 80px;
 }
 
 section:not(.hero):nth-child(even) {
@@ -69,59 +69,16 @@ hr {
 }
 
 
-section h3.title {
-	text-transform: capitalize;
-	font: bold 48px "Amatic SC", sans-serif;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-section p {
-	max-width: 775px;
-	line-height: 2;
-	padding: 0 20px;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
 @media (max-width: 800px) {
 	section {
-		padding: 50px 20px;
+		padding: 30px 20px;
 	}
-}
-
-/*Header Styles*/
-
-header {
-	position: absolute;
-	width: 100%;
-	display: flex;
-	/* justify-content: space-between; */
-	align-items: center;
-	padding: 35px 100px 0;
-	animation: 1s fadein 0.5s forwards;
-	opacity: 0;
-	color: #fff;
-	z-index: 2;
 }
 
 @keyframes fadein {
 	100% {
 		opacity: 1;
 	}
-}
-
-header h2 {
-	font-family: "Amatic SC", sans-serif;
-}
-
-header nav {
-	display: flex;
-	margin-right: -15px;
-}
-
-header nav li {
-	margin: 0 15px;
 }
 
 @media (max-width: 800px) {
@@ -164,7 +121,7 @@ header nav li {
 .hero h1 {
 	font: 72px "Amatic SC", sans-serif;
 	text-shadow: 2px 2px rgba(0, 0, 0, 0.3);
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 
 .hero h3 {
@@ -197,7 +154,7 @@ header nav li {
 	}
 
 	.hero h1 {
-		font-size: 48px;
+		font-size: 32px;
 	}
 
 	.hero h3 {
@@ -212,12 +169,12 @@ header nav li {
 
 h1{
     color:black;
-    size:30px;
+    size:20px;
 }
 
 h2{
-    padding:20px;
-  size:20px;
+    padding:10px;
+  size:10px;
 }
 a{
     color:black;

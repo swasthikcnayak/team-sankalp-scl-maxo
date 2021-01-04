@@ -31,7 +31,7 @@
                             <legend class="border-bottom mb-4">Fill the absentee form :</legend>
                             {{ form|crispy }}
                         </fieldset>
-                        <button type="submit" class="btn btn-info">SUBMIT ABSENTEES LIST</button>
+                        <button type="submit" class="btn btn-info mb-3">SUBMIT ABSENTEES LIST</button>
                     </div>
                 </div>
             </form>
@@ -72,3 +72,10 @@
 
 {% endblock content %}
 
+{% block js-imports %}
+<script>
+  $( function() {
+       $( "#id_conducted_date" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true}).attr("autocomplete", "off") ;
+  });
+  </script>
+{% endblock %}

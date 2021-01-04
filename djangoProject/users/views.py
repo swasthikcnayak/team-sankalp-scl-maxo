@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from djangoProject.utils import is_student, is_teacher
 from .forms import UserRegisterForm, UserUpdateForm, StudentProfileUpdateForm, TeacherProfileUpdateForm
@@ -89,4 +88,4 @@ def profile(request):
         elif is_teacher(request):
             teacher_profile = TeacherProfile.objects.get(user=request.user)
             p_form = TeacherProfileUpdateForm(instance=teacher_profile)
-    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form, 'title': 'PROFILE'})
+    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form})

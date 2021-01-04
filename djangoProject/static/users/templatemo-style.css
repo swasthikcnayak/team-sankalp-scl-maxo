@@ -161,13 +161,16 @@ footer { padding: 15px; }
 }
 .mobile-menu-icon { 
 	cursor:pointer;
-	display:none; 
+	display:none;
+	background-color: #7f7f7f;
 }
 .templatemo-left-nav li { font-weight: 300; }
 .templatemo-left-nav a.active,
 .templatemo-left-nav a:hover {
 	background: #18191b;
-	border-left: 8px solid #13895F;
+	color: #13895F;
+	font-size: medium;
+	border-left: 10px solid #13895F;
 }
 .templatemo-left-nav a {
 	color: #e9e9ea;
@@ -176,29 +179,6 @@ footer { padding: 15px; }
 	transition: all 0.3s ease;
 }
 .templatemo-left-nav .fa { margin-right: 15px; }
-
-/* 3. Right Column
-------------------------------*/
-.templatemo-top-nav-container {
-	background-color: white;
-	padding: 28px 50px;
- 	box-shadow: 0 0 2px 2px rgba(161, 159, 159, 0.18);
-}
-.templatemo-top-nav li {
-    float: left;
-    list-style: none;
-}
-.templatemo-top-nav a {
-	color: #7f7f7f;
-    display: block;
-    padding: 0 50px;
-    border-left: 2px solid #c5c5c5;
-}
-.templatemo-top-nav li:last-child a { border-right: 2px solid #c5c5c5; }
-.templatemo-top-nav a:hover,
-.templatemo-top-nav a.active {
-	color: #39ADB4;
-}
 
 /* Main Content Area */
 .templatemo-content {
@@ -234,17 +214,7 @@ footer { padding: 15px; }
  	box-shadow: 0 0 1px 1px rgba(161, 159, 159, 0.1);
 }
 .templatemo-content-widget.no-padding {	padding: 0; }
-.fa-times {
-	border-radius: 15px;
-  	color: white;
-  	cursor: pointer;
-	padding: 4px 5px;
-  	position: absolute;
-  	top: 15px;
-  	right: 15px;
-  	z-index: 100;
-  	transition: all 0.3s ease;
-}
+
 .fa-heart {
   color: white;
   cursor: pointer;
@@ -476,7 +446,7 @@ footer { padding: 15px; }
 	text-align: center;
 }
 .templatemo-view-img-btn {
-	background-color: #f4f3f3;	
+	background-color: #f4f3f3;
 	border: none;
 	border-radius: 5px;
 	color: #a6a6a6;
@@ -491,20 +461,20 @@ footer { padding: 15px; }
 
 /* 7. Preferences
 -------------------------------*/
-.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .help-block, 
-.has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, 
+.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .help-block,
+.has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label,
 .has-success.radio label, .has-success.radio-inline label {
 	color: #13895F;
 }
 .has-success .form-control { border-color: #13895F; }
-.has-warning .checkbox, .has-warning .checkbox-inline, .has-warning .control-label, .has-warning .help-block, 
-.has-warning .radio, .has-warning .radio-inline, .has-warning.checkbox label, .has-warning.checkbox-inline label, 
+.has-warning .checkbox, .has-warning .checkbox-inline, .has-warning .control-label, .has-warning .help-block,
+.has-warning .radio, .has-warning .radio-inline, .has-warning.checkbox label, .has-warning.checkbox-inline label,
 .has-warning.radio label, .has-warning.radio-inline label {
 	color: #CF922C;
 }
 .has-warning .form-control { border-color: #CF922C; }
-.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, 
-.has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, 
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block,
+.has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label,
 .has-error.radio label, .has-error.radio-inline label {
 	color: #D7425C;
 }
@@ -518,12 +488,10 @@ footer { padding: 15px; }
 /* 8. Media Queries
 ------------------------------*/
 @media screen and (max-width: 1199px) and (min-width: 991px) {
-	.templatemo-site-header { margin: 25px; }
-	.templatemo-sidebar { width: 250px;	}
-	.templatemo-search-form { margin: 20px; }
+	.templatemo-site-header { margin: 15px; }
+	.templatemo-sidebar { width: 30vw;	}
 	nav li { font-size: 1em; }
 	.templatemo-left-nav a { padding: 15px; }
-	.templatemo-top-nav a { padding: 0 30px; }
 }
 
 @media screen and (max-width: 1199px) {
@@ -531,27 +499,24 @@ footer { padding: 15px; }
 }
 
 @media screen and (max-width: 992px) and (min-width: 768px) {
-	.templatemo-sidebar { width: 200px; }
-	.templatemo-site-header h1 { font-size: 1.6em; }
-	.square {
-		width: 20px;
-		height: 20px;
-	}
+	.templatemo-sidebar { width: 30vw; }
+	.templatemo-site-header h1 { font-size: 2em; }
 	.templatemo-left-nav a.active,
 	.templatemo-left-nav a:hover {
-		border-left: 6px solid #13895F;
+		border-left: 10px solid #13895F;
 	}
-	.templatemo-top-nav-container {	padding: 17px 30px;	}
-	.templatemo-top-nav a { padding: 0 15px; }
+	.templatemo-left-nav a { padding: 15px; }
 }
 
 @media screen and (max-width: 992px) {
 	nav li { font-size: 1em; }
 	.templatemo-left-nav a { padding: 15px 10px; }
 	.templatemo-content-container {	padding: 10px; }
+	.templatemo-left-nav a { padding: 15px; }
 }
 @media only screen and (min-width: 768px) {
 	.templatemo-left-nav {	display: block !important; }
+	.templatemo-left-nav a { padding: 15px; }
 }
 
 
@@ -574,14 +539,14 @@ footer { padding: 15px; }
 		position: fixed;
 		top: 10px;
 		right: 50px;
-		height: 30vh;
+		height:fit-content;
 		overflow: auto;
-		width: 40vw;
+		width: 50vw;
 		z-index: 999;
 	}
 	.templatemo-left-nav a.active,
 	.templatemo-left-nav a:hover {
-		border-left: 4px solid #13895F;
+		border-left: 10px solid #13895F;
 	}
 	.mobile-menu-icon {
 		cursor: pointer;
@@ -591,7 +556,7 @@ footer { padding: 15px; }
 		right: 10px;
 		z-index: 1000;
 	}
-	.mobile-menu-icon:hover .fa { background-color: rgba(19,137,95,0.8); }
+	.mobile-menu-icon:hover .fa { background-color: #13895F }
 	.mobile-menu-icon .fa {
 		color: #fff;
 		background-color: rgba(19,137,95,0.4);
@@ -603,7 +568,21 @@ footer { padding: 15px; }
 	}
 }
 
-
 .bolder{
 	font-size: larger;
+}
+
+.alert {
+    positition: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0px);
+    transition: visibility 0s, opacity 250ms, transform 250ms;
+}
+.alert.hide {
+    positition: relative;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px); // translateX, translateY, translateZ works well
+    transition: visibility 0s 250ms, opacity 250ms, transform 250ms;
 }

@@ -12,10 +12,10 @@
 
     <div class="templatemo-flex-row" >
           <div class="templatemo-sidebar">
-            <header class="templatemo-site-header">
-                <h1>Logo</h1>
-                <h1>Website Name</h1>
-            </header>
+            <div class="templatemo-site-header">
+                <img src="{% static 'logo.png' %}" alt="logo.png" width="100px" height="100px">
+                <h1> E-Chatr</h1>
+            </div>
             <div class="mobile-menu-icon">
                 <i class="fa fa-bars"></i>
             </div>
@@ -49,8 +49,8 @@
             {% block content %}
             {% endblock content %}
           </div>
+    <a href="#" class="back-to-top"><i class="fa fa-arrow-up"></i></a>
     </div>
-
     {% include 'users/scipts.html' %}
     {% block js-imports %}
 

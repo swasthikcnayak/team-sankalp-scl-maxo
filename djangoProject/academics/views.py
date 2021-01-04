@@ -27,7 +27,6 @@ def view_list(request):
 @login_required
 def view_notes(request, subjectId):
     subject = get_object_or_404(Subject, id=subjectId)
-    print(subject)
     notes = Note.objects.filter(subject=subject)
     if is_teacher(request):
         if request.method == 'GET':

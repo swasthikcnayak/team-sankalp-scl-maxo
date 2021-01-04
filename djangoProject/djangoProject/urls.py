@@ -7,7 +7,6 @@ import attendance.urls as attendance_url
 import academics.urls as academics_url
 
 import marks.urls as marks_url
-
 import assignments.urls as assignment_url
 from djangoProject.views import home_view
 

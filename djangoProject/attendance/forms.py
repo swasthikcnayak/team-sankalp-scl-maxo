@@ -1,13 +1,18 @@
 from django import forms
 from attendance.models import AttendanceLog
-from users.models import StudentProfile
 from academics.models import SEM_CHOICES
 
 
 class AttendanceUpdateForm(forms.ModelForm):
+
     class Meta:
         model = AttendanceLog
         fields = ['absentees', 'conducted_date']
+
+    def __init__(self, *args, **kwargs):
+        super(AttendanceUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['absentees'].label = "Select all the absentees"
+        self.fields['conducted_date'].label = "Class conducted on "
 
 
 class RequestAttendanceDetails(forms.Form):
@@ -17,3 +22,4 @@ class RequestAttendanceDetails(forms.Form):
         self.sem = kwargs.pop('semester', None)
         super(RequestAttendanceDetails, self).__init__(*args, **kwargs)
         self.fields['semester'].initial = self.sem
+        self.fields['semester'].label = "Select the semester"

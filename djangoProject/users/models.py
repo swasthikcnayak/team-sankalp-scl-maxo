@@ -48,7 +48,7 @@ class User(AbstractUser):
     blood_group = models.CharField(max_length=4, null=True)
     address_line_1 = models.CharField(max_length=50, null=True)
     address_line_2 = models.CharField(max_length=50, null=True)
-    address_line_3 = models.CharField(max_length=50, null=True)
+   #address_line_3 = models.CharField(max_length=50, null=True)
 
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)

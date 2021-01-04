@@ -28,24 +28,19 @@ def view_classes(request):
 
 @login_required
 def view_assignments(request, classId, subjectId):
+    time_now = timezone.now()
+    assignment_parred_due_date = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                           start_time__lt=time_now, end_time__lt=time_now)
+    assignments_to_complete = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                        start_time__lt=time_now, end_time__gt=time_now)
+    assignments_scheduled = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
+                                                      start_time__gt=time_now, end_time__gt=time_now)
     if is_teacher(request):
-        time_now = timezone.now()
-        form = AssignmentCreationForm()
+        form = None
         subject = get_object_or_404(Subject, id=subjectId)
         class_obj = get_object_or_404(Class, id=classId)
         if request.method == 'GET':
-            assignment_parred_due_date = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                                   start_time__lt=time_now, end_time__lt=time_now)
-            assignments_to_complete = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                                start_time__lt=time_now, end_time__gt=time_now)
-            assignments_scheduled = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                              start_time__gt=time_now, end_time__gt=time_now)
-            return render(request, 'assignments/assignment-detail.html',
-                          {'assignment_parred_due_date': assignment_parred_due_date,
-                           'assignments_to_complete': assignments_to_complete,
-                           'assignments_scheduled': assignments_scheduled,
-                           'form': form})
-
+            form = AssignmentCreationForm()
         elif request.method == 'POST':
             teacherProfile = TeacherProfile.objects.get(user=request.user)
             form = AssignmentCreationForm(request.POST, request.FILES)
@@ -58,21 +53,14 @@ def view_assignments(request, classId, subjectId):
                 messages.success(request,
                                  message="Assignment added successfully")
             else:
-                print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")
-            return redirect('view-subject-assignment', subjectId=subjectId, classId=classId)
+        return render(request, 'assignments/assignment-detail.html',
+                      {'assignment_parred_due_date': assignment_parred_due_date,
+                       'assignments_to_complete': assignments_to_complete,
+                       'assignments_scheduled': assignments_scheduled,
+                       'form': form})
     elif is_student(request):
-        time_now = timezone.now()
-        assignment_parred_due_date = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                               start_time__lt=time_now,
-                                                               end_time__lt=time_now)
-        assignments_to_complete = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                            start_time__lt=time_now,
-                                                            end_time__gt=time_now)
-        assignments_scheduled = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
-                                                          start_time__gt=time_now,
-                                                          end_time__gt=time_now)
         return render(request, 'assignments/assignment-detail.html',
                       {'assignment_parred_due_date': assignment_parred_due_date,
                        'assignments_to_complete': assignments_to_complete,
@@ -81,14 +69,13 @@ def view_assignments(request, classId, subjectId):
 
 @login_required
 def submissions(request, assignmentId):
+    form = None
     assignment_details = get_object_or_404(Assignment, id=assignmentId)
     if is_teacher(request):
         submission = Submission.objects.filter(assignment__id=assignmentId)
         if request.method == 'GET':
             form = MarksUpdateForm()
             form.fields['student'].queryset = StudentProfile.objects.filter(submission__assignment__id=assignmentId)
-            return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,
-                                                                        'assignment': assignment_details})
         elif request.method == 'POST':
             form = MarksUpdateForm(request.POST)
             if form.is_valid():
@@ -99,18 +86,16 @@ def submissions(request, assignmentId):
                 messages.success(request,
                                  message="Marks Updated Successfully")
             else:
-                print(form.errors)
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
-            return redirect('view-submissions', assignmentId=assignmentId)
+        return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,
+                                                                    'assignment': assignment_details})
     elif is_student(request):
         submission = Submission.objects.filter(assignment=assignment_details, student__user=request.user).first()
         if request.method == 'GET':
             if submission is None:
                 submission = 0
             form = AssignmentSubmissionForm()
-            return render(request, 'assignments/submission-list.html',
-                          {'assignment': assignment_details, 'form': form, 'submission': submission})
         elif request.method == 'POST':
             time_now = timezone.now()
             if time_now > assignment_details.end_time or time_now < assignment_details.start_time:
@@ -130,4 +115,5 @@ def submissions(request, assignmentId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Could not submit assignment")
-            return redirect('view-submissions', assignmentId=assignmentId)
+        return render(request, 'assignments/submission-list.html',
+                      {'assignment': assignment_details, 'form': form, 'submission': submission})

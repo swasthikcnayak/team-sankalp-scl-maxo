@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block css-imports %}
-      <link rel="stylesheet" href="{% static 'users/profile.css' %}">
 {% endblock css-imports %}
 
 {% block title %}
@@ -12,7 +11,7 @@
 
 
 {% block content %}
-
+    <div class="content container-fluid">
 		<div class="templatemo-content-widget templatemo-login-widget white-bg" style="margin-top: 150px;">
 			<header class="text-center" style="margin-bottom: 20px;">
                     {% if messages %}
@@ -27,5 +26,6 @@
 	        </header>
         <a href="{% url 'login' %}"><button type="button" class="templatemo-blue-button width-100">Login In Here</button></a>
 		</div>
+    </div>
 {% endblock content%}
 

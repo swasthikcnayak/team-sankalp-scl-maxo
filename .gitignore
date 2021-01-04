@@ -36,9 +36,11 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+.vscode
+.idea
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
-
+*.idea
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
@@ -574,3 +576,15 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+.DS_Store
+*.sqlite3
+media/assignments
+media/notes
+media/profile_pics
+media/submissions
+media/timetable
+*.db
+*.pid
+
+[0-9]+'.'py
+/djangoProject/.idea/

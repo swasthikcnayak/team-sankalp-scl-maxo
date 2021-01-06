@@ -574,6 +574,7 @@ footer { padding: 15px; }
 
 .alert {
     position: absolute;
+	margin-bottom: 5px;
     opacity: 1;
     visibility: visible;
     transform: translateX(0px);
@@ -581,6 +582,7 @@ footer { padding: 15px; }
 }
 .alert.hide {
     position: absolute;
+	margin-bottom: 5px;
     opacity: 0;
     visibility: hidden;
     transform: translateX(-10px);

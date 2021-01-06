@@ -8,36 +8,38 @@
 {% endblock title %}
 
 
+
 {% block content %}
     <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124 ">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item text-info" aria-current="page">Login</li>
-  </ol>
-</nav>
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item text-info" aria-current="page">Login</li>
+        </ol>
+    </nav>
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="content container-fluid">
-<div class="templatemo-content-widget templatemo-login-widget white-bg center" style="margin-top: 150px;">
-			<header class="text-center">
-                {% if messages %}
-                    {%  for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-            {% endif %}
-	          <h1>Login</h1>
-	        </header>
-	        <form method="POST" class="templatemo-login-form">
+        <div class="templatemo-content-widget templatemo-login-widget white-bg" style="margin-top: 150px;">
+            <header class="text-center" style="margin-bottom: 20px;">
+                <h1>Login</h1>
+            </header>
+            <form method="POST" class="templatemo-login-form">
                 {% csrf_token %}
-	        			{{ form | crispy }}
-				<div class="form-group">
-					<button type="submit" class="templatemo-blue-button width-100">Login</button>
-				</div>
-	        </form>
-		</div>
-		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-			<p>Forgort password? <strong><a href="{% url 'password_reset' %}" class="blue-text">Click here!</a></strong></p>
-		</div>
+                {{ form | crispy }}
+                <div class="form-group">
+                    <button type="submit" class="templatemo-blue-button width-100">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+            <p>Forgort password? <strong><a href="{% url 'password_reset' %}" class="blue-text">Click here!</a></strong>
+            </p>
+        </div>
     </div>
-{% endblock content%}
+{% endblock content %}
 

@@ -14,19 +14,19 @@
 
 
 {% block content %}
-<nav aria-label="breadcrumb" style="background-color:#1f2124">
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124 ">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item text-info" aria-current="page">Profile</li>
-  </ol>
-</nav>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item text-info" aria-current="page">Profile</li>
+        </ol>
+    </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class=" content container-fluid">
         <div class="student-profile py-4">
             <div class="row">
@@ -43,8 +43,8 @@
                 <div class="col-lg-2"></div>
             </div>
         </div>
-            <br/>
-            {% if user.role != 'ADM' %}
+        <br/>
+        {% if user.role != 'ADM' %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
@@ -56,25 +56,30 @@
                     </div>
                     <div class="col-lg-6">
                         <fieldset class="form-group">
-                                <legend class="border-bottom mb-4">Academic Information</legend>
-                                {{ p_form|crispy }}
+                            <legend class="border-bottom mb-4">Academic Information</legend>
+                            {{ p_form|crispy }}
                         </fieldset>
                     </div>
                 </div>
 
-                <div class="row text-center">
-                    <div class="form-group">
-                        <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
-                        </button>
-                        <a href="{% url 'password_reset' %}">
-                            <button class="button btn  btn-info" type="button"><span>Change password </span></button>
-                        </a>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-sm-12 col- text-center">
+                        <div class="form-group">
+                            <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
+                            </button>
+                            <a href="{% url 'password_reset' %}">
+                                <button class="button btn  btn-info" type="button"><span>Change password </span>
+                                </button>
+                            </a>
+                        </div>
                     </div>
+                    <div class="col-lg-2"></div>
                 </div>
             </form>
         {% else %}
-                {% csrf_token %}
-                <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -84,34 +89,48 @@
                             {{ u_form|crispy }}
                         </fieldset>
                     </div>
-                <div class="col-lg-2"></div>
+                    <div class="col-lg-2"></div>
                 </div>
-                    <div class="row">
-                <div class="text-center">
-                    <div class="form-group">
-                        <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
-                        </button>
-                        <a href="{% url 'password_reset' %}">
-                            <button class="button btn  btn-info" type="button"><span>Change password </span></button>
-                        </a>
-                    </div>
-                </div>
-                    </div>
-                </form>
-            {% endif %}
 
-        </div>
+
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
+                            </button>
+                            <a href="{% url 'password_reset' %}">
+                                <button class="button btn  btn-info" type="button"><span>Change password </span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </form>
+        {% endif %}
+
+
+    </div>
 
 {% endblock content %}
 
 {% block js-imports %}
-<script>
-  $( function() {
-       //$( "#id_date_of_birth" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
-      //$( "#id_date_of_birth" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
-      $( "#id_date_of_birth" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true}).attr("autocomplete", "off") ;
-      $( "#id_join_date" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth:true,changeYear:true}).attr("autocomplete", "off") ;
+    <script>
+        $(function () {
+            //$( "#id_date_of_birth" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            //$( "#id_date_of_birth" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            $("#id_date_of_birth").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            }).attr("autocomplete", "off");
+            $("#id_join_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            }).attr("autocomplete", "off");
 
-  });
-  </script>
+        });
+    </script>
 {% endblock %}

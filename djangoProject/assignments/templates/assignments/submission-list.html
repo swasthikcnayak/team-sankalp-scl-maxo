@@ -13,17 +13,17 @@
 
 
 {% block content %}
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" style="background-color:#67B5B9 ">
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
             {% if request.user.role == 'THR' %}
                 <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Class List</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Create/list assignments</a></li>
-                <li  class="breadcrumb-item active" aria-current="page">Correct Assignment</li>
+                <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">Create/list assignments</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">Correct Assignment</li>
             {% else %}
                 <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Subject List</a></li>
-                 <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">List Assignments</a></li>
-                <li  class="breadcrumb-item active" aria-current="page">Submit Assignment</li>
+                 <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">Assignment lists</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">Submit Assignment</li>
             {% endif %}
     </ol>
     </nav>

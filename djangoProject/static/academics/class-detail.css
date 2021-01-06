@@ -18,15 +18,12 @@ nav {
 	list-style: none;
 }
 
-a {
+.hero-content-area a {
 	text-decoration: none;
 	opacity: 0.75;
 	color: rgb(237, 245, 236);
 }
 
-a:hover {
-	opacity: 1;
-}
 
 a.btn {
 	border-radius: 4px;

@@ -13,6 +13,21 @@
 
 
 {% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Class List</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">Create/list assignments</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">Correct Assignment</li>
+            {% else %}
+                <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Subject List</a></li>
+                 <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">Assignment lists</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">Submit Assignment</li>
+            {% endif %}
+    </ol>
+    </nav>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -21,43 +36,43 @@
         {% endfor %}
     {% endif %}
     <div class="content container">
-        <h1>Submissions</h1>
+        <h1 class="mb-3">Submissions</h1>
         {% if request.user.role == 'THR' %}
-            <h4>Update student marks</h4>
+            <div class="card border-dark col-lg-7 col-12 mb-3">
+                <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
+                <div class="card-body text-dark">
+                    <div class="card-text">
+                        <h5>Start time : {{ assignment.start_time }}</h5>
+                        <h5>End time : {{ assignment.end_time }}</h5>
+                        <p class="text-break">{{ assignment.description }}Read the description correctly before
+                            answering marks spead is as
+                            shfsdfasdfadfsdfadjfajdfjadfsklladsfjlkfdajlkdfsjlksjdflksjdflkown.it will never
+                            overflow</p>
+                    </div>
+                    <button class="btn btn-md"><a href="/media/{{ assignment.question }}"
+                                                  target="__blank">Question</a></button>
+                </div>
+            </div>
 
-                <div class="card mb-3 col-lg-6 col-sm-12">
-                    <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
-                    <div class="card-body text-dark">
-                        <div class="card-text">
-                            <h5>Start time : {{ assignment.start_time }}</h5>
-                            <h5>End time : {{ assignment.end_time }}</h5>
-                            <h5><a href="#details" data-toggle="collapse"> Details </a></h5>
-                            <div id="details" class="collapse">
-                                <span class="dropdown-item">{{ assignment.description }}Read the description correctly before answering marks spead is as shown.it will never overflow</span>
+
+            <div class="card border-dark col-lg-7 col-12 mb-3">
+                <div class="card-body text-dark">
+                    <div class="card-text">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <fieldset class="form-group ">
+                                        <legend class="border-bottom mb-4">Update student marks :</legend>
+                                        {{ form|crispy }}
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-info mb-3">UPDATE MARKS</button>
+                                </div>
                             </div>
-                        </div>
-                        <button class="btn btn-md"><a href="/media/{{ assignment.question }}"
-                                                      target="__blank">Question</a></button>
+                        </form>
                     </div>
                 </div>
-
-
-
-
-
-
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-lg-6">
-                        <fieldset class="form-group ">
-                            <legend class="border-bottom mb-4">Check and update student marks :</legend>
-                            {{ form|crispy }}
-                        </fieldset>
-                        <button type="submit" class="btn btn-info mb-3">UPDATE MARKS</button>
-                    </div>
-                </div>
-            </form>
+            </div>
 
 
 
@@ -89,26 +104,25 @@
             </table>
             <!--</div>-->
         {% endif %}
-    {% if request.user.role == 'STD' %}
-        <div class="row">
-            <div class="card border-dark mb-3 col-12 text-center">
+        {% if request.user.role == 'STD' %}
+            <div class="card border-dark col-xl-7 col-12 mb-3">
                 <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
                 <div class="card-body text-dark">
                     <div class="card-text">
-                        <p>Start time : {{ assignment.start_time }}</p>
-                        <p>End time : {{ assignment.end_time }}</p>
-                        <p>Details : {{ assignment.description }}</p>
-                        <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a></button>
+                        <h5>Start time : {{ assignment.start_time }}</h5>
+                        <h5>End time : {{ assignment.end_time }}</h5>
+                        <p class="text-break">{{ assignment.description }}Read the description correctly before
+                            answering marks spead is as
+                            shfsdfasdfadfsdfadjfajdfjadfsklladsfjlkfdajlkdfsjlksjdflksjdflkown.it will never
+                            overflow</p>
                     </div>
+                    <button class="btn btn-md"><a href="/media/{{ assignment.question }}"
+                                                  target="__blank">Question</a></button>
                 </div>
             </div>
-        </div>
-        {% if submission == 0 %}
-            <h4>Upload your answer script here : </h4>
-
-
-            <div class="row">
-                <div class="card border-dark mb-3 col-12 text-center">
+            {% if submission == 0 %}
+                <h4 class="mb-3">Upload your answer script here : </h4>
+                <div class="card border-dark col-lg-7 col-12 mb-3">
                     <div class="card-body text-dark">
                         <div class="card-text">
                             <form method="POST" enctype="multipart/form-data">
@@ -122,24 +136,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-        {% else %}
-            <h4>You have already submitted the assignment</h4>
-            <h5>Details as below : </h5>
-            <p>Maximum marks : {{ submission.assignment.maximum_marks }}</p>
-            {% if submission.marks_obtained != -1 %}
-                <p>Marks obtained{{ submission.marks_obtained }}</p>
+
             {% else %}
-                <p>marks obtained : Not corrected</p>
+
+
+                <div class="card border-dark col-lg-7 col-12 mb-3">
+                    <div class="card-body text-dark">
+                        <div class="card-text">
+                            <h4>You have already submitted the assignment</h4>
+                <h5>Details as below : </h5>
+                <p>Maximum marks : {{ submission.assignment.maximum_marks }}</p>
+                {% if submission.marks_obtained != -1 %}
+                    <p>Marks obtained : {{ submission.marks_obtained }}</p>
+                {% else %}
+                    <p>marks obtained : Not corrected</p>
+                {% endif %}
+                <p>Time submitted : {{ submission.time_submitted }}</p>
+                <p>Answer script :
+                    <button><a href="/media/{{ assignment.question }}" target="__blank">Answer</a></button>
+                </p>
+                        </div>
+                    </div>
+                </div>
+
             {% endif %}
-            <p>Time submitted : {{ submission.time_submitted }}</p>
-            <p>Answer script :
-                <button><a href="/media/{{ assignment.question }}" target="__blank">Answer</a></button>
-            </p>
         {% endif %}
-    {% endif %}
     </div>
 
 

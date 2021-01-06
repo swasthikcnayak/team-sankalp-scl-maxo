@@ -10,26 +10,32 @@
 {% block title %}
     <title>CLASS-DETAILS</title>
 {% endblock title %}
-<header>
-        <h2><a href="#">DEPARTMENT</a></h2>
-
-
 {% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-danger">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li class="breadcrumb-item"><a href="{% url 'view-class-list' %}" class="text-danger">Class List</a></li>
+                <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
+            {% else %}
+                <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
+            {% endif %}
+    </ol>
+    </nav>
     <div class="content">
-      <section class="hero">
-        <div class="background-image"></div>
-        <div class="hero-content-area">
-          <h1>CLASS DETAILS!</h1>
+        <section class="hero">
+            <div class="background-image"></div>
+            <div class="hero-content-area">
+                <h1>CLASS DETAILS!</h1>
+                <h2 style="color: #0a0a0a">DEPARTMENT : {{ class.department.department_name }}</h2>
+                <h2 style="color: #0a0a0a">SEMESTER : {{ class.semester }}</h2>
+                <h2 style="color: #0a0a0a">SECTION : {{ class.section_name }}</h2>
 
-        <h2 style="color: #0a0a0a">DEPARTMENT : {{ class.department.department_name }}</h2>
-        <h2 style="color: #0a0a0a">SEMESTER : {{ class.semester }}</h2>
-        <h2 style="color: #0a0a0a">SECTION : {{ class.section_name }}</h2>
-
-          <a href="{{ class.link }}" class="btn" target="__blank">Join the class</a>
-            <div class="margin-bottom-5"></div>
-          <a href="/media/{{class.timetable}}" class="btn" target="__blank">Timetable</a>
-        </div>
-      </section>
+                <a href="{{ class.link }}" class="btn" target="__blank">Join the class</a>
+                <div class="margin-bottom-5"></div>
+                <a href="/media/{{ class.timetable }}" class="btn" target="__blank">Timetable</a>
+            </div>
+        </section>
     </div>
 {% endblock content %}
 

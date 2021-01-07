@@ -29,7 +29,7 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div class="content">
+    <div class="content container-fluid">
     <h1 class="mb-3">Notes</h1>
         {% if request.user.role == 'STD' %}
             {% if subjects.count != 0 %}

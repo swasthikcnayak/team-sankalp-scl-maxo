@@ -152,7 +152,7 @@
                 {% endif %}
                 <p>Time submitted : {{ submission.time_submitted }}</p>
                 <p>Answer script :
-                    <button><a href="/media/{{ assignment.question }}" target="__blank">Answer</a></button>
+                    <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
                 </p>
                         </div>
                     </div>

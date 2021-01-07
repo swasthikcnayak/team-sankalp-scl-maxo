@@ -1,11 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from PIL import Image
-
 from academics.models import Department
 
 from academics.models import Subject, Class, SEM_CHOICES
-
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):

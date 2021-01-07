@@ -1,4 +1,5 @@
 {% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -87,7 +88,7 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
                             </td>
                             <td>
-                                <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a>
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Question</a>
                                 </button>
                             </td>
                         </tr>
@@ -129,7 +130,7 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
                             </td>
                             <td>
-                                <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a>
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Question</a>
                                 </button>
                             </td>
                         </tr>
@@ -171,7 +172,7 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
                             </td>
                             <td>
-                                <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a>
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Question</a>
                                 </button>
                             </td>
                         </tr>
@@ -214,7 +215,7 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
                             </td>
                             <td>
-                                <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a>
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Question</a>
                                 </button>
                             </td>
                         </tr>
@@ -289,7 +290,7 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
                             </td>
                             <td>
-                                <button><a href="/media/{{ assignment.question }}" target="__blank">Question</a>
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Question</a>
                                 </button>
                             </td>
                         </tr>

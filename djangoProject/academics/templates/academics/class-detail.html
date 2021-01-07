@@ -31,9 +31,9 @@
                 <h2 style="color: #0a0a0a">SEMESTER : {{ class.semester }}</h2>
                 <h2 style="color: #0a0a0a">SECTION : {{ class.section_name }}</h2>
 
-                <a href="{{ class.link }}" class="btn" target="__blank">Join the class</a>
+                <a href="{{ class.link }}" class="btn mb-3" target="__blank"><span class="fa fa-video-camera"></span> Join the class</a>
                 <div class="margin-bottom-5"></div>
-                <a href="/media/{{ class.timetable }}" class="btn" target="__blank">Timetable</a>
+                <a href="{{ class.timetable.url }}" class="btn" target="__blank"><span class="fa fa-calendar-check-o"></span> Timetable</a>
             </div>
         </section>
     </div>

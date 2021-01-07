@@ -44,6 +44,8 @@
             </div>
         </div>
         <br/>
+
+
         {% if user.role != 'ADM' %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -63,9 +65,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-sm-12 col- text-center">
-                        <div class="form-group">
+                        <div class="btn-group mx-auto">
                             <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
                             </button>
                             <a href="{% url 'password_reset' %}">
@@ -73,8 +73,6 @@
                                 </button>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-lg-2"></div>
                 </div>
             </form>
         {% else %}
@@ -94,9 +92,7 @@
 
 
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-8">
-                        <div class="form-group">
+                        <div class="btn-group mx-auto">
                             <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
                             </button>
                             <a href="{% url 'password_reset' %}">
@@ -104,12 +100,9 @@
                                 </button>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-lg-2"></div>
                 </div>
             </form>
         {% endif %}
-
 
     </div>
 

@@ -52,7 +52,7 @@
                             <td>  {{ note.chapter_number }}</td>
                             <td> {{ note.chapter_name }}</td>
                             <td>
-                                <button><a href="/media/{{ note.link }}" target="__blank">Open notes</a></button>
+                                <button><a href="{{ note.link.url }}" target="__blank">Open notes</a></button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -103,7 +103,7 @@
                             <td>  {{ note.chapter_number }}</td>
                             <td> {{ note.chapter_name }}</td>
                             <td>
-                                <button><a href="/media/{{ note.link }}" target="__blank">Open notes</a></button>
+                                <button><a href="{{ note.link.url }}" target="__blank">Open notes</a></button>
                             </td>
                         </tr>
                     {% endfor %}

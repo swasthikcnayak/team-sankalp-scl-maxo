@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap");
-
 .student-profile .card {
   border-radius: 10px;
 }
@@ -31,15 +29,6 @@ h3{
   font-size: 16px;
   color: #000;
 }
-
-.student-profile .table th,
-.student-profile .table td {
-  font-size: 14px;
-  padding: 10px 15px;
-  color: #000;
-}
-
-
 
 .button {
   display: inline-block;
@@ -81,17 +70,4 @@ h3{
   opacity: 1;
   right: 0;
 }
-
-
-body {
-  font-family: "Nunito", sans-serif;
-  font-weight: 100;
-  color: #0a0a0a;
-}
-
-.content {
-  max-width: 90%;
-  margin: 50px auto;
-}
-
 

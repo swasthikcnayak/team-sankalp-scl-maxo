@@ -93,7 +93,7 @@
 
                 <div class="row">
                         <div class="btn-group mx-auto">
-                            <button class="button btn-info" style="vertical-align:middle"><span>Update changes</span>
+                            <button class="button btn btn-info" style="vertical-align:middle"><span>Update changes</span>
                             </button>
                             <a href="{% url 'password_reset' %}">
                                 <button class="button btn  btn-info" type="button"><span>Change password </span>
@@ -111,8 +111,6 @@
 {% block js-imports %}
     <script>
         $(function () {
-            //$( "#id_date_of_birth" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
-            //$( "#id_date_of_birth" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             $("#id_date_of_birth").datepicker({
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,

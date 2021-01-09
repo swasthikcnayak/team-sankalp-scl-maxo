@@ -55,6 +55,7 @@ def view_assignments(request, classId, subjectId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")
+            return redirect('view-subject-assignment',classId=classId,subjectId=subjectId)
         return render(request, 'assignments/assignment-detail.html',
                       {'assignment_parred_due_date': assignment_parred_due_date,
                        'assignments_to_complete': assignments_to_complete,
@@ -88,6 +89,7 @@ def submissions(request, assignmentId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
+            return redirect('view-submissions',assignmentId=assignmentId)
         return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,
                                                                     'assignment': assignment_details})
     elif is_student(request):
@@ -115,5 +117,6 @@ def submissions(request, assignmentId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Could not submit assignment")
+            return redirect('view-submissions', assignmentId=assignmentId)
         return render(request, 'assignments/submission-list.html',
                       {'assignment': assignment_details, 'form': form, 'submission': submission})

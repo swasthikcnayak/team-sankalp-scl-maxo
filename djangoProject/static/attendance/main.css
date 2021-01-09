@@ -10,14 +10,10 @@ body {
   margin: 50px auto;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+
 
 thead {
   text-transform: uppercase;
-  border-bottom: 1px solid #242323;
 }
 
 thead th {
@@ -27,19 +23,21 @@ thead th {
 
 tr {
   -webkit-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
-}
-
-tr.hide {
-  opacity: 0;
-  height: 0;
+  transition: opacity 0.2s ease;
+  border: 1px solid black;
 }
 
 td {
   padding: 6px;
   border-bottom: 1px solid #0e0d0d;
 }
+tr a{
+  color: #ce5856;
+  font-size: 15px;
+}
 
 tr:hover td {
-  background: #e6e6e6;
+  background: #83c9c9;
 }
+
+/*#acb08d*/

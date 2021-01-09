@@ -12,28 +12,30 @@
 
 {% block content %}
 
-<nav aria-label="breadcrumb" style="background-color:#1f2124">
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124 ">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item text-info" aria-current="page">Logout</li>
-  </ol>
-</nav>
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item text-info" aria-current="page">Logout</li>
+        </ol>
+    </nav>
     {% if messages %}
-                    {%  for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-            {% endif %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="content container-fluid">
-		<div class="templatemo-content-widget templatemo-login-widget white-bg" style="margin-top: 150px;">
-			<header class="text-center" style="margin-bottom: 20px;">
+        <div class="templatemo-content-widget templatemo-login-widget white-bg" style="margin-top: 150px;">
+            <header class="text-center" style="margin-bottom: 20px;">
 
                 <h3 class="pt-8 text-info" style="margin-top: 20px;">Your have been logged out successfully.</h3>
-            <h5 class="text-muted">Forgot something? </h5>
-	        </header>
-        <a href="{% url 'login' %}"><button type="button" class="templatemo-blue-button width-100">Login In Here</button></a>
-		</div>
+                <h5 class="text-muted">Forgot something? </h5>
+            </header>
+            <a href="{% url 'login' %}">
+                <button type="button" class="templatemo-blue-button width-100">Login In Here</button>
+            </a>
+        </div>
     </div>
-{% endblock content%}
+{% endblock content %}
 

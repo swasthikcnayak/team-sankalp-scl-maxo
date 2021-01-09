@@ -13,9 +13,9 @@
 {% block content %}
     <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-danger">Home</a></li>
+        <li class="breadcrumb-item text-dange"><a href="{% url 'home' %}" class="r">Home</a></li>
             {% if request.user.role == 'THR' %}
-                <li class="breadcrumb-item"><a href="{% url 'view-class-list' %}" class="text-danger">Class List</a></li>
+                <li class="breadcrumb-item text-danger"><a href="{% url 'view-class-list' %}" >Class List</a></li>
                 <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
             {% else %}
                 <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
@@ -24,7 +24,6 @@
     </nav>
     <div class="content">
         <section class="hero">
-            <div class="background-image"></div>
             <div class="hero-content-area">
                 <h1>CLASS DETAILS!</h1>
                 <h2 style="color: #0a0a0a">DEPARTMENT : {{ class.department.department_name }}</h2>

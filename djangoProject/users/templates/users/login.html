@@ -16,7 +16,7 @@
             <li class="breadcrumb-item text-info" aria-current="page">Login</li>
         </ol>
     </nav>
-{% if messages %}
+    {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
                 {{ message }}

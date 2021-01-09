@@ -15,17 +15,21 @@
 {% block content %}
     <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124 ">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
             {% if request.user.role == 'THR' %}
                 <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Class List</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">assignments</a></li>
-                <li  class="breadcrumb-item text-info" aria-current="page">check Assignment</li>
+                <li class="breadcrumb-item"><a
+                        href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id %}">assignments</a>
+                </li>
+                <li class="breadcrumb-item text-info" aria-current="page">check Assignment</li>
             {% else %}
                 <li class="breadcrumb-item"><a href="{% url 'view-classes-assignment' %}">Subject List</a></li>
-                 <li class="breadcrumb-item"><a href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id%}">Assignments</a></li>
-                <li  class="breadcrumb-item text-info" aria-current="page">Submit Assignment</li>
+                <li class="breadcrumb-item"><a
+                        href="{% url 'view-subject-assignment' classId=assignment.Class.id subjectId=assignment.subject.id %}">Assignments</a>
+                </li>
+                <li class="breadcrumb-item text-info" aria-current="page">Submit Assignment</li>
             {% endif %}
-    </ol>
+        </ol>
     </nav>
 
     {% if messages %}
@@ -42,11 +46,17 @@
                 <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
                 <div class="card-body text-dark">
                     <div class="card-text">
-                        <h5>Start time : {{ assignment.start_time }}</h5>
-                        <h5>End time : {{ assignment.end_time }}</h5>
-                        <p class="text-break">{{ assignment.description }}</p>
+                        <h5>Start time : {{ assignment.start_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>End time : {{ assignment.end_time|date:"d-m-Y H:i a" }}</h5>
+                        <button class="btn btn-sm btn-warning mb-2" type="button" data-toggle="collapse"
+                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Description
+                        </button>
+                        <div class="collapse" id="collapseExample">
+                            <p class="text-break">{{ assignment.description }}</p>
+                        </div>
                     </div>
-                    <button class="btn btn-md"><a href="{{ assignment.question.url }}"
+                    <button class="btn btn-danger"><a href="{{ assignment.question.url }}" class="text-white"
                                                   target="__blank">Question</a></button>
                 </div>
             </div>
@@ -75,7 +85,7 @@
 
             <!--<div class=" table-responsive">-->
             <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
-                    <thead class="thead-dark" style="opacity: 0.8">
+                <thead class="thead-dark" style="opacity: 0.8">
                 <tr>
                     <th style="border-bottom: 2px solid black">Reg. Number</th>
                     <th style="border-bottom: 2px solid black">maximum marks</th>
@@ -90,7 +100,7 @@
                         <td>{{ submission.student.user.username }}</td>
                         <td>{{ submission.assignment.maximum_marks }}</td>
                         <td>{{ submission.marks_obtained }}</td>
-                        <td>{{ submission.time_submitted }}</td>
+                        <td>{{ submission.time_submitted|date:"d-m-Y H:i a" }}</td>
                         <td>
                             <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
                         </td>
@@ -105,10 +115,16 @@
                 <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
                 <div class="card-body text-dark">
                     <div class="card-text">
-                        <h5>Start time : {{ assignment.start_time }}</h5>
-                        <h5>End time : {{ assignment.end_time }}</h5>
-                        <p class="text-break">{{ assignment.description }}Read the description correctly before
-                            answering marks </p>
+                        <h5>Start time : {{ assignment.start_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>End time : {{ assignment.end_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>Description : </h5>
+                        <button class="btn btn-sm btn-warning mb-2" type="button" data-toggle="collapse"
+                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Description
+                        </button>
+                        <div class="collapse" id="collapseExample">
+                            <p class="text-break">{{ assignment.description }}</p>
+                        </div>
                     </div>
                     <button class="btn btn-md"><a href="{{ assignment.question.url }}"
                                                   target="__blank">Question</a></button>
@@ -140,17 +156,17 @@
                     <div class="card-body text-dark">
                         <div class="card-text">
                             <h4>You have already submitted the assignment</h4>
-                <h5>Details as below : </h5>
-                <p>Maximum marks : {{ submission.assignment.maximum_marks }}</p>
-                {% if submission.marks_obtained != -1 %}
-                    <p>Marks obtained : {{ submission.marks_obtained }}</p>
-                {% else %}
-                    <p>marks obtained : Not corrected</p>
-                {% endif %}
-                <p>Time submitted : {{ submission.time_submitted }}</p>
-                <p>Answer script :
-                    <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
-                </p>
+                            <h5>Details as below : </h5>
+                            <p>Maximum marks : {{ submission.assignment.maximum_marks }}</p>
+                            {% if submission.marks_obtained != -1 %}
+                                <p>Marks obtained : {{ submission.marks_obtained }}</p>
+                            {% else %}
+                                <p>marks obtained : Not corrected</p>
+                            {% endif %}
+                            <p>Time submitted : {{ submission.time_submitted|date:"d-m-Y H:i a" }}</p>
+                            <p>Answer script :
+                                <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
+                            </p>
                         </div>
                     </div>
                 </div>

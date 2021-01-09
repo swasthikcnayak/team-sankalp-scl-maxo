@@ -14,6 +14,13 @@
 
 {% block content %}
     <section id="hero">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
         <div class="hero-container">
             <h3>Welcome to <strong>E-CHATR</strong></h3>
             <h1>Together we Excel</h1>
@@ -138,49 +145,18 @@
                 <div class="content">
 
                     <p>Any assistance needed contact us here so that we can help you for the fullest </p>
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-8">
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
                                 <fieldset class="form-group ">
-                                    <legend class="border-bottom mb-4">Fill the Assistance form :</legend>
-                                    <div class="form-group">
-                                        <input type="text" maxlength="50" class="form-control" required id="id_email"
-                                               placeholder="Reg Number/ Employee Id">
-                                        <small id="emailHelp" class="form-text text-muted">Faculty provide your employee
-                                            Id, while
-                                            students provide registration number</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="id_email"></label><input type="email" class="form-control"
-                                                                             id="id_email"
-                                                                             required
-                                                                             placeholder="Enter Email address">
-                                        <small id="emailHelp" class="form-text text-muted">Provide your college
-                                            registered email
-                                            address</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="mr-sm-2 sr-only" for="role">Role</label>
-                                        <select class="custom-select" id="role" required>
-                                            <option selected>Choose...</option>
-                                            <option value="STD">Student</option>
-                                            <option value="THR">Teacher</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">
-                                <textarea rows="10" cols="40" name="description" contenteditable
-                                          placeholder="Give detailed description of your problem"></textarea>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn  btn-success">SUBMIT</button>
-                                    </div>
+                                    <legend class="border-bottom mb-4">Let us know your issue :</legend>
+                                    {{ form|crispy }}
                                 </fieldset>
-                            </form>
+                                <button type="submit" class="btn btn-info">SEND</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>

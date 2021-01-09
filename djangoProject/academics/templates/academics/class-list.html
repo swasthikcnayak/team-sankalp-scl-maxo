@@ -8,16 +8,12 @@
 {% block title %}
     <title>CLASS</title>
 {% endblock title %}
-
-
-
-
 {% block content %}
     <nav aria-label="breadcrumb" style="background-color:#1f2124">
         <ol class="breadcrumb" style="background-color:#1f2124 ">
             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
             <li class="breadcrumb-item text-info" aria-current="page">Class List</li>
-    </ol>
+        </ol>
     </nav>
     {% if messages %}
         {% for message in messages %}
@@ -27,40 +23,40 @@
         {% endfor %}
     {% endif %}
     <div class="content container-fluid">
-    <h1 class="mb-3">Class list</h1>
+        <h1 class="mb-3">Class list</h1>
         {% if request.user.role == 'THR' %}
             {% if teaches.count != 0 %}
                 <h4 class="mb-3">Select the class</h4>
-            <!--<div class=" table-responsive">-->
+                <!--<div class=" table-responsive">-->
                 <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
                     <thead class="thead-dark" style="opacity: 0.8">
-                <tr>
-                    <th style="border-bottom: 2px solid black">Subject</th>
-                    <th style="border-bottom: 2px solid black">Semester</th>
-                    <th style="border-bottom: 2px solid black">Section</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for teach in teaches %}
                     <tr>
-                        <td ><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.subject.subject_name }}</a>
-                        </td>
-                        <td ><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.semester }}</a>
-                        </td>
-                        <td><a
-                               href=" {% url 'view-class' classId=teach.Class.id%}">{{ teach.Class.section_name }}</a>
-                        </td>
+                        <th style="border-bottom: 2px solid black">Subject</th>
+                        <th style="border-bottom: 2px solid black">Semester</th>
+                        <th style="border-bottom: 2px solid black">Section</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for teach in teaches %}
+                        <tr>
+                            <td><a
+                                    href=" {% url 'view-class' classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
+                            </td>
+                            <td><a
+                                    href=" {% url 'view-class' classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
+                            </td>
+                            <td><a
+                                    href=" {% url 'view-class' classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
                 <!--</div>-->
-                {% else %}
+            {% else %}
                 <h4>You do not teach any class! No record found</h4>
-                {% endif %}
-    {% endif %}
+            {% endif %}
+        {% endif %}
     </div>
 
 

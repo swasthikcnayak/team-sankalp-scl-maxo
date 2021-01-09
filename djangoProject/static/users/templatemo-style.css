@@ -7,6 +7,14 @@ body {
     font-size: 13px;
 }
 
+#loading{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #fff url('../loader.gif') no-repeat center;
+    z-index: 999999;
+}
+
 body, .templatemo-left-nav {
     background: #1f2124;
 }

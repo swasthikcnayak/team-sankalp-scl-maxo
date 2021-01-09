@@ -269,26 +269,29 @@ nav li {
     }
 
     .templatemo-sidebar {
-        width: 30vw;
+        width: 250px;
     }
 
-    nav li {
-        font-size: 1em;
-    }
 
     .templatemo-left-nav a {
         padding: 15px;
+    }
+
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
     }
 }
 
 
 @media screen and (max-width: 992px) and (min-width: 768px) {
     .templatemo-sidebar {
-        width: 30vw;
+        width: 250px;
     }
 
-    .templatemo-site-header h1 {
-        font-size: 2em;
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
     }
 
     .templatemo-left-nav a.active,
@@ -302,17 +305,18 @@ nav li {
 }
 
 @media screen and (max-width: 992px) {
-    nav li {
-        font-size: 1em;
-    }
 
     .templatemo-left-nav a {
         padding: 15px 10px;
     }
 
-    /*.templatemo-content-container {	padding: 10px; }*/
     .templatemo-left-nav a {
         padding: 15px;
+    }
+
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
     }
 }
 
@@ -324,6 +328,15 @@ nav li {
     .templatemo-left-nav a {
         padding: 15px;
     }
+
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
+    }
+
+    .templatemo-sidebar {
+        width: 250px;
+    }
 }
 
 
@@ -334,6 +347,7 @@ nav li {
 
     .templatemo-site-header {
         margin: 20px 15px;
+        font-size: 1.2rem;
     }
 
     .templatemo-content-widget {
@@ -346,9 +360,9 @@ nav li {
         position: fixed;
         top: 10px;
         right: 50px;
+        width: 40vw;
         height: fit-content;
         overflow: auto;
-        width: 50vw;
         z-index: 999;
     }
 

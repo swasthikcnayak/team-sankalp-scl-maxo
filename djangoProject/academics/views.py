@@ -33,7 +33,7 @@ def view_notes(request, subjectId):
             form = AddNotesForm()
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form})
         elif request.method == 'POST':
-            form = AddNotesForm(request.POST,request.FILES)
+            form = AddNotesForm(request.POST, request.FILES)
             if form.is_valid():
                 note = form.save(commit=False)
                 note.subject = subject
@@ -47,7 +47,7 @@ def view_notes(request, subjectId):
                 else:
                     messages.add_message(request, messages.ERROR,
                                          message="This chapter notes is already added")
-                return redirect('view-notes',subjectId=subjectId)
+                return redirect('view-notes', subjectId=subjectId)
     elif is_student(request):
         notes = Note.objects.filter(subject__id=subjectId)
         return render(request, 'academics/notes-detail.html', {'notes': notes})

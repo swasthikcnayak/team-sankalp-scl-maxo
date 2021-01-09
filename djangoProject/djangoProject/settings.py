@@ -111,8 +111,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'webapp@sankalp.live'
-EMAIL_HOST_PASSWORD = 'd9656abbdc6dd48e48e28585a798d63d-b6190e87-e5d632c8'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 
-ISSUE_MAIL = 'issues@sankalp.live'
+ISSUE_MAIL = ''

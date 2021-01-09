@@ -79,10 +79,10 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
@@ -121,10 +121,10 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
@@ -163,10 +163,10 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
@@ -206,10 +206,10 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>
@@ -245,8 +245,8 @@
                     {% for assignment in assignments_scheduled %}
                         <tr>
                             <td>{{ assignment.assignment_name }}</td>
-                            <td>{{ assignment.start_time }}</td>
-                            <td>{{ assignment.end_time }}</td>
+                            <td>{{ assignment.start_time|date:"d-m-Y H:i a" }}</td>
+                            <td>{{ assignment.end_time|date:"d-m-Y H:i a" }}</td>
                             <td>{{ assignment.maximum_marks }}</td>
                             <td>
                                 <button><a aria-disabled="true">Question</a></button>
@@ -281,10 +281,10 @@
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.assignment_name }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.start_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
-                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time }}</a>
+                                <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.end_time|date:"d-m-Y H:i a" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'view-submissions' assignmentId=assignment.id %}">{{ assignment.maximum_marks }}</a>

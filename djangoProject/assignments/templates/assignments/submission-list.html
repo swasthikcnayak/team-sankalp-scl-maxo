@@ -42,8 +42,9 @@
                 <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
                 <div class="card-body text-dark">
                     <div class="card-text">
-                        <h5>Start time : {{ assignment.start_time }}</h5>
-                        <h5>End time : {{ assignment.end_time }}</h5>
+                        <h5>Start time : {{ assignment.start_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>End time : {{ assignment.end_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>Description : </h5>
                         <p class="text-break">{{ assignment.description }}</p>
                     </div>
                     <button class="btn btn-md"><a href="{{ assignment.question.url }}"
@@ -89,8 +90,8 @@
                     <tr>
                         <td>{{ submission.student.user.username }}</td>
                         <td>{{ submission.assignment.maximum_marks }}</td>
-                        <td>{{ submission.marks_obtained }}</td>
-                        <td>{{ submission.time_submitted }}</td>
+                        <td>{{ submission.marks_obtained|date:"d-m-Y H:i a" }}</td>
+                        <td>{{ submission.time_submitted|date:"d-m-Y H:i a" }}</td>
                         <td>
                             <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
                         </td>
@@ -105,8 +106,9 @@
                 <div class="card-header"><h4>{{ assignment.assignment_name }}</h4></div>
                 <div class="card-body text-dark">
                     <div class="card-text">
-                        <h5>Start time : {{ assignment.start_time }}</h5>
-                        <h5>End time : {{ assignment.end_time }}</h5>
+                        <h5>Start time : {{ assignment.start_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>End time : {{ assignment.end_time|date:"d-m-Y H:i a" }}</h5>
+                        <h5>Description : </h5>
                         <p class="text-break">{{ assignment.description }}Read the description correctly before
                             answering marks </p>
                     </div>
@@ -147,7 +149,7 @@
                 {% else %}
                     <p>marks obtained : Not corrected</p>
                 {% endif %}
-                <p>Time submitted : {{ submission.time_submitted }}</p>
+                <p>Time submitted : {{ submission.time_submitted|date:"d-m-Y H:i a" }}</p>
                 <p>Answer script :
                     <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
                 </p>

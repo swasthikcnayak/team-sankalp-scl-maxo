@@ -17,6 +17,7 @@ table {
 
 thead {
   text-transform: uppercase;
+  font-family: "Amatic SC", sans-serif;
   border-bottom: 1px solid #242323;
 }
 

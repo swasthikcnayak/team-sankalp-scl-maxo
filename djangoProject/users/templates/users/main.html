@@ -20,7 +20,7 @@
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <nav class="templatemo-left-nav">
+        <nav class="templatemo-left-nav" style="position: fixed">
             <ul class="navigation-custom">
                 <li><a href=" {% url 'home' %}" id=""><i class="fa fa-home fa-fw"></i>Home</a></li>
                 {% if user.is_authenticated %}
@@ -51,6 +51,9 @@
                     <li><a href="{% url 'login' %}" id="#LOG-IN"><i class="fa fa-sign-in fa-fw"></i>Sign In</a></li>
                 {% endif %}
             </ul>
+        <div class="templatemo-site-header">
+            <p>&copy; E-छात्र</p>
+        </div>
         </nav>
     </div>
 

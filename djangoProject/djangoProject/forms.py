@@ -3,6 +3,7 @@ from django import forms
 ROLE_CHOICES = [
     ('STD', 'STUDENT'),
     ('THR', 'TEACHER'),
+    ('ADM', 'ADMIN'),
 ]
 
 

@@ -1,0 +1,127 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>PROFILE</title>
+{% endblock title %}
+
+
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item text-info" aria-current="page">Profile</li>
+        </ol>
+    </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class=" content container-fluid">
+        <div class="student-profile py-4">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="card shadow-sm bg-transparent border-0">
+                        <div class="card-header bg-transparent text-center" style="">
+                            <img class="profile_img" src="{{ user.image.url }}" alt="Profile photo">
+                            <h3>{{ user.username }}</h3>
+                            <h4>{{ user.email }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+        <br/>
+
+
+        {% if user.role != 'ADM' %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <fieldset class="form-group ">
+                            <legend class="border-bottom mb-4">Personal Information</legend>
+                            {{ u_form|crispy }}
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Academic Information</legend>
+                            {{ p_form|crispy }}
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="btn-group mx-auto">
+                            <button class="button btn-info" style="vertical-align:middle"><span>Update Profile</span>
+                            </button>
+                            <a href="{% url 'password_reset' %}">
+                                <button class="button btn  btn-info" type="button"><span>Change password </span>
+                                </button>
+                            </a>
+                        </div>
+                </div>
+            </form>
+        {% else %}
+            {% csrf_token %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <fieldset class="form-group ">
+                            <legend class="border-bottom mb-4">Personal Information</legend>
+                            {{ u_form|crispy }}
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+
+
+                <div class="row">
+                        <div class="btn-group mx-auto">
+                            <button class="button btn btn-info" style="vertical-align:middle"><span>Update changes</span>
+                            </button>
+                            <a href="{% url 'password_reset' %}">
+                                <button class="button btn  btn-info" type="button"><span>Change password </span>
+                                </button>
+                            </a>
+                        </div>
+                </div>
+            </form>
+        {% endif %}
+
+    </div>
+
+{% endblock content %}
+
+{% block js-imports %}
+    <script>
+        $(function () {
+            $("#id_date_of_birth").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            }).attr("autocomplete", "off");
+            $("#id_join_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            }).attr("autocomplete", "off");
+
+        });
+    </script>
+{% endblock %}

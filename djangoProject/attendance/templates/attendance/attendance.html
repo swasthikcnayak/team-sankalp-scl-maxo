@@ -1,0 +1,122 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>ATTENDANCE</title>
+{% endblock title %}
+
+
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li  class="breadcrumb-item text-info" aria-current="page">Class List</li>
+            {% else %}
+                <li  class="breadcrumb-item text-info" aria-current="page">Attendance</li>
+            {% endif %}
+    </ol>
+    </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+        <div class="content container-fluid">
+        <h1 class="mb-3">Attendance </h1 >
+            {% if request.user.role == 'STD' %}
+                <div class="card border-dark col-xl-7 col-12 mb-3">
+                <div class="card-body text-dark">
+                    <div class="card-text">
+                        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="form-group ">
+                            <legend class="border-bottom mb-4">Check your attendance : </legend>
+                            {{ form|crispy }}
+                        </fieldset>
+                        <button type="submit" class="btn btn-info mb-3">Check Attendance</button>
+                    </div>
+                </div>
+            </form>
+                    </div>
+                </div>
+                </div>
+
+<hr/>
+
+                {% if attendances.count != 0  %}
+                    <!--<div class=" table-responsive">-->
+                <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
+                    <thead class="thead-dark" style="opacity: 0.8">
+                        <tr>
+                            <th style="border-bottom: 2px solid black">Subject</th>
+                            <th style="border-bottom: 2px solid black">Classes attended</th>
+                            <th style="border-bottom: 2px solid black">Classes conducted</th>
+                            <th style="border-bottom: 2px solid black">Percentage</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for a in attendances %}
+                            <tr>
+                                <td>{{ a.subject.subject_name }}</td>
+                                <td>{{ a.classes_attended }}</td>
+                                <td>{{ a.classes_conducted }}</td>
+                                <td>{{ a.percentage }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!--</div>-->
+                {% else %}
+                    <h4>No attendance record found</h4>
+                {% endif %}
+            {% endif %}
+
+            {% if request.user.role == 'THR' %}
+                {% if teaches.count != 0 %}
+                    <h4 class="mb-3">Select your class</h4>
+                    <!--<div class=" table-responsive">-->
+                <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
+                    <thead class="thead-dark" style="opacity: 0.8">
+                        <tr>
+                            <th style="border-bottom: 2px solid black">Subject</th>
+                            <th style="border-bottom: 2px solid black">Semester</th>
+                            <th style="border-bottom: 2px solid black">Section</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for teach in teaches %}
+                            <tr>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
+                                </td>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
+                                </td>
+                                <td><a
+                                        href=" {% url 'view-subject-attendance' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!--</div>-->
+                {% else %}
+                    <h4>You do not teach any class, No record found</h4>
+                {% endif %}
+            {% endif %}
+        </div>
+
+
+{% endblock content %}
+

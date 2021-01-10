@@ -1,0 +1,95 @@
+{% extends 'users/main.html' %}
+{% load static %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>ASSIGNMENTS</title>
+{% endblock title %}
+
+
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li  class="breadcrumb-item text-info" aria-current="page">Class list</li>
+            {% else %}
+                <li class="breadcrumb-item text-info" aria-current="page">Subject List</li>
+            {% endif %}
+    </ol>
+    </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="content container-fluid">
+    <h1 class="mb-3">Assignments</h1>
+        {% if request.user.role == 'THR'%}
+            {% if teaches.count != 0 %}
+                <h4 class="mb-3">Select the class</h4>
+            <!--<div class=" table-responsive">-->
+                <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
+                    <thead class="thead-dark" style="opacity: 0.8">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                    <th style="border-bottom: 2px solid black">Semester</th>
+                    <th style="border-bottom: 2px solid black">Section</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for teach in teaches %}
+                    <tr>
+                        <td ><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.subject.subject_name }}</a>
+                        </td>
+                        <td ><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.semester }}</a>
+                        </td>
+                        <td><a
+                               href=" {% url 'view-subject-assignment' subjectId=teach.subject.id classId=teach.Class.id %}">{{ teach.Class.section_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                <!-- </div> -->
+                {% else %}
+                <h4>You do not teach any class, no record found</h4>
+                {% endif %}
+        {% endif %}
+    {% if request.user.role == 'STD' %}
+        {% if subjects.count != 0 %}
+            <h4 class="mb-3">Select the subject</h4>
+            <!--<div class=" table-responsive">-->
+                <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
+                    <thead class="thead-dark" style="opacity: 0.8">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Subject</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in subjects %}
+                    <tr>
+                        <td ><a
+                               href="{% url 'view-subject-assignment' classId=classId subjectId=subject.subject.id %}">{{ subject.subject.subject_name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <!--</div> -->
+            {% else %}
+            <h4>You are not enrolled into any subject.</h4>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock content %}
+

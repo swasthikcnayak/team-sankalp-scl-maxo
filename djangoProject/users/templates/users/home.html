@@ -1,0 +1,207 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'users/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>HOME</title>
+{% endblock title %}
+
+
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124; margin: 0px">
+            <li class="breadcrumb-item text-info" aria-current="page">Home</li>
+        </ol>
+    </nav>
+    <section id="hero">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="hero-container">
+            <h3>Welcome to <strong>E-CHATR</strong></h3>
+            <h1>Together we Excel</h1>
+            <h2>A solution for your Past,Present and Future!</h2>
+            <a href="#faq" class="btn-get-started">Get Started</a>
+        </div>
+    </section>
+
+    <main id="main" class="container-fluid">
+
+        <section id="faq" class="faq">
+            <div class="container" style="background-color:#fff3f3; padding: 40px">
+
+                <div class="section-title">
+                    <h2>Why E-Chatr?</h2>
+                    <h3>Our <span>Features</span></h3>
+                </div>
+
+                <ul class="faq-list">
+
+                    <li>
+                        <a data-toggle="collapse" class="collapse" href="#faq0"
+                           style="font-family: 'Open Sans', sans-serif;margin-bottom:10px;">Get Future Ready<span
+                                class="fa fa-arrow-down"></span></a>
+                        <div id="faq0" class="collapse show" data-parent=".faq-list">
+                            <p>
+                                With E-Chatr, you can make every aspect of your student record to an online platform,
+                                thus promoting paperless
+                                workflow as an initiative to digital India. We have everything that you need, assisting
+                                faculty and students in
+                                every situations.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" class="collapse" href="#faq1"
+                           style="font-family: 'Open Sans', sans-serif;margin-bottom:10px;">Simple Interface<span
+                                class="fa fa-arrow-down"></span></a>
+                        <div id="faq1" class="collapse" data-parent=".faq-list">
+                            <p>
+                                With E-Chatr you’ll get a fast, simple, and reliable web interface for tracking each and
+                                every student,
+                                studying under you may it be attendance, marks, assignments
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" class="collapse" href="#faq2"
+                           style="font-family: 'Open Sans', sans-serif;margin-bottom:10px;">End to End Encryption<span
+                                class="fa fa-arrow-down"></span></a>
+                        <div id="faq2" class="collapse" data-parent=".faq-list">
+                            <p>
+                                We provide end to end encryption of your data, only you and the faculty can access your
+                                data. Accessing your information
+                                needs password, which will be provided to you in the begginning and we strongly request
+                                you to change the password. Every password must follow certail rules
+                                for enhanced security. The password will be stored in human incomprehensible format for
+                                further safety.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" href="#faq3" class="collapse"
+                           style="font-family: 'Open Sans', sans-serif;margin-bottom:10px;">All At one Place
+                            <span class="fa fa-arrow-down"></span></a>
+                        <div id="faq3" class="collapse" data-parent=".faq-list">
+                            <p>
+                                We provide all the features which are available in every classroom environment, you name
+                                them, we provide them
+                                Assigning assignments, correcting assignments, updating marks, submissions, attendance,
+                                timetables, notes and the
+                                list grows. Explore to know more.
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container" style="background-color:#fff3f3; padding: 40px; ">
+
+                <div class="section-title">
+                    <h2>About Us</h2>
+                    <h3>Learn More <span>About Us</span></h3>
+                    <p>Who are we? </p>
+                </div>
+
+                <div class="row content text-center">
+                    <p style="font-size: 14px ; margin:28px">
+                        <strong style="font-size:17px; color: #e43c5c;">Sankalp</strong> is a group of people who
+                        are under
+                        Sushiksha, which is a Mentoring program organized
+                        For scholars of Vishwa Konkani Student Scholarship Fund (VKSSF) by members of VKSSF Alumni
+                        Association (VAA). Sushiksha was started in 2018 by Royal Denzil Sequeira, a member of VAA
+                        since 2015, with 20 mentees. Since then Sushiksha has grown to be family of 170 mentees and
+                        20 mentors. Mentees of Sushiksha are undergraduate scholars of VKSSF who are determined to
+                        thrive and be successful in their area of study and career. Mentors of Sushiksha Program are
+                        experienced professionals who were once the scholars of VKSSF and have lived through their
+                        own share of successes and failures but believe in empowering the scholars early on in their
+                        career path. This website is a solution built for the problems encountered by students during
+                        the pandemic where , "WE" were supposed to look up several website for our academic details.
+                        We at Sankalp, have brought <strong>E-छात्र</strong> for your service, where you can get all
+                        services at one place.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container" style="background-color:#fff3f3; padding: 40px; ">
+
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <h3>Get in touch with <span> Us</span></h3>
+                    <p>Get a step closer</p>
+                </div>
+
+                <div class="content">
+
+                    <p>Any assistance needed contact us here so that we can help you for the fullest </p>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="form-group ">
+                                    <legend class="border-bottom mb-4">Let us know your issue :</legend>
+                                    {{ form|crispy }}
+                                </fieldset>
+                                <button type="submit" class="btn btn-info">SEND</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-9 footer-contact">
+                        <div class="row">
+                            <img class="img-responsive col-3" src="{% static 'sushiksha-logo.jpg' %}" width="auto"
+                                 height="auto" alt="sushikshalogo.png" style="image-rendering: -moz-crisp-edges;">
+                            <img class="img-responsive col-3" src="{% static 'sankalp-logo.png' %}" width="auto"
+                                 height="auto" alt="sankalplogo.png" style="image-rendering: -moz-crisp-edges;">
+                        </div>
+                        <p>
+                            <br><br>
+                            <strong>Any issues contact us here or fill the form above with detailed description
+                                : </strong><br>
+                            <strong>Email:</strong> webapp@sankalp.live<br>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="fa fa-arrow-up"></i></a>
+{% endblock content %}
+
+{% block js-imports %}
+    <!-- -->
+    <script type="text/javascript" src="{% static 'users/main.js' %}"></script>
+{% endblock js-imports %}

@@ -1,0 +1,42 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'academics/class-detail.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>CLASS-DETAILS</title>
+{% endblock title %}
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124">
+            <li class="breadcrumb-item text-dange"><a href="{% url 'home' %}" class="r">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li class="breadcrumb-item text-danger"><a href="{% url 'view-class-list' %}">Class List</a></li>
+                <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
+            {% else %}
+                <li class="breadcrumb-item text-info" aria-current="page">Class details</li>
+            {% endif %}
+        </ol>
+    </nav>
+    <div class="content">
+        <section class="hero">
+            <div class="hero-content-area">
+                <h1>CLASS DETAILS!</h1>
+                <h2 style="color: #0a0a0a">DEPARTMENT : {{ class.department.department_name }}</h2>
+                <h2 style="color: #0a0a0a">SEMESTER : {{ class.semester }}</h2>
+                <h2 style="color: #0a0a0a">SECTION : {{ class.section_name }}</h2>
+
+                <a href="{{ class.link }}" class="btn mb-3" target="__blank"><span class="fa fa-video-camera"></span>
+                    Join the class</a>
+                <div class="margin-bottom-5"></div>
+                <a href="{{ class.timetable.url }}" class="btn" target="__blank"><span
+                        class="fa fa-calendar-check-o"></span> Timetable</a>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,73 @@
+{% extends 'users/main.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css-imports %}
+    <link rel="stylesheet" href="{% static 'attendance/main.css' %}">
+{% endblock css-imports %}
+
+{% block title %}
+    <title>MARKS</title>
+{% endblock title %}
+
+
+
+
+{% block content %}
+    <nav aria-label="breadcrumb" style="background-color:#1f2124">
+        <ol class="breadcrumb" style="background-color:#1f2124 ">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.role == 'THR' %}
+                <li class="breadcrumb-item"><a href="{% url 'view-list' %}">Class List</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'view-list'%}">Student List</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">View Marks</li>
+            {% else %}
+                <li class="breadcrumb-item"><a href="{% url 'view-list' %}">Subject List</a></li>
+                <li  class="breadcrumb-item text-info" aria-current="page">View Marks</li>
+            {% endif %}
+    </ol>
+    </nav>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="content container-fluid">
+    <h1 class="mb-3">Marks</h1>
+    {% if request.user.role != 'ADM' %}
+        {% if submissions.count != 0 %}
+            <!--<div class=" table-responsive">-->
+                <table id="data-table" class="table table-striped" style="border:1px;margin-bottom: 20px">
+                    <thead class="thead-dark" style="opacity: 0.8">
+                <tr>
+                    <th style="border-bottom: 2px solid black">Assignment Name</th>
+                    <th style="border-bottom: 2px solid black">Maximum Marks</th>
+                    <th style="border-bottom: 2px solid black">Marks Obtained</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for submission in submissions %}
+                    <tr>
+                        <td >{{ submission.assignment.assignment_name }}</td>
+                        <td >{{ submission.assignment.maximum_marks }}</td>
+                        {% if submission.marks_obtained != -1 %}
+                            <td >{{ submission.marks_obtained }}</td>
+                        {% else %}
+                            <td >Not checked</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <!--</div> -->
+            {% else %}
+                    <h4>No records found</h4>
+                    {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock content %}

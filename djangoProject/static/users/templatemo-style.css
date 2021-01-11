@@ -315,9 +315,29 @@ nav li {
     }
 }
 
+@media only screen and (min-width: 992px) {
+    .templatemo-left-nav {
+        display: block !important;
+    }
+
+    .templatemo-left-nav a {
+        padding: 15px;
+    }
+
+    .templatemo-sidebar {
+        width: 250px;
+    }
+    .footer-home{
+        display: block;
+    }
+}
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 992px) {
+    .footer-home{
+        display: none;
+    }
+
     .templatemo-flex-row {
         display: block;
     }
@@ -341,6 +361,11 @@ nav li {
         height: fit-content;
         overflow: auto;
         z-index: 999;
+        border: 1px solid green;
+    }
+
+    .templatemo-left-nav a {
+        padding: 15px;
     }
 
     .templatemo-left-nav a.active,

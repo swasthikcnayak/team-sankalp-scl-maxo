@@ -14,7 +14,7 @@
 <div class="templatemo-flex-row">
     <div class="templatemo-sidebar">
         <div class="templatemo-site-header">
-            <img src="{% static 'logo.png' %}" alt="logo.png" width="70" height="70">
+            <img src="{% static 'logo.png' %}" alt="logo.png" width="100" height="100">
             <h1> E-छात्र</h1>
         </div>
         <div class="mobile-menu-icon">
@@ -51,15 +51,6 @@
                     <li><a href="{% url 'login' %}" id="#LOG-IN"><i class="fa fa-sign-in fa-fw"></i>Sign In</a></li>
                 {% endif %}
             </ul>
-        <div class="mt-5 ml-4 footer-home">
-            <div class="text-white">
-                &copy; Copyright
-            </div>
-            <div class="credits text-white">
-                 Build by Team Sanklap
-                SDT team
-            </div>
-        </div>
         </nav>
 
     </div>
@@ -74,6 +65,7 @@
 
 <script>
     var loader = document.getElementById('loading');
+
     function loadingFunction() {
         loader.style.display = "none"
     }

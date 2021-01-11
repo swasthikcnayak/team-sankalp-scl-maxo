@@ -269,9 +269,6 @@ nav li {
     overflow-y: scroll;
 }
 
-.templatemo-left-nav{
-    width: 100%;
-}
 /* 8. Media Queries
 ------------------------------*/
 @media screen and (max-width: 1199px) and (min-width: 991px) {
@@ -315,7 +312,23 @@ nav li {
     }
 }
 
-@media only screen and (min-width: 992px) {
+@media screen and (max-width: 992px) {
+
+    .templatemo-left-nav a {
+        padding: 15px 10px;
+    }
+
+    .templatemo-left-nav a {
+        padding: 15px;
+    }
+
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (min-width: 891px) {
     .templatemo-left-nav {
         display: block !important;
     }
@@ -324,20 +337,18 @@ nav li {
         padding: 15px;
     }
 
+    .templatemo-site-header {
+        margin: 20px 15px;
+        font-size: 1.2rem;
+    }
+
     .templatemo-sidebar {
         width: 250px;
-    }
-    .footer-home{
-        display: block;
     }
 }
 
 
-@media screen and (max-width: 992px) {
-    .footer-home{
-        display: none;
-    }
-
+@media screen and (max-width: 890px) {
     .templatemo-flex-row {
         display: block;
     }
@@ -361,11 +372,6 @@ nav li {
         height: fit-content;
         overflow: auto;
         z-index: 999;
-        border: 1px solid green;
-    }
-
-    .templatemo-left-nav a {
-        padding: 15px;
     }
 
     .templatemo-left-nav a.active,

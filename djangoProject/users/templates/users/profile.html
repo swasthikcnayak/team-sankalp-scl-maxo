@@ -114,12 +114,14 @@
             $("#id_date_of_birth").datepicker({
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,
-                changeYear: true
+                changeYear: true,
+                yearRange: "-100:+0",
             }).attr("autocomplete", "off");
             $("#id_join_date").datepicker({
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,
-                changeYear: true
+                changeYear: true,
+                yearRange: "-100:+0",
             }).attr("autocomplete", "off");
 
         });

@@ -4,6 +4,7 @@ ROLE_CHOICES = [
     ('STD', 'STUDENT'),
     ('THR', 'TEACHER'),
     ('ADM', 'ADMIN'),
+    ('OTH', 'OTHERS'),
 ]
 
 

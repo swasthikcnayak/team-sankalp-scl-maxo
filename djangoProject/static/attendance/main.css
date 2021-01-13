@@ -38,7 +38,7 @@ tr a {
 }
 
 tr:hover td {
-    background: #26d4e0;
+    background: lightblue;
 }
 
 tr a:hover {

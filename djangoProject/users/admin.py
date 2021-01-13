@@ -6,10 +6,14 @@ from .models import User, StudentProfile, TeacherProfile, Teach
 # changing admin view for user profile
 # list_display refers to the list of columns that admin should be able to see
 class UserAdminClass(UserAdmin):
-    list_display = ('username','email', 'role', 'date_joined', 'last_login', 'is_admin', 'is_staff')
+    # list to display in admin panel
+    list_display = ('username', 'email', 'role', 'date_joined', 'last_login', 'is_admin', 'is_staff')
+    # search by following fields
     search_fields = ('email', 'username')
+    # cannot be edited
     readonly_fields = ('date_joined', 'last_login')
 
+    # required features that should be overriding the UserAdmin,
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
@@ -31,7 +35,7 @@ class TeacherProfileAdminClass(admin.ModelAdmin):
 
 # changing admin view for teahes model
 class TeachesAdminClass(admin.ModelAdmin):
-    list_display = ('teacher','Class', 'subject')
+    list_display = ('teacher', 'Class', 'subject')
     search_fields = ('Class__semester', 'Class__section_name', 'Class__department__department_name',
                      'Class__department__department_short_form', 'teacher__user__username',
                      'teacher__user__email', 'teacher__user__first_name', 'teacher__user__lastname')

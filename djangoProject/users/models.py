@@ -5,6 +5,8 @@ from academics.models import Department
 
 from academics.models import Subject, Class, SEM_CHOICES
 
+
+# creating custom UserProfile Account Manager
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         if not email:
@@ -30,6 +32,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
+# creating custom user
 class User(AbstractUser):
     email = models.EmailField(verbose_name="Email", unique=True)
     ROLE_CHOICES = [
@@ -79,6 +82,7 @@ class User(AbstractUser):
             img.save(self.image.path)
 
 
+# creating custom student profile one to one with user
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="user")
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True,
@@ -94,6 +98,7 @@ class StudentProfile(models.Model):
         return self.user.username
 
 
+# creating custom teacher profile one on one with user
 class TeacherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="user")
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name="department", null=True)
@@ -103,6 +108,7 @@ class TeacherProfile(models.Model):
         return self.user.username
 
 
+# teaches column for selecting teacher to teach a specific subject to a given class
 class Teach(models.Model):
     Class = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name="section")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)

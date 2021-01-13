@@ -14,21 +14,25 @@ from users.models import StudentProfile, TeacherProfile, Teach
 def view_classes(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        # check profile is updated or not otherwise go back to profile
         if student_profile.section is None:
             messages.add_message(request, messages.ERROR,
                                  message="Update your profile before looking at other details")
             return redirect('profile')
+        # show list of subjects
         subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'assignments/list-view.html',
                       {'subjects': subjects, 'classId': student_profile.section.id})
     elif is_teacher(request):
         teaches = Teach.objects.filter(teacher__user=request.user)
+        # show list of subject
         return render(request, 'assignments/list-view.html', {'teaches': teaches})
 
 
 @login_required
 def view_assignments(request, classId, subjectId):
     time_now = timezone.now()
+    # classify the assignments based on time
     assignment_parred_due_date = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
                                                            start_time__lt=time_now, end_time__lt=time_now)
     assignments_to_complete = Assignment.objects.filter(subject__id=subjectId, Class__id=classId,
@@ -55,7 +59,7 @@ def view_assignments(request, classId, subjectId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details")
-            return redirect('view-subject-assignment',classId=classId,subjectId=subjectId)
+            return redirect('view-subject-assignment', classId=classId, subjectId=subjectId)
         return render(request, 'assignments/assignment-detail.html',
                       {'assignment_parred_due_date': assignment_parred_due_date,
                        'assignments_to_complete': assignments_to_complete,
@@ -67,7 +71,7 @@ def view_assignments(request, classId, subjectId):
                        'assignments_to_complete': assignments_to_complete,
                        'assignments_scheduled': assignments_scheduled})
 
-
+#view submissions, correct submissions, make submissionsad
 @login_required
 def submissions(request, assignmentId):
     form = None
@@ -75,8 +79,10 @@ def submissions(request, assignmentId):
     if is_teacher(request):
         submission = Submission.objects.filter(assignment__id=assignmentId)
         if request.method == 'GET':
+            # look all the submissions made
             form = MarksUpdateForm()
             form.fields['student'].queryset = StudentProfile.objects.filter(submission__assignment__id=assignmentId)
+            # show only the students who have submitted assignments
         elif request.method == 'POST':
             form = MarksUpdateForm(request.POST)
             if form.is_valid():
@@ -89,10 +95,11 @@ def submissions(request, assignmentId):
             else:
                 messages.add_message(request, messages.ERROR,
                                      message="Please check the input details or contact admin")
-            return redirect('view-submissions',assignmentId=assignmentId)
+            return redirect('view-submissions', assignmentId=assignmentId)
         return render(request, 'assignments/submission-list.html', {'submissions': submission, 'form': form,
                                                                     'assignment': assignment_details})
     elif is_student(request):
+        # show the submission, do not allow late submission, allow submission in time
         submission = Submission.objects.filter(assignment=assignment_details, student__user=request.user).first()
         if request.method == 'GET':
             if submission is None:

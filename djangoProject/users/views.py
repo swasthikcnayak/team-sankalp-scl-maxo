@@ -10,9 +10,9 @@ from .models import User, StudentProfile, TeacherProfile
 # registering users
 @login_required
 def register(request):
-    if request.user.is_superuser:
+    if request.user.is_superuser or request.user.is_admin:  # only superuser and admin is allowed
         if request.method == 'GET':
-            return render(request, 'users/register.html')
+            return render(request, 'users/register.html')  # render register page
         elif request.method == 'POST':
             form = UserRegisterForm(request.POST)
             if form.is_valid():
@@ -21,9 +21,11 @@ def register(request):
                 email = form.cleaned_data.get('email')
                 role = form.cleaned_data.get('role')
                 user = form.save(commit=False)
+                # generate random password
                 password = User.objects.make_random_password(
                     length=10,
                     allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+                # assign the roles and give permissions
                 if role == 'ADM':
                     roleFull = 'ADMIN'
                     user.is_staff = True
@@ -39,12 +41,14 @@ def register(request):
                 print(password)
                 user.set_password(password)
                 user.save()
+                # create corresponding profiles
                 if role == 'THR':
                     teacher_profile = TeacherProfile.objects.create(user=user)
                     teacher_profile.save()
                 elif role == 'STD':
                     student_profile = StudentProfile.objects.create(user=user, cgpa=0.00)
                     student_profile.save()
+                # send acknowledgement
                 messages.success(request,
                                  message="User is registered successfully and an Email has been sent to " + email + ".")
             else:

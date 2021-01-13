@@ -2,7 +2,7 @@ from django.db import models
 from academics.models import Subject, Class
 from users.models import StudentProfile, TeacherProfile
 
-
+#Model to store all the the assignments created
 class Assignment(models.Model):
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, verbose_name="teacher", null=True)
     Class = models.ForeignKey(Class, on_delete=models.SET_NULL, verbose_name='class', null=True)
@@ -24,7 +24,7 @@ class Assignment(models.Model):
     class Meta:
         unique_together = ('subject', 'assignment_name', 'Class')
 
-
+#Model to store all the submissions
 class Submission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, verbose_name='assignment')
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name='student')

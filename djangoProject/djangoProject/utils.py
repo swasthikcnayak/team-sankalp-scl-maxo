@@ -1,3 +1,4 @@
+# special functions which will be accessed very often
 def is_student(request):
     if request.user.role == 'STD':
         return True

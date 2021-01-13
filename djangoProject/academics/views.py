@@ -12,13 +12,16 @@ from djangoProject.utils import is_student, is_teacher
 def view_list(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        # check if section field in profile is filled
         if student_profile.section is None:
             messages.add_message(request, messages.ERROR,
                                  message="Update your profile before looking at other details")
             return redirect('profile')
+        # get list of subjects
         subjects = Teach.objects.filter(Class=student_profile.section)
         return render(request, 'academics/notes-list.html', {'subjects': subjects})
     elif is_teacher(request):
+        # get list of subjects-classes the teacher teaches
         teaches = Teach.objects.filter(teacher__user=request.user)
         return render(request, 'academics/notes-list.html', {'teaches': teaches})
 
@@ -31,14 +34,17 @@ def view_notes(request, subjectId):
     if is_teacher(request):
         if request.method == 'GET':
             form = AddNotesForm()
+            # display notes
             return render(request, 'academics/notes-detail.html', {'notes': notes, 'form': form})
         elif request.method == 'POST':
             form = AddNotesForm(request.POST, request.FILES)
+            # add new notes
             if form.is_valid():
                 note = form.save(commit=False)
                 note.subject = subject
                 teacherProfile = get_object_or_404(TeacherProfile, user=request.user)
                 note.department = teacherProfile.department
+                # check for the existing notes of same chapter
                 if Note.objects.filter(department=note.department, subject=note.subject,
                                        chapter_number=note.chapter_number).count() == 0:
                     form.save()
@@ -50,6 +56,7 @@ def view_notes(request, subjectId):
                 return redirect('view-notes', subjectId=subjectId)
     elif is_student(request):
         notes = Note.objects.filter(subject__id=subjectId)
+        # view notes
         return render(request, 'academics/notes-detail.html', {'notes': notes})
 
 
@@ -58,14 +65,17 @@ def view_notes(request, subjectId):
 def class_list(request):
     if is_student(request):
         student_profile = get_object_or_404(StudentProfile, user=request.user)
+        # see if the profile is updated or not
         if student_profile.section is None:
             messages.add_message(request, messages.ERROR,
                                  message="Update your profile before looking at other details")
             return redirect('profile')
         class_id = student_profile.section.id
+        # get details of students class
         return redirect('view-class', classId=class_id)
     elif is_teacher(request):
         teaches = Teach.objects.filter(teacher__user=request.user)
+        # show list of classes, the teacher teaches
         return render(request, 'academics/class-list.html', {'teaches': teaches})
 
 
@@ -73,4 +83,5 @@ def class_list(request):
 @login_required
 def view_class(request, classId):
     class_obj = get_object_or_404(Class, id=classId)
+    # view details of a class
     return render(request, 'academics/class-detail.html', {'class': class_obj})

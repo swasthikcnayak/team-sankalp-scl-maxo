@@ -1,7 +1,7 @@
 from django import forms
 from assignments.models import Assignment, Submission
 
-
+#Creating assignments
 class AssignmentCreationForm(forms.ModelForm):
     class Meta:
         model = Assignment
@@ -22,7 +22,7 @@ class AssignmentCreationForm(forms.ModelForm):
         self.fields['end_time'].label = "Assignment ends at"
         self.fields['question'].label = "Upload question paper"
 
-
+#Updating marks
 class MarksUpdateForm(forms.ModelForm):
     class Meta:
         model = Submission
@@ -33,7 +33,7 @@ class MarksUpdateForm(forms.ModelForm):
         self.fields['student'].label = "Select the student"
         self.fields['marks_obtained'].label = "Set the marks"
 
-
+#submitting new assignment
 class AssignmentSubmissionForm(forms.ModelForm):
     class Meta:
         model = Submission

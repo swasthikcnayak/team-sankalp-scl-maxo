@@ -5,6 +5,7 @@ from django.contrib import messages
 from djangoProject.settings import ISSUE_MAIL
 
 
+# hander functions for errors
 def handler404(request, exception):
     context = {
         'error_no': 404,
@@ -37,12 +38,15 @@ def handler403(request, exception):
     return render(request, 'users/404.html', context)
 
 
+# show the home page
 def home_view(request):
     if request.method == 'GET':
+        # get request simple display
         form = IssueForm()
         return render(request, 'users/home.html', {'form': form})
     elif request.method == 'POST':
         form = IssueForm(request.POST)
+        # get the required data,filter and send the mail
         if form.is_valid():
             id = form.cleaned_data.get('id')
             email = form.cleaned_data.get('email')
@@ -54,10 +58,20 @@ def home_view(request):
             else:
                 roleFull = 'STUDENT'
             description = form.cleaned_data.get('description')
-            send_mail('issue raised by ' + id,
-                      'Issue has been raised by user ' + id + '\n having email address '
+            """"rq.post(
+                "https://api.mailgun.net/v3/sankalp.live/messages",
+                auth=("api",API_KEY),
+                data={"from": EMAIL_HOST_USER,
+                "to": [ISSUE_MAIL],
+                "subject": 'Issue raised by ' + id,
+                "text": 'Issue has been raised by user ' + id + '\n having email address '
                       + email + '\nrole ' + roleFull + '\nthe details are as below \n'
-                      + description, from_email=None, recipient_list=[ISSUE_MAIL], fail_silently=False)
+                      + description,})"""
+            # send_mail('issue raised by ' + id,
+            #           'Issue has been raised by user ' + id + '\n having email address '
+            #           + email + '\nrole ' + roleFull + '\nthe details are as below \n'
+            #           + description, from_email=None, recipient_list=[ISSUE_MAIL], fail_silently=False)
+            # show the acknowledgement message to user
             messages.success(request,
                              message="Your issue has been reported, you will contacted soon via mail")
         else:

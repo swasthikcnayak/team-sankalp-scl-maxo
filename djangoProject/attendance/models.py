@@ -4,22 +4,25 @@ from academics.models import Subject, Class
 from users.models import StudentProfile, TeacherProfile
 
 
+# Model to store the attendance of the student
 class Attendance(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, verbose_name="student")
-    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, verbose_name="subject",null=True)
-    Class = models.ForeignKey(Class,on_delete=models.SET_NULL,null=True)
+    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, verbose_name="subject", null=True)
+    Class = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True)
     classes_conducted = models.IntegerField(default=0)
     classes_attended = models.IntegerField(default=0)
     percentage = models.IntegerField(default=0)
 
     class Meta:
+        # only 1 entry for a student and a subject together
         unique_together = ('student', 'subject')
 
 
+# log the updates to the attendance made
 class AttendanceLog(models.Model):
     absentees = models.ManyToManyField(StudentProfile, verbose_name='absentees', blank=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='subject',null=False)
-    Class = models.ForeignKey(Class,on_delete=models.CASCADE,verbose_name='class',null=False)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='subject', null=False)
+    Class = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name='class', null=False)
     teacher = models.ForeignKey(TeacherProfile, on_delete=models.SET_NULL, verbose_name='teacher', null=True)
-    conducted_date = models.DateField( null=True,verbose_name='conducted_date')
+    conducted_date = models.DateField(null=True, verbose_name='conducted_date')
     logged_date = models.DateTimeField(auto_now_add=True, verbose_name='logged_date')

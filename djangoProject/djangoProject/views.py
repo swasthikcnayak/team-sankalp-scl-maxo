@@ -58,10 +58,19 @@ def home_view(request):
             else:
                 roleFull = 'STUDENT'
             description = form.cleaned_data.get('description')
-            send_mail('issue raised by ' + id,
-                      'Issue has been raised by user ' + id + '\n having email address '
+            """"rq.post(
+                "https://api.mailgun.net/v3/sankalp.live/messages",
+                auth=("api",API_KEY),
+                data={"from": EMAIL_HOST_USER,
+                "to": [ISSUE_MAIL],
+                "subject": 'Issue raised by ' + id,
+                "text": 'Issue has been raised by user ' + id + '\n having email address '
                       + email + '\nrole ' + roleFull + '\nthe details are as below \n'
-                      + description, from_email=None, recipient_list=[ISSUE_MAIL], fail_silently=False)
+                      + description,})"""
+            # send_mail('issue raised by ' + id,
+            #           'Issue has been raised by user ' + id + '\n having email address '
+            #           + email + '\nrole ' + roleFull + '\nthe details are as below \n'
+            #           + description, from_email=None, recipient_list=[ISSUE_MAIL], fail_silently=False)
             # show the acknowledgement message to user
             messages.success(request,
                              message="Your issue has been reported, you will contacted soon via mail")

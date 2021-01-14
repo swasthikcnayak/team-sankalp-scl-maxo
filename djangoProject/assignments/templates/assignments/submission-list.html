@@ -102,7 +102,7 @@
                         <td>{{ submission.marks_obtained }}</td>
                         <td>{{ submission.time_submitted|date:"d-m-Y H:i a" }}</td>
                         <td>
-                            <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
+                            <button><a href="{{ submission.answer.url }}" target="__blank">Answer</a></button>
                         </td>
                     </tr>
                 {% endfor %}
@@ -165,7 +165,7 @@
                             {% endif %}
                             <p>Time submitted : {{ submission.time_submitted|date:"d-m-Y H:i a" }}</p>
                             <p>Answer script :
-                                <button><a href="{{ assignment.question.url }}" target="__blank">Answer</a></button>
+                                <button><a href="{{ submission.answer.url }}" target="__blank">Answer</a></button>
                             </p>
                         </div>
                     </div>

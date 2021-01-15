@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from djangoProject.utils import is_student, is_teacher
 from .forms import UserRegisterForm, UserUpdateForm, StudentProfileUpdateForm, TeacherProfileUpdateForm
 from .models import User, StudentProfile, TeacherProfile
+from djangoProject.settings import API_KEY, EMAIL_HOST_USER
+import requests as rq
 
 
 # registering users
@@ -35,15 +37,14 @@ def register(request):
                     roleFull = 'TEACHER'
                 else:
                     roleFull = 'STUDENT'
-
-                    """rq.post(
-                "https://api.mailgun.net/v3/sankalp.live/messages",
-                auth=("api",API_KEY),
-                data={"from": EMAIL_HOST_USER,
-                "to": [email],
-                "subject": 'Login details',
-                "text": 'Here is your login details \n username : ' + username + '\n role : ' +
-                          roleFull + '\n password : ' + password})"""
+                rq.post(
+                    "https://api.mailgun.net/v3/sankalp.live/messages",
+                    auth=("api", API_KEY),
+                    data={"from": EMAIL_HOST_USER,
+                          "to": [email],
+                          "subject": 'Login details',
+                          "text": 'Here is your login details \n username : ' + username + '\n role : ' +
+                                  roleFull + '\n password : ' + password})
                 """send_mail( 'Login details', 'Here is your login details \n username : ' + username + '\n role : ' + 
                 roleFull + '\n password : ' + password, from_email=None, recipient_list=[email], fail_silently=False, ) """
                 print(username, roleFull)

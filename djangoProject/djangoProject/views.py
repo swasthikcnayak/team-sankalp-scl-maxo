@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from djangoProject.forms import IssueForm
 from django.core.mail import send_mail
 from django.contrib import messages
-from djangoProject.settings import ISSUE_MAIL
+from djangoProject.settings import ISSUE_MAIL, API_KEY, EMAIL_HOST_USER
+import requests as rq
 
 
 # hander functions for errors
@@ -58,15 +59,15 @@ def home_view(request):
             else:
                 roleFull = 'STUDENT'
             description = form.cleaned_data.get('description')
-            """"rq.post(
+            rq.post(
                 "https://api.mailgun.net/v3/sankalp.live/messages",
-                auth=("api",API_KEY),
+                auth=("api", API_KEY),
                 data={"from": EMAIL_HOST_USER,
-                "to": [ISSUE_MAIL],
-                "subject": 'Issue raised by ' + id,
-                "text": 'Issue has been raised by user ' + id + '\n having email address '
-                      + email + '\nrole ' + roleFull + '\nthe details are as below \n'
-                      + description,})"""
+                      "to": [ISSUE_MAIL],
+                      "subject": 'Issue raised by ' + id,
+                      "text": 'Issue has been raised by user ' + id + '\n having email address '
+                              + email + '\nrole ' + roleFull + '\nthe details are as below \n'
+                              + description, })
             # send_mail('issue raised by ' + id,
             #           'Issue has been raised by user ' + id + '\n having email address '
             #           + email + '\nrole ' + roleFull + '\nthe details are as below \n'
